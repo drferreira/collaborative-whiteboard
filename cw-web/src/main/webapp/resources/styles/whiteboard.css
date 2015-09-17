@@ -1,43 +1,29 @@
 .whiteboard{
 	overflow: hidden;
-	background-color: #F5F5F5;
 }
 
 .stage_header{
 	font-size: 20px !important;
-	min-height: 30px;
 	text-align: center;
-	/*font-family: 'Raleway',sans-serif;*/
-	vertical-align: middle;
-	background-color: rgb(211, 225, 245);
-	/*font-family: 'Open Sans', sans-serif;*/
-	line-height: 32px;
-	border-top: solid 1px rgb(208, 208, 208);
-	border-bottom: solid 1px rgb(103, 102, 102);
+	background-color: whitesmoke;
+	border-bottom: solid 1px #BDBDBD;
 }
 
 .stage{
 	border-left: 1px solid #C6CFD5;
-	min-width: 390px;
 	display: table-cell;
-	background-color: #e0f3f1;
-	height: 615px;
 	overflow: hidden;
 	cursor: pointer;
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
+	background-color: white;
 }
 
 .stage:last-child {
 	border-right: 1px solid #C6CFD5;
 }
-
-.stages{
-	position: relative;
-}
-
 .message{
 	white-space: normal !important;
 	text-align: center !important;
@@ -58,7 +44,6 @@
 	margin: 0 0 24px;
 	text-transform: uppercase;
 	color: #675c5c;
-	background-color: #F5F5F5;
 	top: 240px;
 	position: relative;
 }
@@ -74,7 +59,6 @@
 	width: 350px;
 	height: 100px;
 	margin-top: 5%;
-	margin-left: 5%;
 	background-size: 350px 100px;
 	box-shadow: 3px 3px 5px 2px #ccc;
 	background: rgba(255, 255, 173, 0.97);
@@ -95,6 +79,8 @@
 	font-family: 'Helvetica Neue', sans-serif;
 	font-size: 14px;
 	top: 4px;
+	position: relative;
+	top: 5px;
 	position: relative;
 }
 
@@ -135,14 +121,6 @@
 	text-align: center;
 }
 
-.image_user{
-	width: 45px;
-	height: 45px;
-	top: -33px;
-	left: -5px;
-	border-radius: 22px;
-	position: relative;
-}
 
 .user{
 	background-image: url(../images/icons/photo.jpg);
@@ -181,7 +159,6 @@
 	top: -72px;
 	position: relative;
 	float: right;
-	margin-right: 4px;
 }
 
 .whiteboard_update{
@@ -191,4 +168,95 @@
 
 .whiteboard_header_area{
 	margin-top:1%;
+}
+
+/*--------------  Refatoração  ---------------- */
+.ticket_status{
+	/*border-bottom: solid 1px #95C7FB;*/
+	/*border-top: solid 1px #95C7FB;*/
+}
+
+.ticket_status_AVAILABLE{
+	border-left: solid 10px #97ffff;
+	border-bottom: solid 1px #97ffff;
+	border-top: solid 1px #97ffff;
+}
+.ticket_status_BUSY{
+	border-left: solid 10px #fbae34;
+	border-bottom: solid 1px #fbae34;
+	border-top: solid 1px #fbae34;
+}
+.ticket_status_FINALIZED{
+	border-left: solid 10px #D0D0D0;
+	border-bottom: solid 1px #D0D0D0;
+	border-top: solid 1px #D0D0D0;
+}
+.ticket_status_REMOVED{
+	border-left: solid 10px #e0eee0;
+	border-bottom: solid 1px #e0eee0;
+	border-top: solid 1px #e0eee0;
+}
+.ticket_status_FROZEN{
+	border-left: solid 10px #3399ff;
+	border-bottom: solid 1px #3399ff;
+	border-top: solid 1px #3399ff;
+}
+
+.task_ticket{
+	    padding: 5px;
+	        margin-top: 10px;
+		    float: left;
+		        width: 100%;
+			    position: relative;
+			        background-color: #DCEBFB;
+				    box-sizing: border-box;
+				        -moz-box-sizing: border-box;
+					    -webkit-box-sizing: border-box;
+}
+
+.ticket_code{
+	margin-top: 5px;
+}
+
+.ticket_code span{
+	font-weight: bold;
+	color: #797979;
+}
+
+.ticket_subject{
+
+}
+
+.ticket_subject{
+}
+
+.ticket_subject p{
+	word-break: break-all;
+	white-space: normal;
+	color: #685206;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 12px;
+	line-height: 10px;
+	text-align: center;
+}
+
+.ticket_estimated{
+	float: left;
+	color: #797979;
+}
+
+
+.ticket_commands_area{
+	float: right;
+}
+
+.ticket_commands_area img{
+}
+
+.ticket_user{
+	width: 45px;
+	height: 45px;
+	top: -33px;
+	left: -5px;
+	position: relative;
 }

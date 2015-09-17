@@ -1,36 +1,32 @@
 .user_data{
-    position: relative;
-    left: 2%;
-    top:5%;
-}
-
-.user_data_grid{
-
+	position: relative;
+	margin-left: 5%;
+	top: 10%;
 }
 
 .user_data_column{
-    padding: 15px;
-    padding-left: 0 !important;
+	padding: 15px;
+	padding-left: 0 !important;
 }
 
 .profile_image{
-    width: 100px;
-    height: 100px;
-    border: solid 1px #DCD2D2;
-    border-radius: 10px;
+	width: 100px;
+	height: 100px;
+	border: solid 1px #DCD2D2;
+	border-radius: 10px;
 }
 
 .change_picture{
-    left: 1.5%;
-    position: relative;
+	left: 1.5%;
+	position: relative;
 }
 
 .user_data_area{
-    position: relative;
-    margin-top: 2%;
+	position: relative;
+	margin-top: 5%;
 }
 
 .input_file{
-    display: none;
+	display: none;
 }
 
