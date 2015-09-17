@@ -1,155 +1,146 @@
 html, body{
-    background-color: whitesmoke;
-    margin: 0px;
-    padding: 0px;
-    overflow-y: auto;
-    overflow-x: hidden;
+	background-color: whitesmoke;
+	margin: 0px;
+	padding: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 form{
-    padding: 0px;
-    margin: 0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 .header_page {
-    height: 25%;
+	background-color: whitesmoke;
+	height: 20%;
+	border-bottom: solid 1px #d2D0D0;
 }
 
 .projectArea {
-    width: 300px;
+	width: 300px;
 }
 
 #foundedAreas {
-    width: 300px;
+	width: 300px;
 }
 
-
 .sheet {
-    background-color: white !important;
-    position: absolute;
-    height: 99% !important;
-    width: 100% !important;
+	background-color: white !important;
+	position: absolute;
+	height: 99% !important;
+	width: 100% !important;
 }
 
 .removed_area {
-    background-color: #f5d3cd;
+	background-color: #f5d3cd;
 }
 
 .warning_button {
-    background: #f55454 !important;
-    color: black !important;
+	background: #f55454 !important;
+	color: black !important;
 }
 
 .green_button {
-    background: #3fe694 !important;
-    color: #111111 !important;
+	background: #3fe694 !important;
+	color: #111111 !important;
 }
 
 .chatEnable {
-    background: url(../images/chat_button_enable.png) no-repeat;
+	background: url(../images/chat_button_enable.png) no-repeat;
 }
 
 .chatEnable {
-    background: url(../images/chat_button_disable.png) no-repeat;
+	background: url(../images/chat_button_disable.png) no-repeat;
 }
 
 #receivedMessageFlag {
-    margin-left: -40px;
-    margin-top: -15px;
-    font-size: 300%;
-    position: absolute;
-    color: #edee83;
-    float: right;
+	margin-left: -40px;
+	margin-top: -15px;
+	font-size: 300%;
+	position: absolute;
+	color: #edee83;
+	float: right;
 }
 
 .storyRemoved {
-    color: #dbdbdb;
+	color: #dbdbdb;
 }
 
 .ui-growl {
-    left: 20px;
-    position: fixed;
-    top: 20px;
+	left: 20px;
+	position: fixed;
+	top: 20px;
 }
 
 
 .column_status{
-    height: 25px;
-    width: 25px;
-    position: absolute;
-    align-content: center;
-    margin-top: -12px;
-    margin-left: 30px;
+	height: 25px;
+	width: 25px;
+	position: absolute;
+	align-content: center;
+	margin-top: -12px;
+	margin-left: 30px;
 }
 
 .story_backlog {
-    color: black;
-    height: 35px;
-    moz-border-radius: 7px;
-    -webkit-border-radius: 7px;
-    border-radius: 7px;
-    text-align: center;
-    display: block;
-    font-size: 32px;
+	color: black;
+	height: 35px;
+	moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	text-align: center;
+	display: block;
+	font-size: 32px;
 }
 
 .ui-widget, .ui-widget * {
-    font-size: 15px !important;
+	font-size: 15px !important;
 }
 
 .initialName{
-    margin-top: 5%;
-    font-size: 50px;
-    color: #edd021;
-    text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
-    text-align: center;
+	margin-top: 5%;
+	font-size: 50px;
+	color: #edd021;
+	text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
+	text-align: center;
 }
 
 .ui-ribbon .ui-colorpicker .ui-button {
-    height: 24px;
+	height: 24px;
 }
 
 .ui-icon.ui-ribbonicon-new {
-    margin-left: -10px;
-    margin-top: -20px;
-    background-image: url(../images/icons/new.png);
+	margin-left: -10px;
+	margin-top: -20px;
+	background-image: url(../images/icons/new.png);
 }
 
 .ui-icon.ui-ribbonicon-save {
-    background-image: url(../images/icon/save.png);
+	background-image: url(../images/icon/save.png);
 }
 
 .ui-icon.ui-ribbonicon-paste {
-    background-image: url(../images/icon/paste.png);
+	background-image: url(../images/icon/paste.png);
 }
 
 .ui-icon.ui-ribbonicon-cut {
-    background-image: url(../images/icon/cut.png);
+	background-image: url(../images/icon/cut.png);
 }
 
 .ui-icon.ui-ribbonicon-print {
-    background-image: url(../images/icon/print.png);
+	background-image: url(../images/icon/print.png);
 }
 
 #wikiPage{
-    float: right;
-    margin-right: 10px;
+	float: right;
+	margin-right: 10px;
 }
 
 .files td.name {
-    word-break:break-all;
+	word-break:break-all;
 }
 
-.pickListArea{
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 10px;
-}
-
-.ui-picklist-list {
-    height:600px !important;
-    width:750px !important;
-}
 
 
 /* ------------------- Refatoração ----------------------- */
@@ -157,114 +148,128 @@ form{
 
 /* Primefaces Reset */
 .ui-widget, .ui-widget * {
-    font-size: 13px !important;
+	font-size: 13px !important;
 }
 
 .highlighted_font{
-    font-size: 14px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    color: #676666;
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: #676666;
 }
 
 .large_font{
-    font-size: 18px;
+	font-size: 18px;
 }
 
 .x_large_font{
-    font-size: 30px;
+	font-size: 30px;
 }
 
 .xx_large_font{
-    font-size: 45px;
+	font-size: 45px;
 }
 
 .standart_font{
-    font-size: 12px;
-    color: #797979;
+	font-size: 12px;
+	color: #797979;
 }
 
 .minimal_font{
-    font-size: 10px;
-    color: #797979;
+	font-size: 10px;
+	color: #797979;
 }
 
 .black_area_font{
-    color: white !important;
+	color: white !important;
 }
 
 .separator{
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	border: 0;
+	height: 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .color_column_standart{
-    width: 70px;
+	width: 70px;
 }
 
 .color_column_minimal{
-    width: 25px
+	width: 25px
 }
 
 .color_flag_minimal{
-    height: 25px;
-    width: 25px;
-    margin: 0 auto;
+	height: 25px;
+	width: 25px;
+	margin: 0 auto;
 }
 
 .color_flag_standart{
-    height: 30px;
-    width: 30px;
-    margin: 0 auto;
+	height: 30px;
+	width: 30px;
+	margin: 0 auto;
 }
 
 .headerDataArea{
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .spaced_text{
-    margin-left: 10px;
-    margin-right: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .vertical_separator{
-    margin-left: 5px;
-    margin-right: 5px;
-    color: rgba(0, 0, 0, 0.1);
+	margin-left: 5px;
+	margin-right: 5px;
+	color: rgba(0, 0, 0, 0.1);
 }
 
 .top_menu{
-    float: right;
-    position: relative;
-    padding: 15px;
+	float: right;
+	position: relative;
+	padding: 15px;
 }
 
 .inline_element{
-    float: right;
-    position: relative;
+	float: right;
+	position: relative;
 }
 
 .remove_link_decoration{
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .side_menu{
-    width: 20% !important;
-    position: fixed;
-    height: 100%;
-    right: 0px;
-    top: 0px;
-    background-color: #FFFFFF;
-    display: none;
+	width: 20% !important;
+	position: fixed;
+	height: 100%;
+	right: 0px;
+	top: 0px;
+	background-color: #FFFFFF;
+	display: none;
 }
 
 .side_menu_open {
-    display: block;
+	display: block;
+}
+
+
+.pickList_area{
+	margin-left: 4% !important;
+}
+
+#picklist:first-child {
+	width:50% !important;
+}
+
+.picklist_full_area ul.ui-picklist-list {
+	min-height: 500px !important;
+	width: 850px !important;
 }
 
 

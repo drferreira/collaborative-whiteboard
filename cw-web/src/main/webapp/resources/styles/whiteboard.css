@@ -1,192 +1,194 @@
 .whiteboard{
-    overflow: hidden;
-    background-color: #F5F5F5;
+	overflow: hidden;
+	background-color: #F5F5F5;
 }
 
 .stage_header{
-    font-size: 20px !important;
-    min-height: 30px;
-    text-align: center;
-    /*font-family: 'Raleway',sans-serif;*/
-    vertical-align: middle;
-    background-color: rgb(211, 225, 245);
-    /*font-family: 'Open Sans', sans-serif;*/
-    line-height: 32px;
-    border-top: solid 1px rgb(208, 208, 208);
-    border-bottom: solid 1px rgb(103, 102, 102);
+	font-size: 20px !important;
+	min-height: 30px;
+	text-align: center;
+	/*font-family: 'Raleway',sans-serif;*/
+	vertical-align: middle;
+	background-color: rgb(211, 225, 245);
+	/*font-family: 'Open Sans', sans-serif;*/
+	line-height: 32px;
+	border-top: solid 1px rgb(208, 208, 208);
+	border-bottom: solid 1px rgb(103, 102, 102);
 }
 
 .stage{
-    border-left: 1px solid #C6CFD5;
-    min-width: 390px;
-    display: table-cell;
-    background-color: #e0f3f1;
-    height: 575px;
-    overflow: hidden;
-    cursor: pointer;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
+	border-left: 1px solid #C6CFD5;
+	min-width: 390px;
+	display: table-cell;
+	background-color: #e0f3f1;
+	height: 615px;
+	overflow: hidden;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .stage:last-child {
-    border-right: 1px solid #C6CFD5;
+	border-right: 1px solid #C6CFD5;
 }
 
 .stages{
-    position: relative;
+	position: relative;
 }
 
 .message{
-    white-space: normal !important;
-    text-align: center !important;
-    color: #5E5E5E !important;
-    font-family: 'Helvetica Neue', sans-serif !important;
-    font-size: 85px !important;
-    font-weight: bold !important;
-    letter-spacing: -1px !important;
-    line-height: 1 !important;
-    min-height: 593px !important;
+	white-space: normal !important;
+	text-align: center !important;
+	color: #5E5E5E !important;
+	font-family: 'Helvetica Neue', sans-serif !important;
+	font-size: 85px !important;
+	font-weight: bold !important;
+	letter-spacing: -1px !important;
+	line-height: 1 !important;
+	min-height: 593px !important;
 }
 
 .message span{
-    font-family: 'Raleway',sans-serif;
-    font-size: 62px;
-    font-weight: 800;
-    line-height: 72px;
-    margin: 0 0 24px;
-    text-transform: uppercase;
-    color: #675c5c;
-    background-color: #F5F5F5;
-    top: 240px;
-    position: relative;
+	font-family: 'Raleway',sans-serif;
+	font-size: 62px;
+	font-weight: 800;
+	line-height: 72px;
+	margin: 0 0 24px;
+	text-transform: uppercase;
+	color: #675c5c;
+	background-color: #F5F5F5;
+	top: 240px;
+	position: relative;
 }
 
 .stopwatch{
-    width: 25px;
-    float: left;
-    padding: 0px;
-    position: relative;
+	width: 25px;
+	float: left;
+	padding: 0px;
+	position: relative;
 }
 
 .ticket{
-    width: 350px;
-    height: 100px;
-    margin-top: 5%;
-    margin-left: 5%;
-    background-size: 350px 100px;
-    box-shadow: 3px 3px 5px 2px #ccc;
-    background: rgba(255, 255, 173, 0.97);
-    float: left;
+	width: 350px;
+	height: 100px;
+	margin-top: 5%;
+	margin-left: 5%;
+	background-size: 350px 100px;
+	box-shadow: 3px 3px 5px 2px #ccc;
+	background: rgba(255, 255, 173, 0.97);
+	float: left;
 }
 
 .task_estimated{
-    top: -50px;
-    position: relative;
-    text-align: left;
-    border-top: 1px solid #318ce7;
-    width: 350px;
-    height: 24px;
+	top: -50px;
+	position: relative;
+	text-align: left;
+	border-top: 1px solid #318ce7;
+	width: 350px;
+	height: 24px;
 }
 
 .task_estimated span{
-    color: #685206;
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 14px;
-    top: 4px;
-    position: relative;
+	color: #685206;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 14px;
+	top: 4px;
+	position: relative;
 }
 
 .task_code{
-    left: 35px;
-    position: relative;
-    width: 315px;
-    text-align: center;
-    border-bottom: 1px solid #318ce7;
-    top: 8px;
-    text-align: center;
+	left: 35px;
+	position: relative;
+	width: 315px;
+	text-align: center;
+	border-bottom: 1px solid #318ce7;
+	top: 8px;
+	text-align: center;
 }
 
 .task_code span{
-    font-weight: bold;
-    color: #318ce7;
+	font-weight: bold;
+	color: #318ce7;
 }
 
 .task_subject{
-    top: -45px;
-    width: 345px;
-    height: 45px;
-    left: 2px;
-    position: relative;
-    text-align: center;
+	top: -45px;
+	width: 345px;
+	height: 45px;
+	left: 2px;
+	position: relative;
+	text-align: center;
 }
 
 .task_subject p{
-    word-break: break-all;
-    white-space: normal;
-    position: relative;
-    max-width: 310px;
-    max-height: 48px;
-    color: #685206;
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 12px;
-    line-height: 10px;
-    text-align: center;
+	word-break: break-all;
+	white-space: normal;
+	position: relative;
+	max-width: 310px;
+	max-height: 48px;
+	color: #685206;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 12px;
+	line-height: 10px;
+	text-align: center;
 }
 
 .image_user{
-    width: 45px;
-    height: 45px;
-    top: -33px;
-    left: -5px;
-    border-radius: 22px;
-    position: relative;
+	width: 45px;
+	height: 45px;
+	top: -33px;
+	left: -5px;
+	border-radius: 22px;
+	position: relative;
 }
 
 .user{
-    background-image: url(../images/icons/photo.jpg);
-    border: none !important;
+	background-image: url(../images/icons/photo.jpg);
+	border: none !important;
 }
 
 .finalized_task{
-    opacity: 0.4;
-    filter: alpha(opacity=40); /* For IE8 and earlier */
+	opacity: 0.4;
+	filter: alpha(opacity=40); /* For IE8 and earlier */
 }
 
 
 .task_subject span{
-    display: table-cell;
-    vertical-align: middle;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .center_arrow{
-    position: absolute;
-    height: 46px;
-    transform: rotate(90deg);
-    top: 380px;
-    z-index: 5;
+	position: absolute;
+	height: 46px;
+	transform: rotate(90deg);
+	top: 380px;
+	z-index: 5;
 }
 
 .task_command{
-    width: 22px;
-    float: left;
-    padding: 0px;
-    margin-left: 5px;
-    position: relative;
-    cursor: pointer;
+	width: 22px;
+	float: left;
+	padding: 0px;
+	margin-left: 5px;
+	position: relative;
+	cursor: pointer;
 }
 
 .task_commands_area{
-    top: -72px;
-    position: relative;
-    float: right;
-    margin-right: 4px;
+	top: -72px;
+	position: relative;
+	float: right;
+	margin-right: 4px;
 }
 
 .whiteboard_update{
-    top: 20px;
+	top: 20px;
 }
 
 
-
+.whiteboard_header_area{
+	margin-top:1%;
+}

@@ -5,11 +5,11 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="pageContent">
+	<div id="iterationHeaderArea">
         <h:form id="iterationForm" prependId="false">
-            <p:toolbar styleClass="toolbar">
+            <p:toolbar >
                 <f:facet name="left">
-                    <p:selectOneMenu id="console" value="#{iterationSettingsController.iterationSelected}"
-                                     style="min-width: 210px; top: 3px;" required="true"
+                    <p:selectOneMenu id="console" value="#{iterationSettingsController.iterationSelected}" required="true"
                                      requiredMessage="#{iteration_settings['iteration.mandatory.iteration']}">
                         <f:selectItem itemLabel="#{iteration_settings['iteration.default.value.dropdown']}"
                                       itemValue=""/>
@@ -23,6 +23,8 @@
                 </f:facet>
             </p:toolbar>
         </h:form>
+	    </div>
+
 
         <div class="headerDataArea">
             <h:form id="dataHeaderForm" prependId="false">
@@ -53,9 +55,9 @@
             </h:form>
         </div>
 
-        <div class="pickListArea">
+        <div class="pickList_area">
             <h:form id="listForm" prependId="false">
-                <p:pickList id="pickList" converter="storyConverterToPickList"
+                <p:pickList id="pickList" converter="storyConverterToPickList" class="picklist_full_area"
                             value="#{iterationSettingsController.stories}"
                             var="story" itemLabel="#{iterationSettingsController.mountStoryName(story)}"
                             itemValue="#{story}" itemDisabled="#{iterationSettingsController.disabled(story)}">
