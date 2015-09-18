@@ -9,6 +9,7 @@ import br.org.tutty.collaborative_whiteboard.WhiteboardDao;
 import cw.entities.Stage;
 import cw.entities.User;
 import cw.exceptions.DataNotFoundException;
+import backlog_manager.enums.TaskStatus;
 import dtos.*;
 
 import java.util.Base64;
@@ -20,115 +21,123 @@ import java.util.function.Consumer;
  */
 public class WhiteboardFactory {
 
-    private WhiteboardDao whiteboardDao;
-    private TaskDao taskDao;
+	private WhiteboardDao whiteboardDao;
+	private TaskDao taskDao;
 
-    public WhiteboardFactory(WhiteboardDao whiteboardDao, TaskDao taskDao) {
+	public WhiteboardFactory(WhiteboardDao whiteboardDao, TaskDao taskDao) {
 
-        this.whiteboardDao = whiteboardDao;
-        this.taskDao = taskDao;
-    }
+		this.whiteboardDao = whiteboardDao;
+		this.taskDao = taskDao;
+	}
 
-    public WhiteboardMailable builderMailableWhiteboard() {
-        WhiteboardMailable whiteboardMailable = new WhiteboardMailable();
-        builderAllStages(whiteboardMailable, whiteboardDao.fetchAllStages());
+	public WhiteboardMailable builderMailableWhiteboard() {
+		WhiteboardMailable whiteboardMailable = new WhiteboardMailable();
+		builderAllStages(whiteboardMailable, whiteboardDao.fetchAllStages());
 
-        for (Task task : taskDao.fetchForWhiteboard()) {
-            Story story = task.getStory();
-            Stage stage = task.getStage();
+		for (Task task : taskDao.fetchForWhiteboard()) {
+			Story story = task.getStory();
+			Stage stage = task.getStage();
 
-            try {
-                StagesMailable stagesMailable = whiteboardMailable.getStageByName(stage.getName());
-                StoryMailable storyMailable = builderStory(stagesMailable, story);
-                builderTask(storyMailable, task);
+			try {
+				StagesMailable stagesMailable = whiteboardMailable.getStageByName(stage.getName());
+				StoryMailable storyMailable = builderStory(stagesMailable, story);
+				builderTask(storyMailable, task);
 
-                whiteboardMailable.addStage(stagesMailable);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+				whiteboardMailable.addStage(stagesMailable);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
-        return whiteboardMailable;
-    }
+		return whiteboardMailable;
+	}
 
-    private void builderAllStages(WhiteboardMailable whiteboardMailable, Set<Stage> stages) {
-        stages.forEach(new Consumer<Stage>() {
-            @Override
-            public void accept(Stage stage) {
-                try {
-                    builderStage(whiteboardMailable, stage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+	private void builderAllStages(WhiteboardMailable whiteboardMailable, Set<Stage> stages) {
+		stages.forEach(new Consumer<Stage>() {
+			@Override
+			public void accept(Stage stage) {
+				try {
+					builderStage(whiteboardMailable, stage);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
-    }
+	}
 
-    private StagesMailable builderStage(WhiteboardMailable whiteboardMailable, Stage stage) throws NoSuchFieldException, IllegalAccessException {
-        StagesMailable stagesMailable;
+	private StagesMailable builderStage(WhiteboardMailable whiteboardMailable, Stage stage) throws NoSuchFieldException, IllegalAccessException {
+		StagesMailable stagesMailable;
 
-        stagesMailable = new StagesMailable();
-        Equalizer.equalize(stage, stagesMailable);
-        whiteboardMailable.addStage(stagesMailable);
+		stagesMailable = new StagesMailable();
+		Equalizer.equalize(stage, stagesMailable);
+		whiteboardMailable.addStage(stagesMailable);
 
-        return stagesMailable;
-    }
+		return stagesMailable;
+	}
 
-    private StoryMailable builderStory(StagesMailable stagesMailable, Story story) throws NoSuchFieldException, IllegalAccessException {
-        StoryMailable storyMailable;
-        if (!stagesMailable.existStory(story.getCode())) {
-            storyMailable = new StoryMailable();
-            Equalizer.equalize(story, storyMailable);
-            stagesMailable.addStory(storyMailable);
-        } else {
-            storyMailable = stagesMailable.getStoryByCode(story.getCode());
-        }
+	private StoryMailable builderStory(StagesMailable stagesMailable, Story story) throws NoSuchFieldException, IllegalAccessException {
+		StoryMailable storyMailable;
+		if (!stagesMailable.existStory(story.getCode())) {
+			storyMailable = new StoryMailable();
+			Equalizer.equalize(story, storyMailable);
+			stagesMailable.addStory(storyMailable);
+		} else {
+			storyMailable = stagesMailable.getStoryByCode(story.getCode());
+		}
 
-        return storyMailable;
-    }
+		return storyMailable;
+	}
 
-    private void builderTask(StoryMailable storyMailable, Task task) throws NoSuchFieldException, IllegalAccessException {
-        TaskMailable taskMailable;
-        TaskStatusMailable taskStatusMailable = builderTaskStatus(task);
+	private void builderTask(StoryMailable storyMailable, Task task) throws NoSuchFieldException, IllegalAccessException {
+		TaskMailable taskMailable;
+		TaskStatusMailable taskStatusMailable = builderTaskStatus(task);
 
-        if (!storyMailable.existTask(task.getCode())) {
-            taskMailable = new TaskMailable();
+		if (!storyMailable.existTask(task.getCode())) {
+			taskMailable = new TaskMailable();
 
-            taskMailable.setTaskStatus(taskStatusMailable);
-            Equalizer.equalize(task, taskMailable);
+			taskMailable.setTaskStatus(taskStatusMailable);
+			Equalizer.equalize(task, taskMailable);
 
-            try{
-                TaskStatusLog taskStatusLog = taskDao.fetchTaskStatusLog(task);
-                User user = taskStatusLog.getUser();
+			builderUserImage(task, taskMailable);
+			storyMailable.addTask(taskMailable);
+		}
+	}
 
-                taskMailable.setUsername(user.getFullName());
-                taskMailable.setProfilePicture(convertImage(user.getProfilePicture()));
-            }catch (DataNotFoundException e){
-                e.printStackTrace();
-            }
+	private void builderUserImage(Task task, TaskMailable taskMailable){
+		try{
+			TaskStatusLog taskStatusLog = taskDao.fetchTaskStatusLog(task);
 
-            storyMailable.addTask(taskMailable);
-        }
-    }
+			if(TaskStatus.BUSY.equals(taskStatusLog.getTaskStatus())){
+				User user = taskStatusLog.getUser();
 
-    private String convertImage(byte[] image){
-        return Base64.getEncoder().encodeToString(image);
-    }
+				taskMailable.setUsername(user.getFullName());
+				taskMailable.setProfilePicture(convertImage(user.getProfilePicture()));
 
-    private TaskStatusMailable builderTaskStatus(Task task) throws NoSuchFieldException, IllegalAccessException {
-        try {
-            TaskStatusMailable taskStatusMailable = new TaskStatusMailable();
+			}
+			}catch (DataNotFoundException e){
+				e.printStackTrace();
+			}
 
-            TaskStatusLog taskStatusLog = taskDao.fetchTaskStatusLog(task);
-            Equalizer.equalize(taskStatusLog, taskStatusMailable);
+	}
 
-            taskStatusMailable.setValue(taskStatusLog.getTaskStatus().name());
+	private String convertImage(byte[] image){
+		return Base64.getEncoder().encodeToString(image);
+	}
 
-            return taskStatusMailable;
-        } catch (DataNotFoundException e) {
-            return null;
-        }
-    }
+	private TaskStatusMailable builderTaskStatus(Task task) throws NoSuchFieldException, IllegalAccessException {
+		try {
+			TaskStatusMailable taskStatusMailable = new TaskStatusMailable();
+
+			TaskStatusLog taskStatusLog = taskDao.fetchTaskStatusLog(task);
+			Equalizer.equalize(taskStatusLog, taskStatusMailable);
+
+			taskStatusMailable.setValue(taskStatusLog.getTaskStatus().name());
+
+			return taskStatusMailable;
+		} catch (DataNotFoundException e) {
+			return null;
+		}
+	}
 
 }
