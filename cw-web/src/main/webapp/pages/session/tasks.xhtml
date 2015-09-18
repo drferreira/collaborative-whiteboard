@@ -155,9 +155,9 @@
                                             requiredMessage="#{tasks_bundle['mandatory_message.time']}"/>
 
 
-                                <p:inputText id="taskSubjectEdition" required="true"
+                                <p:inputText id="taskSubjectEdition" required="true" styleClass="task_subject_edition"
                                              value="#{tasksEditionController.taskEdition.subject}"
-                                             size="67" requiredMessage="#{tasks_bundle['mandatory_message.subject']}"/>
+                                             requiredMessage="#{tasks_bundle['mandatory_message.subject']}"/>
 
                                 <p:focus for="descriptionEdition"/>
 

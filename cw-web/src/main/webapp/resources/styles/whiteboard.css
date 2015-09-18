@@ -89,10 +89,6 @@
 	text-align: center;
 }
 
-.task_code span{
-	font-weight: bold;
-	color: #318ce7;
-}
 
 .task_subject{
 	top: -45px;
@@ -250,6 +246,11 @@
 .ticket_estimated{
 	float: left;
 	color: #797979;
+}
+
+.ticket_estimated span{
+	font-size: 12px;
+	    color: #797979;
 }
 
 
