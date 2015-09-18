@@ -55,13 +55,13 @@ function write_tasks(whiteboardJson) {
 		$.each(stages, function (key, stage) {
 			var stories = stage.stories;
 
-			stories.sort(sortByProperty('storyPoints'));
+			//stories.sort(sortByProperty('storyPoints'));
 
 			if (stories.length != 0) {
 				$.each(stories, function (key, story) {
 					var tasks = story.tasks;
 
-					tasks.sort(sortByProperty('code'));
+					//tasks.sort(sortByProperty('code'));
 
 					if (tasks.length != 0) {
 						$.each(tasks, function (key, task) {
