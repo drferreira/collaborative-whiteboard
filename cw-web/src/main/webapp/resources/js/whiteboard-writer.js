@@ -80,7 +80,7 @@ function write_task(stage_target, taskJson) {
 	task.addClass('task_ticket');
 
 	task.append(write_task_code(taskJson.code));
-	task.append(write_image_user(taskJson.taskStatus));
+	task.append(write_image_user(taskJson.taskStatus,taskJson.profilePicture));
 	task.append(write_task_status(taskJson.taskStatus, task));
 	task.append(write_task_subject(taskJson.subject));
 	task.append(write_task_estimated(taskJson.estimatedTime))
@@ -95,13 +95,18 @@ function write_task(stage_target, taskJson) {
 
 function write_task_status(task_status, ticket){
 	ticket.addClass('ticket_status');
-	ticket.addClass('ticket_status_'+task_status['value']);
+	ticket.addClass('ticket_status_'+task_status.value);
 }
 
-function write_image_user(taskStatus) {
-	if (taskStatus.value == 'BUSY') {
+function write_image_user(task_status, task_user_picture) {
+	if (task_status.value == 'BUSY') {
 		var image_div = $(document.createElement('div'));
 		image_div.addClass('image_user');
+
+		var img = $(document.createElement('img'));
+		img.attr('src', 'data:image/jpeg;base64,'+task_user_picture);
+
+		image_div.append(img);
 	}
 
 	return image_div;

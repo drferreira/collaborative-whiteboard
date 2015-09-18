@@ -23,6 +23,11 @@ public class TaskMailable implements Serializable{
 
     private TaskStatusMailable taskStatus;
 
+    private String username;
+
+    private String profilePicture;
+
+
     public String getCode() {
         return code;
     }
@@ -61,5 +66,13 @@ public class TaskMailable implements Serializable{
 
     public void setTaskStatus(TaskStatusMailable taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public void setUsername(String username){
+	this.username = username;
+    }
+
+    public void setProfilePicture(String profilePicture){
+	this.profilePicture = profilePicture;
     }
 }

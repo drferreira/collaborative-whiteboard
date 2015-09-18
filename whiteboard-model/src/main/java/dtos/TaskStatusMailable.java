@@ -15,8 +15,6 @@ public class TaskStatusMailable implements Serializable {
     @Equalization(name = "date")
     private Date date;
 
-    private String username;
-
     public String getValue() {
         return value;
     }
@@ -31,13 +29,5 @@ public class TaskStatusMailable implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

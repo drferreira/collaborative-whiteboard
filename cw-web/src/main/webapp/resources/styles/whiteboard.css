@@ -75,13 +75,8 @@
 }
 
 .task_estimated span{
-	color: #685206;
-	font-family: 'Helvetica Neue', sans-serif;
-	font-size: 14px;
-	top: 4px;
-	position: relative;
-	top: 5px;
-	position: relative;
+    font-size: 12px;
+        color: #797979;
 }
 
 .task_code{
@@ -203,23 +198,34 @@
 }
 
 .task_ticket{
-	    padding: 5px;
-	        margin-top: 10px;
-		    float: left;
-		        width: 100%;
-			    position: relative;
-			        background-color: #DCEBFB;
-				    box-sizing: border-box;
-				        -moz-box-sizing: border-box;
-					    -webkit-box-sizing: border-box;
+	padding: 5px;
+	margin-top: 10px;
+	float: left;
+	width: 100%;
+	position: relative;
+	background-color: #DCEBFB;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.image_user{
+	float:right;
+}
+
+.image_user img{
+	height: auto;
+	width: auto;
+	max-width: 35px;
+	max-height: 35px;
 }
 
 .ticket_code{
-	margin-top: 5px;
+	float: left;
 }
 
 .ticket_code span{
-	font-weight: bold;
+	font-size: 12px;
 	color: #797979;
 }
 
@@ -228,6 +234,7 @@
 }
 
 .ticket_subject{
+	margin-top: 10%;
 }
 
 .ticket_subject p{

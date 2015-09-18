@@ -3,14 +3,15 @@ package br.org.tutty.collaborative_whiteboard.backlog_manager.factories;
 import backlog_manager.entities.Story;
 import backlog_manager.entities.Task;
 import backlog_manager.entities.TaskStatusLog;
-import backlog_manager.enums.TaskStatus;
 import br.org.tutty.Equalizer;
 import br.org.tutty.backlog_manager.TaskDao;
 import br.org.tutty.collaborative_whiteboard.WhiteboardDao;
 import cw.entities.Stage;
+import cw.entities.User;
 import cw.exceptions.DataNotFoundException;
 import dtos.*;
 
+import java.util.Base64;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -97,8 +98,22 @@ public class WhiteboardFactory {
             taskMailable.setTaskStatus(taskStatusMailable);
             Equalizer.equalize(task, taskMailable);
 
+            try{
+                TaskStatusLog taskStatusLog = taskDao.fetchTaskStatusLog(task);
+                User user = taskStatusLog.getUser();
+
+                taskMailable.setUsername(user.getFullName());
+                taskMailable.setProfilePicture(convertImage(user.getProfilePicture()));
+            }catch (DataNotFoundException e){
+                e.printStackTrace();
+            }
+
             storyMailable.addTask(taskMailable);
         }
+    }
+
+    private String convertImage(byte[] image){
+        return Base64.getEncoder().encodeToString(image);
     }
 
     private TaskStatusMailable builderTaskStatus(Task task) throws NoSuchFieldException, IllegalAccessException {
@@ -109,7 +124,6 @@ public class WhiteboardFactory {
             Equalizer.equalize(taskStatusLog, taskStatusMailable);
 
             taskStatusMailable.setValue(taskStatusLog.getTaskStatus().name());
-            taskStatusMailable.setUsername(taskStatusLog.getUser().getFullName());
 
             return taskStatusMailable;
         } catch (DataNotFoundException e) {
