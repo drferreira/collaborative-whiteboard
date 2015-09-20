@@ -24,6 +24,7 @@ import java.io.Serializable;
 public class ProfileController extends GenericController implements Serializable {
 	private static String INVALID_TYPE_KEY = "invalid.type.picture";
 	private static String INVALID_TYPE_KEY_DETAIL = "invalid.type.picture.detail";
+	private static String INVALID_SIZE_KEY_DETAIL = "invalid.size.picture.detail";
 	private static String SAVE_KEY = "profile.edition.save";
 	private static String SAVE_KEY_DETAIL = "profile.edition.save.detail";
 	private static String TYPE_FILE_JPG = "jpeg";
@@ -61,16 +62,32 @@ public class ProfileController extends GenericController implements Serializable
 	public void updatePicture(FileUploadEvent fileUploadEvent) {
 		UploadedFile file = fileUploadEvent.getFile();
 
-		if (isValidPictureType(file)) {
+		if (isValidPictureType(file) && isValidPictureSize(file)) {
 			userEdition.getProfilePicture().setProfilePicture(file);
 
 		} else {
-			facesMessageUtil.showGlobalMessage(FacesMessage.SEVERITY_ERROR, INVALID_TYPE_KEY, INVALID_TYPE_KEY_DETAIL);
 		}
 	}
 
 	private Boolean isValidPictureType(UploadedFile uploadedFile) {
 		String contentType = uploadedFile.getContentType();
-		return contentType.contains(TYPE_FILE_JPG) || contentType.contains(TYPE_FILE_PNG);
+		Boolean result = contentType.contains(TYPE_FILE_JPG) || contentType.contains(TYPE_FILE_PNG);
+
+		if(!result){
+			facesMessageUtil.showGlobalMessage(FacesMessage.SEVERITY_ERROR, INVALID_TYPE_KEY, INVALID_TYPE_KEY_DETAIL);
+		}
+
+		return result;
+	}
+
+	private Boolean isValidPictureSize(UploadedFile uploadedFile){
+		Boolean result = uploadedFile.getSize() < 300000 ? Boolean.TRUE : Boolean.FALSE;
+
+		if(!result){
+			facesMessageUtil.showGlobalMessage(FacesMessage.SEVERITY_ERROR, INVALID_TYPE_KEY, INVALID_SIZE_KEY_DETAIL);
+		}
+
+		return result;
+
 	}
 }

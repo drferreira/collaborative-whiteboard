@@ -4,7 +4,7 @@ import backlog_manager.entities.Task;
 import br.org.tutty.backlog_manager.StoryDao;
 import br.org.tutty.backlog_manager.TaskDao;
 import br.org.tutty.collaborative_whiteboard.WhiteboardDao;
-import br.org.tutty.collaborative_whiteboard.backlog_manager.factories.WhiteboardFactory;
+import br.org.tutty.collaborative_whiteboard.cw.whiteboard.factories.WhiteboardFactory;
 import br.org.tutty.collaborative_whiteboard.cw.filters.StageFilters;
 import br.org.tutty.collaborative_whiteboard.cw.handlers.WhiteboardHandler;
 import cw.entities.Stage;
