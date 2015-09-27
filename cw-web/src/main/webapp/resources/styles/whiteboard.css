@@ -6,11 +6,11 @@
 	font-size: 20px !important;
 	text-align: center;
 	background-color: whitesmoke;
-	border-bottom: solid 1px #BDBDBD;
+	border-bottom: solid 1px #EFEFEF;
 }
 
 .stage{
-	border-left: 1px solid #C6CFD5;
+	border-left: 1px solid #EFEFEF;
 	display: table-cell;
 	overflow: hidden;
 	cursor: pointer;
@@ -61,7 +61,7 @@
 	margin-top: 5%;
 	background-size: 350px 100px;
 	box-shadow: 3px 3px 5px 2px #ccc;
-	background: rgba(255, 255, 173, 0.97);
+	background: #F5F5F5;
 	float: left;
 }
 
@@ -171,38 +171,44 @@
 	border-left: solid 10px #97ffff;
 	border-bottom: solid 1px #97ffff;
 	border-top: solid 1px #97ffff;
+	border-right: solid 1px #97ffff;
 }
 .ticket_status_BUSY{
 	border-left: solid 10px #fbae34;
 	border-bottom: solid 1px #fbae34;
 	border-top: solid 1px #fbae34;
+	border-right: solid 1px #fbae34;
 }
 .ticket_status_FINALIZED{
 	border-left: solid 10px #D0D0D0;
 	border-bottom: solid 1px #D0D0D0;
 	border-top: solid 1px #D0D0D0;
+	border-right: solid 1px #D0D0D0;
 }
 .ticket_status_REMOVED{
 	border-left: solid 10px #e0eee0;
 	border-bottom: solid 1px #e0eee0;
 	border-top: solid 1px #e0eee0;
+	border-right: solid 1px #e0eee0;
 }
 .ticket_status_FROZEN{
 	border-left: solid 10px #3399ff;
 	border-bottom: solid 1px #3399ff;
 	border-top: solid 1px #3399ff;
+	border-right: solid 1px #3399ff;
 }
 
 .task_ticket{
 	padding: 5px;
 	margin-top: 10px;
 	float: left;
-	width: 100%;
+	width: 98%;
 	position: relative;
-	background-color: #DCEBFB;
+	/*background-color: #DCEBFB;*/
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
+	margin-left: 1%;
 }
 
 .image_user{
