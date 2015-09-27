@@ -61,7 +61,7 @@
 	margin-top: 5%;
 	background-size: 350px 100px;
 	box-shadow: 3px 3px 5px 2px #ccc;
-	background: #F5F5F5;
+	background: rgba(255, 255, 173, 0.97);
 	float: left;
 }
 
@@ -204,7 +204,7 @@
 	float: left;
 	width: 98%;
 	position: relative;
-	/*background-color: #DCEBFB;*/
+	background-color: #FBFBFB;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
