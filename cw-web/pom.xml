@@ -23,6 +23,12 @@
 
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -40,10 +46,10 @@
 					<warName>collaborative-whiteboard</warName>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<webResources>
-						<resource>
-							<!-- this is relative to the pom.xml directory -->
-							<directory>src/main/resources</directory>
-						</resource>
+						<webResource>
+							<directory>src/main/resources/properties</directory>
+							<filtering>true</filtering>
+						</webResource>
 					</webResources>
 				</configuration>
 			</plugin>
