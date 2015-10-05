@@ -23,6 +23,7 @@ public class EmailValidation implements Validator{
     private FacesMessageUtil facesMessageUtil;
 
     private static String MESSAGE_KEY = "email.validation.error";
+    private static String MESSAGE_KEY_DETAIL = "email.validation.error.detail";
 
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -35,7 +36,7 @@ public class EmailValidation implements Validator{
 
         if(!matcher.matches()){
             try {
-                throw new ValidatorException(facesMessageUtil.getFacesMessage(FacesMessage.SEVERITY_ERROR, MESSAGE_KEY));
+                throw new ValidatorException(facesMessageUtil.getFacesMessage(FacesMessage.SEVERITY_ERROR, MESSAGE_KEY, MESSAGE_KEY_DETAIL));
 
             } catch (IOException e) {
                 e.printStackTrace();

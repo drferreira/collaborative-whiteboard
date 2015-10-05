@@ -10,7 +10,6 @@
 }
 
 .stage{
-	border-left: 1px solid #EFEFEF;
 	display: table-cell;
 	overflow: hidden;
 	cursor: pointer;
