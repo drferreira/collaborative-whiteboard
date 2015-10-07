@@ -16,14 +16,18 @@ Dependencias para desenvolvimento do projeto.
 
 Processo de construção.
 
-(Clonar Projeto) - Branch DEV
-(Clonar | Instalar Dependencias)
+1º - (Clonar Projeto) - Branch DEV
 
-$ cd collaborative-whiteboard/cw-root
-$ mvn clean install -Ddatabase.action=true
+2º - (Clonar | Instalar Dependencias)
 
-(Iniciar Wildfly)
-$ cd collaborative-whiteboard/cw-ear
-$ mvn wildfly:deploy
+3º - $ cd collaborative-whiteboard/cw-root
+
+4º - $ mvn clean install -Ddatabase.action=true
+
+- Start Wildfly
+
+5º - $ cd collaborative-whiteboard/cw-ear
+
+6º - $ mvn wildfly:deploy
 
 
