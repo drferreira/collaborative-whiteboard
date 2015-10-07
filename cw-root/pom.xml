@@ -8,9 +8,8 @@
 	<name>cw-root</name>
 
 	<scm>
-		<connection>
-			scm:git:git@github.com:drferreira/collaborative-whiteboard.git
-		</connection>
+		<connection>scm:git:git@github.com:drferreira/collaborative-whiteboard.git</connection>
+		<developerConnection>scm:git:git@github.com:drferreira/collaborative-whiteboard.git</developerConnection>
 	</scm>
 
 	<distributionManagement>
@@ -83,6 +82,14 @@
 								<git-SHA-1>${buildNumber}</git-SHA-1>
 							</manifestEntries>
 						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>1.9.4</version>
+					<configuration>
+						<tag>${version}</tag>
 					</configuration>
 				</plugin>
 			</plugins>
