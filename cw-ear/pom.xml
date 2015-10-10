@@ -99,25 +99,25 @@
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-model</artifactId>
-			<version>${project.version}</version>
+			<version>${parent.version}</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-web</artifactId>
-			<version>${project.version}</version>
+			<version>${parent.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-business</artifactId>
-			<version>${project.version}</version>
+			<version>${parent.version}</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-persistence</artifactId>
-			<version>${project.version}</version>
+			<version>${parent.version}</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>

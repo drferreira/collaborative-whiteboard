@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>whiteboard-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${parent.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -66,7 +66,8 @@
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-persistence</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${parent.version}</version>
+
 			<scope>provided</scope>
 		</dependency>
 
@@ -80,7 +81,7 @@
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${parent.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
