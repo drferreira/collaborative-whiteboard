@@ -13,7 +13,7 @@
 	<version>1.1.0-SNAPSHOT</version>
 	<packaging>ear</packaging>
 
-	<name>cw-ear</name>
+	<name>cw-app</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -99,25 +99,25 @@
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-web</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-business</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-persistence</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
