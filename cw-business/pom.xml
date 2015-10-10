@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<artifactId>cw-root</artifactId>
 		<groupId>br.org.tutty.collaborative-whiteboard</groupId>
@@ -7,19 +9,9 @@
 		<relativePath>../cw-root/pom.xml</relativePath>
 	</parent>
 
-	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 	<artifactId>cw-business</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
 	<packaging>ejb</packaging>
-
 	<name>cw-business</name>
-
-	<properties>
-		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<build>
 		<plugins>
@@ -43,45 +35,46 @@
 	</build>
 
 	<dependencies>
+		<!-- ################################# -->
+		<!--   Dependencieas between modules   -->
+		<!-- ################################# -->
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>whiteboard-model</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-persistence</artifactId>
+			<version>${project.parent.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-model</artifactId>
+			<version>${project.parent.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- ################################# -->
+		<!--          Dependencies             -->
+		<!-- ################################# -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20090211</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-persistence</artifactId>
-			<version>${parent.version}</version>
-
-			<scope>provided</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.5.Final</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-model</artifactId>
-			<version>${parent.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -115,5 +108,4 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 </project>

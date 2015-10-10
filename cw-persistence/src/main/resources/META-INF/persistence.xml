@@ -6,7 +6,7 @@
     <persistence-unit name="CWPool" transaction-type="JTA">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:jboss/datasources/CW</jta-data-source>
-        <jar-file>lib/cw-model-1.0-SNAPSHOT.jar</jar-file>
+	<jar-file>lib/cw-model-${project.parent.version}.jar</jar-file>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

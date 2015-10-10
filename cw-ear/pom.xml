@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<artifactId>cw-root</artifactId>
 		<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 		<version>1.1.0-SNAPSHOT</version>
 		<relativePath>../cw-root/pom.xml</relativePath>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 	<artifactId>cw-ear</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
 	<packaging>ear</packaging>
-
 	<name>cw-app</name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<wildfly-hostname>localhost</wildfly-hostname>
 		<wildfly-port>9990</wildfly-port>
 		<wildfly-username>admin</wildfly-username>
@@ -28,6 +25,14 @@
 			<id>prime-repo</id>
 			<name>PrimeFaces Maven Repository</name>
 			<url>http://repository.primefaces.org</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -81,6 +86,37 @@
 	</build>
 
 	<dependencies>
+		<!-- ################################# -->
+		<!--   Dependencieas between modules   -->
+		<!-- ################################# -->
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-model</artifactId>
+			<version>${project.parent.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-web</artifactId>
+			<version>${project.parent.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-business</artifactId>
+			<version>${project.parent.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-persistence</artifactId>
+			<version>${project.parent.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<!-- ################################# -->
+		<!--          Dependencies             -->
+		<!-- ################################# -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
@@ -97,35 +133,9 @@
 			<version>5.1</version>
 		</dependency>
 		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-model</artifactId>
-			<version>${parent.version}</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-web</artifactId>
-			<version>${parent.version}</version>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-business</artifactId>
-			<version>${parent.version}</version>
-			<type>ejb</type>
-		</dependency>
-		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-persistence</artifactId>
-			<version>${parent.version}</version>
-			<type>ejb</type>
-		</dependency>
-		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>br.org.tutty</groupId>

@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<artifactId>cw-root</artifactId>
 		<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 		<version>1.1.0-SNAPSHOT</version>
 		<relativePath>../cw-root/pom.xml</relativePath>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 	<artifactId>cw-persistence</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
 	<packaging>ejb</packaging>
-
 	<name>cw-persistence</name>
 
 	<properties>
-		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<database.action>validate</database.action>
 	</properties>
-
 
 	<build>
 		<resources>
@@ -51,6 +46,18 @@
 	</build>
 
 	<dependencies>
+		<!-- ################################# -->
+		<!--   Dependencieas between modules   -->
+		<!-- ################################# -->
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-model</artifactId>
+			<version>${project.parent.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- ################################# -->
+		<!--          Dependencies             -->
+		<!-- ################################# -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
@@ -67,13 +74,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.0.CR2</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
-			<artifactId>cw-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
