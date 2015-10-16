@@ -92,6 +92,9 @@
 			../cw-web
 		</module>
 		<module>
+			../cw-rest-web
+		</module>
+		<module>
 			../cw-persistence
 		</module>
 		<module>

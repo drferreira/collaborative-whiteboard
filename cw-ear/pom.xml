@@ -53,6 +53,11 @@
 							<artifactId>cw-web</artifactId>
 							<contextRoot>cw</contextRoot>
 						</webModule>
+						<webModule>
+							<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+							<artifactId>cw-rest-web</artifactId>
+							<contextRoot>cw-rest</contextRoot>
+						</webModule>
 						<ejbModule>
 							<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 							<artifactId>cw-business</artifactId>
@@ -82,6 +87,12 @@
 		<dependency>
 			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 			<artifactId>cw-web</artifactId>
+			<version>${project.parent.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>br.org.tutty.collaborative-whiteboard</groupId>
+			<artifactId>cw-rest-web</artifactId>
 			<version>${project.parent.version}</version>
 			<type>war</type>
 		</dependency>
