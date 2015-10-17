@@ -22,7 +22,7 @@ Dependencias para desenvolvimento do projeto.
 
 ```{r, engine='bash', count_lines}
 cd collaborative-whiteboard/cw-root
-mvn clean install -Ddatabase.action=true
+mvn clean install -Ddatabase.action=true -P public
 ```
 
 ## Start Wildfly
