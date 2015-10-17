@@ -7,27 +7,29 @@ Construindo o projeto para ambientes de desenvolvimento:
 
 Dependencias para desenvolvimento do projeto.
 
- - Wildfly 9.0
- - Java 8
- - Maven 3 
- - Postgresql 9.4
- - Property Monitor : git@github.com:drferreira/property-monitor.git
- - Equalize Object  : git@github.com:drferreira/equalizer-object.git
+ * Wildfly 9.0
+ * Java 8
+ * Maven 3 
+ * Postgresql 9.4
+ * Property Monitor : git@github.com:drferreira/property-monitor.git
+ * Equalize Object  : git@github.com:drferreira/equalizer-object.git
 
-Processo de construção.
+## Processo de construção.
 
-1º - (Clonar Projeto) - Branch DEV
+(Clonar Projeto) - Branch DEV
 
-2º - (Clonar | Instalar Dependencias)
+(Clonar | Instalar Dependencias)
 
-3º - $ cd collaborative-whiteboard/cw-root
+```{r, engine='bash', count_lines}
+cd collaborative-whiteboard/cw-root
+mvn clean install -Ddatabase.action=true
+```
 
-4º - $ mvn clean install -Ddatabase.action=true
+## Start Wildfly
 
-- Start Wildfly
-
-5º - $ cd collaborative-whiteboard/cw-ear
-
-6º - $ mvn wildfly:deploy
+```{r, engine='bash', count_lines}
+cd collaborative-whiteboard/cw-ear
+mvn wildfly:deploy
+```
 
 
