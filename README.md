@@ -29,7 +29,7 @@ mvn clean install -Ddatabase.action=true -P public
 
 ```{r, engine='bash', count_lines}
 cd collaborative-whiteboard/cw-ear
-mvn wildfly:deploy
+mvn wildfly:deploy -P public
 ```
 
 
