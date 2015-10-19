@@ -1,4 +1,4 @@
-body{ 
+body{
 	overflow:hidden;
 }
 
@@ -33,4 +33,6 @@ body{
 	height: 100px;
 }
 
-
+ .margin-top{
+     margin-top:5%;
+ }
