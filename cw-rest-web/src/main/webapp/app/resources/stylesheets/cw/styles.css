@@ -1,0 +1,45 @@
+
+.color_WAITING {
+	background-color: #fbae34;
+	border: solid 1px rgb(155, 155, 155);
+}
+
+.color_REMOVED {
+	background-color: #e0eee0;
+	border: solid 1px rgb(200, 200, 200);
+}
+
+.color_AVAILABLE {
+	background-color: #97ffff;
+	border: solid 1px rgb(173, 198, 237);
+}
+
+.color_ANALYZED {
+	background-color: #6cdc97;
+	border: solid 1px rgb(0, 166, 0);
+}
+
+.color_IN_ANALYSIS {
+	background-color: #98e6b6;
+	border: solid 1px rgb(0, 166, 0);
+}
+
+.color_FINALIZED {
+	background-color: #D0D0D0;
+	border: solid 1px #ADADAD;
+}
+
+.color_BUSY{
+	background-color: #fbae34;
+	border: solid 1px rgb(203, 151, 68);
+}
+
+.color_FROZEN{
+	background-color: #3399ff;
+	border: solid 1px rgb(80, 115, 253);
+}
+
+.project_name{
+	font-size: 45px;
+	color: #E4C100;
+}
