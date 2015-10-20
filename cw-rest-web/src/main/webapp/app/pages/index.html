@@ -9,8 +9,9 @@
         <script type="text/javascript" src="../resources/js/angular/angular.min.js"></script>
         <script type="text/javascript" src="../resources/js/angular/ui-bootstrap-tpls-0.14.2.min.js"></script>
         <script type="text/javascript" src="../resources/js/cw/app.js"></script>
-        <script type="text/javascript" src="../resources/js/cw/login-ctrl.js"></script>
-        <script type="text/javascript" src="../resources/js/cw/register-ctrl.js"></script>
+        <script type="text/javascript" src="../resources/js/cw/login/login-interface-ctrl.js"></script>
+        <script type="text/javascript" src="../resources/js/cw/login/login-ctrl.js"></script>
+        <script type="text/javascript" src="../resources/js/cw/login/register-ctrl.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../resources/stylesheets/bootstrap/bootstrap-theme.min.css"/>
         <link rel="stylesheet" type="text/css" href="../resources/stylesheets/bootstrap/bootstrap.min.css"/>
@@ -19,14 +20,14 @@
         <link rel="stylesheet" type="text/css" href="../resources/stylesheets/cw/login-page.css"/>
         <link rel="stylesheet" type="text/css" href="../resources/stylesheets/cw/styles.css"/>
     </head>
-    <body class="container-fluid">
+    <body class="container-fluid" >
         <div class="bs-callout bs-callout-info">
             <div class="row text-center">
                 <h1><span class="project_name">Collaborative Whiteboard</span></h1>
             </div>
         </div>
 
-        <div class="container margin-top">
+        <div class="container margin-top" >
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#login-panel" data-toggle="tab">Login</a>
@@ -35,6 +36,7 @@
                     <a href="#register-panel" data-toggle="tab">Cadastro</a>
                 </li>
             </ul>
+
             <div class="tab-content">
                 <div class="tab-pane active" id="login-panel">
                     <div id="login_area" ng-controller="login-ctrl" class="panel panel-default">
@@ -45,33 +47,40 @@
                         <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
 
                         <div class="panel-body">
-                            <form >
-                                <div class="form-group">
-                                    <div class="input-group date">
-                                        <input class="form-control" id="email_login" type="email" ng-model="email" placeholder="email@exemplo.com.br" required/>
+                            <form name="login_form" novalidate ng-submit="login()">
+                                <div class="form-group" ng-class="{'has-error': login_form.email_login.$invalid && login_form.email_login.$dirty}">
+                                    <div class="input-group">
+                                        <input class="form-control" id="email_login" name="email_login" type="email" ng-model="email" placeholder="email@exemplo.com.br" required>
+
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-envelope"></span>
                                         </span>
                                     </div>
+
+                                    <span class="help-block" ng-show="login_form.email_login.$error.required && login_form.email_login.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="login_form.email_login.$error.email && login_form.email_login.$dirty">Deve ser um email valido.</span>
                                 </div>
 
-                                <div class="form-group">
-                                    <input class="form-control" id="password_login" type="password" ng-model="password"
-                                                                                                    placeholder="Senha" required />
+
+                                <div class="form-group" ng-class="{'has-error': login_form.password_login.$invalid && login_form.password_login.$dirty}">
+                                    <input class="form-control" id="password_login" name="password_login" type="password" ng-model="password"
+                                                                                                                          placeholder="Senha" required />
+                                        <span class="help-block" ng-show="login_form.password_login.$error.required && login_form.password_login.$dirty">Campo obrigatório.</span>
                                 </div>
 
-                                <button type="submit" ng-click="login()" class="btn btn-primary">Login</button>
+                                <button type="submit" ng-disabled="login_form.$invalid" class="btn btn-primary">Login</button>
                             </form>
                         </div>
                     </div>
                 </div>
+
                 <div class="tab-pane" id="register-panel">
                     <div id="register_area" ng-controller="register-ctrl" class="panel panel-default">
                         <div class="panel-heading text-center">
                             Cadastro
                         </div>
                         <div class="panel-body">
-                            <form>
+                            <form novalidate>
                                 <div class="form-group">
                                     <div class="input-group date">
                                         <input class="form-control" id="email_register" type="email" ng-model="email_register"
