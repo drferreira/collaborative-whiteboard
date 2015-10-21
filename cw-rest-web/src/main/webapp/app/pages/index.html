@@ -9,6 +9,7 @@
         <script type="text/javascript" src="../resources/js/angular/angular.min.js"></script>
         <script type="text/javascript" src="../resources/js/angular/ui-bootstrap-tpls-0.14.2.min.js"></script>
         <script type="text/javascript" src="../resources/js/cw/app.js"></script>
+        <script type="text/javascript" src="../resources/js/cw/login/messages-ctrl.js"></script>
         <script type="text/javascript" src="../resources/js/cw/login/login-ctrl.js"></script>
         <script type="text/javascript" src="../resources/js/cw/login/register-ctrl.js"></script>
 
@@ -26,6 +27,12 @@
             </div>
         </div>
 
+        <div ng-controller="MessagesCtrl" class="container">
+            <div class="row text-center">
+                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+            </div>
+        </div>
+
         <div class="container margin-top" >
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -38,12 +45,10 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="login-panel">
-                    <div id="login_area" ng-controller="login-ctrl" class="panel panel-default">
+                    <div id="login_area" ng-controller="LoginCtrl" class="panel panel-default">
                         <div class="panel-heading text-center">
                             Seja Bem Vindo!
                         </div>
-
-                        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
 
                         <div class="panel-body">
                             <form name="login_form" novalidate ng-submit="login()">
@@ -74,7 +79,7 @@
                 </div>
 
                 <div class="tab-pane" id="register-panel">
-                    <div id="register_area" ng-controller="register-ctrl" class="panel panel-default">
+                    <div id="register_area" ng-controller="RegisterCtrl" class="panel panel-default">
                         <div class="panel-heading text-center">
                             Cadastro
                         </div>
@@ -125,14 +130,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control" name="password_confirmation_register" id="password_confirmation_register" type="password" ng-model="password_confirmation"
-                                                                                                                                                          placeholder="Confirmação Senha" required>
+                                    <input class="form-control" name="password_confirmation_register" id="password_confirmation_register" type="password" ng-model="password_confirmation_register" placeholder="Confirmação Senha" required>
 
-                                        <span class="help-block" ng-show="register_form.password_confirmation_register.$error.required && register_form.password_confirmation_register.$dirty">Campo obrigatório.</span>
-                                        <span class="help-block" ng-show="(password_register != password_confirmation) && (password_confirmation && password_confirmation)">As senhas informadas devem ser iguais.</span>
+                                    <span class="help-block" ng-show="register_form.password_confirmation_register.$error.required && register_form.password_confirmation_register.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="(password_register != password_confirmation) && (password_confirmation && password_confirmation)">As senhas informadas devem ser iguais.</span>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" ng-disabled="register_form.$invalid" class="btn btn-primary">Register</button>
                             </form>
                         </div>
                     </div>

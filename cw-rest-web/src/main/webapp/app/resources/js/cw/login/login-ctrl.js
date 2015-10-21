@@ -1,13 +1,11 @@
-angular.module('cw-app',['ui.bootstrap']).controller('login-ctrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+angular.module('cw-app').controller('LoginCtrl', ['$scope', '$http', '$window','$rootScope' , function ($scope, $http, $window, $rootScope) {
+
     $scope.alerts = [];
     $authentication_error_message = 'Login Invalido. Verifique os dados informados.';
+
     $HTTP_POST_URL = window.location.origin + '/cw-rest/session/rest/authentication/login';
 
     $scope.login = function(){
-            invoke_login();
-    }
-
-    function invoke_login(){
        $http.post($HTTP_POST_URL, {
             email: $scope.email,
             password: $scope.password
@@ -17,13 +15,11 @@ angular.module('cw-app',['ui.bootstrap']).controller('login-ctrl', ['$scope', '$
                 $window.location.href = window.location.origin + '/cw-rest/app/pages/session/home.html'
 
             }else{
-                $scope.alerts.pop();
-                $scope.alerts.push({type:'danger', msg:$authentication_error_message});
+                $rootScope.$broadcast("loginErrorEvent");
             }
 
         }, function (response){
             console.log(response);
-
         });
     }
 }]);

@@ -1,1 +1,1 @@
-angular.module('cw-app', []);
+angular.module('cw-app', ['ui.bootstrap']);
