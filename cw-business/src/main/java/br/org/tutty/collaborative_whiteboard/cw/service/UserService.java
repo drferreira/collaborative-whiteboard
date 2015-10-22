@@ -10,6 +10,8 @@ public interface UserService {
 
     public User fetch(String email) throws DataNotFoundException;
 
+    Boolean isAlreadyRegistered(String email);
+
     Boolean hasSomeProject();
 
     void create(User user);

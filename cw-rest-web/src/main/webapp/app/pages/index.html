@@ -85,57 +85,58 @@
                         </div>
                         <div class="panel-body">
                             <form name="register_form" novalidate ng-submit="register()">
-                                <div class="form-group" ng-class="{'has-error': register_form.email_register.$invalid && register_form.email_register.$dirty}">
+                                <div class="form-group" ng-class="{'has-error': register_form.emailRegister.$invalid && register_form.emailRegister.$dirty}">
                                     <div class="input-group">
-                                        <input name="email_register" class="form-control" id="email_register" type="email" ng-model="email_register"
-                                                                                                                           placeholder="email@exemplo.com.br" required>
+                                        <input name="emailRegister" class="form-control" id="emailRegister" type="email" ng-model="user.emailRegister" placeholder="email@exemplo.com.br" ng-blur="validateEmail()" required>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-envelope"></span>
                                         </span>
                                     </div>
 
-                                    <span class="help-block" ng-show="register_form.email_register.$error.required && register_form.email_register.$dirty">Campo obrigatório.</span>
-                                    <span class="help-block" ng-show="register_form.email_register.$error.email && register_form.email_register.$dirty">Deve ser um email valido.</span>
+                                    <span class="help-block" ng-show="register_form.emailRegister.$error.required && register_form.emailRegister.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="register_form.emailRegister.$error.email && register_form.emailRegister.$dirty">Deve ser um email valido.</span>
+                                    <span class="help-block" ng-show="register_form.emailRegister.$error.emailInUse">Email em uso.</span>
                                 </div>
-                                <div class="form-group" ng-class="{'has-error': register_form.first_name_register.$invalid && register_form.first_name_register.$dirty}">
-                                    <input class="form-control" name="first_name_register" id="first_name_register" ng-model="first_name_register"
-                                                                                                                    placeholder="Nome" required>
+                                <div class="form-group" ng-class="{'has-error': register_form.firstNameRegister.$invalid && register_form.firstNameRegister.$dirty}">
+                                    <input class="form-control" name="firstNameRegister" id="firstNameRegister" ng-model="user.firstNameRegister"
+                                                                                                                placeholder="Nome" required>
 
-                                    <span class="help-block" ng-show="register_form.first_name_register.$error.required && register_form.first_name_register.$dirty">Campo obrigatório.</span>
-                                </div>
-
-                                <div class="form-group" ng-class="{'has-error': register_form.surname_register.$invalid && register_form.surname_register.$dirty}">
-                                    <input class="form-control" name="surname_register" id="surname_register" ng-model="surname_register" placeholder="Sobrenomes" required>
-
-                                    <span class="help-block" ng-show="register_form.surname_register.$error.required && register_form.surname_register.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="register_form.firstNameRegister.$error.required && register_form.firstNameRegister.$dirty">Campo obrigatório.</span>
                                 </div>
 
-                                <div class="form-group" ng-class="{'has-error': register_form.birthdate_date.$invalid && register_form.birthdate_date.$dirty}">
-                                    <div class="input-group date" id="birthdate_date">
-                                        <input name="birthdate_date" class="form-control" id="birthdate_register" ng-model="birthdate_register" placeholder="Aniversário" required>
+                                <div class="form-group" ng-class="{'has-error': register_form.surnameRegister.$invalid && register_form.surnameRegister.$dirty}">
+                                    <input class="form-control" name="surnameRegister" id="surnameRegister" ng-model="user.surnameRegister" placeholder="Sobrenomes" required>
+
+                                    <span class="help-block" ng-show="register_form.surnameRegister.$error.required && register_form.surnameRegister.$dirty">Campo obrigatório.</span>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error': register_form.birthdayRegister.$invalid && register_form.birthdayRegister.$dirty}">
+                                    <div class="input-group date" id="birthdayRegister">
+                                        <input  name="birthdayRegister" class="form-control" ng-model="user.birthdayRegister" placeholder="Aniversário" required>
 
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
+
                                     </div>
 
-                                    <span class="help-block" ng-show="register_form.birthdate_date.$error.required && register_form.birthdate_date.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="register_form.birthdayRegister.$error.required && register_form.birthdayRegister.$dirty">Campo obrigatório.</span>
                                 </div>
 
-                                <div class="form-group" ng-class="{'has-error': register_form.password_register.$invalid && register_form.password_register.$dirty}">
-                                    <input class="form-control" name="password_register" id="password_register" type="password" ng-model="password_register"
-                                                                                                                                placeholder="Senha" required>
+                                <div class="form-group" ng-class="{'has-error': register_form.passwordRegister.$invalid && register_form.passwordRegister.$dirty}">
+                                    <input class="form-control" name="passwordRegister" id="passwordRegister" type="password" ng-model="user.passwordRegister"
+                                                                                                                              placeholder="Senha" required>
 
-                                    <span class="help-block" ng-show="register_form.password_register.$error.required && register_form.password_register.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="register_form.passwordRegister.$error.required && register_form.passwordRegister.$dirty">Campo obrigatório.</span>
                                 </div>
 
-                                <div class="form-group">
-                                    <input class="form-control" name="password_confirmation_register" id="password_confirmation_register" type="password" ng-model="password_confirmation_register" placeholder="Confirmação Senha" required>
+                                <div class="form-group" ng-class="{'has-error': (register_form.passwordRegister.$invalid && register_form.passwordRegister.$dirty) || ((user.passwordRegister != user.passwordConfirmationRegister) && (user.passwordRegister && user.passwordConfirmationRegister))}">
+                                    <input class="form-control" name="passwordConfirmationRegister" id="passwordConfirmationRegister" type="password" ng-model="user.passwordConfirmationRegister" placeholder="Confirmação Senha" required >
 
-                                    <span class="help-block" ng-show="register_form.password_confirmation_register.$error.required && register_form.password_confirmation_register.$dirty">Campo obrigatório.</span>
-                                    <span class="help-block" ng-show="(password_register != password_confirmation) && (password_confirmation && password_confirmation)">As senhas informadas devem ser iguais.</span>
+                                    <span class="help-block" ng-show="register_form.passwordConfirmationRegister.$error.required && register_form.passwordConfirmationRegister.$dirty">Campo obrigatório.</span>
+                                    <span class="help-block" ng-show="(user.passwordRegister != user.passwordConfirmationRegister) && (user.passwordRegister && user.passwordConfirmationRegister)">As senhas informadas devem ser iguais.</span>
                                 </div>
-                                <button type="submit" ng-disabled="register_form.$invalid" class="btn btn-primary">Register</button>
+                                <button type="submit"  ng-disabled="register_form.$invalid" class="btn btn-primary">Register</button>
                             </form>
                         </div>
                     </div>
@@ -159,7 +160,10 @@
     </body>
     <script>
         $(document).ready(function() {
-            $("#birthdate_date").datepicker();
+            $("#birthdayRegister").datepicker({
+                endDate : '-1d',
+                format : 'dd/mm/yyyy'
+            });
         });
     </script>
 </html>

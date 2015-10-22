@@ -1,12 +1,8 @@
-angular.module('cw-app').controller('LoginCtrl', ['$scope', '$http', '$window','$rootScope' , function ($scope, $http, $window, $rootScope) {
-
-    $scope.alerts = [];
-    $authentication_error_message = 'Login Invalido. Verifique os dados informados.';
-
+angular.module('cw-app').controller('LoginCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope) {
     $HTTP_POST_URL = window.location.origin + '/cw-rest/session/rest/authentication/login';
 
     $scope.login = function(){
-       $http.post($HTTP_POST_URL, {
+        $http.post($HTTP_POST_URL, {
             email: $scope.email,
             password: $scope.password
 

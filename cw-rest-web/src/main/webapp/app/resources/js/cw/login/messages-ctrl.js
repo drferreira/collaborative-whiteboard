@@ -1,5 +1,6 @@
 angular.module('cw-app').controller('MessagesCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     $scope.alerts = [];
+    $authentication_error_message = 'Login Invalido. Verifique os dados informados.';
 
     function addLoginErrorMessage(){
         $scope.alerts.pop();
@@ -8,5 +9,9 @@ angular.module('cw-app').controller('MessagesCtrl', ['$scope', '$http', '$window
 
     $scope.$on("loginErrorEvent", function () {
         addLoginErrorMessage();
+    });
+
+    $scope.$on("clearMessagesEvent", function () {
+        $scope.alerts = [];
     });
 }]);

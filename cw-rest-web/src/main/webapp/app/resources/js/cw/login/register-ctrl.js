@@ -1,11 +1,31 @@
-angular.module('cw-app').controller('RegisterCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+angular.module('cw-app').controller('RegisterCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope) {
+    $HTTP_POST_URL_VALIDATE = window.location.origin + '/cw-rest/session/rest/user/validate';
+    $HTTP_POST_URL_CREATE = window.location.origin + '/cw-rest/session/rest/user/create';
 
     $scope.register = function(){
-        console.log($scope.email_register);
-        console.log($scope.first_name_register);
-        console.log($scope.surname_register);
-        console.log($scope.birthdate_register);
-        console.log($scope.password_confirmation_register);
+        $http.post($HTTP_POST_URL_CREATE, $scope.user).then(function (response){
+            if(response.data){
+                $window.location.href = window.location.origin + '/cw-rest/app/pages/session/home.html'
+            }
+        });
+    }
+
+    $scope.validateEmail = function(){
+        $rootScope.$broadcast("clearMessagesEvent");
+
+        $http.post($HTTP_POST_URL_VALIDATE, $scope.user).then(function (response){
+            $scope.emailInUse = !response.data;
+            $scope.register_form.emailRegister.$setValidity('emailInUse', response.data);
+            $scope.register_form.$setValidity('emailInUse', response.data);
+        });
+    }
+
+    $scope.matchPassword = function(){
+        if($scope.user.passwordRegister != $scope.passwordConfirmationRegister){
+            if($scope.passwordRegister && $scope.passwordConfirmationRegister){
+                $scope.register_form.$setValidity('passwordMatch', false);
+            }
+        }
     }
 }]);
 

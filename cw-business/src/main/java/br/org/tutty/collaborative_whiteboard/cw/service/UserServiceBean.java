@@ -28,6 +28,17 @@ public class UserServiceBean implements UserService, Serializable {
     }
 
     @Override
+    public Boolean isAlreadyRegistered(String email) {
+        try {
+            fetch(email);
+            return Boolean.TRUE;
+
+        } catch (DataNotFoundException e) {
+            return Boolean.FALSE;
+        }
+    }
+
+    @Override
     public Boolean hasSomeProject() {
         User user = sessionContext.getLoggedUser().getUser();
         return user.hasSomeProject();
