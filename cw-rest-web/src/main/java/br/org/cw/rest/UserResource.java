@@ -65,7 +65,7 @@ public class UserResource {
         Map values = new Gson().fromJson(userCreationData, Map.class);
 
         String email = values.get("emailRegister").toString();
-        String password = values.get("password_register").toString();
+        String password = values.get("passwordRegister").toString();
         String firstName = values.get("firstNameRegister").toString();
         String lastName = values.get("surnameRegister").toString();
         Date birthday = sourceFormat.parse(values.get("birthdayRegister").toString());
