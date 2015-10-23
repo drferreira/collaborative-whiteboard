@@ -124,17 +124,17 @@
                                 </div>
 
                                 <div class="form-group" ng-class="{'has-error': register_form.passwordRegister.$invalid && register_form.passwordRegister.$dirty}">
-                                    <input class="form-control" name="passwordRegister" id="passwordRegister" type="password" ng-model="user.passwordRegister"
+                                    <input class="form-control" ng-blur="matchPassword()" name="passwordRegister" id="passwordRegister" type="password" ng-model="user.passwordRegister"
                                                                                                                               placeholder="Senha" required>
 
                                     <span class="help-block" ng-show="register_form.passwordRegister.$error.required && register_form.passwordRegister.$dirty">Campo obrigatório.</span>
                                 </div>
 
-                                <div class="form-group" ng-class="{'has-error': (register_form.passwordRegister.$invalid && register_form.passwordRegister.$dirty) || ((user.passwordRegister != user.passwordConfirmationRegister) && (user.passwordRegister && user.passwordConfirmationRegister))}">
-                                    <input class="form-control" name="passwordConfirmationRegister" id="passwordConfirmationRegister" type="password" ng-model="user.passwordConfirmationRegister" placeholder="Confirmação Senha" required >
+                                <div class="form-group" ng-class="{'has-error': register_form.passwordConfirmationRegister.$dirty && (register_form.passwordConfirmationRegister.$error.required || register_form.passwordConfirmationRegister.$error.passwordMatch)}">
+                                    <input class="form-control" ng-blur="matchPassword()" name="passwordConfirmationRegister" id="passwordConfirmationRegister" type="password" ng-model="user.passwordConfirmationRegister" placeholder="Confirmação Senha" required >
 
                                     <span class="help-block" ng-show="register_form.passwordConfirmationRegister.$error.required && register_form.passwordConfirmationRegister.$dirty">Campo obrigatório.</span>
-                                    <span class="help-block" ng-show="(user.passwordRegister != user.passwordConfirmationRegister) && (user.passwordRegister && user.passwordConfirmationRegister)">As senhas informadas devem ser iguais.</span>
+                                    <span class="help-block" ng-show="register_form.passwordConfirmationRegister.$error.passwordMatch">As senhas informadas devem ser iguais.</span>
                                 </div>
                                 <button type="submit"  ng-disabled="register_form.$invalid" class="btn btn-primary">Register</button>
                             </form>

@@ -21,9 +21,15 @@ angular.module('cw-app').controller('RegisterCtrl', ['$scope', '$http', '$window
     }
 
     $scope.matchPassword = function(){
-        if($scope.user.passwordRegister != $scope.passwordConfirmationRegister){
-            if($scope.passwordRegister && $scope.passwordConfirmationRegister){
+        if($scope.user.passwordRegister && $scope.user.passwordConfirmationRegister){
+            if($scope.user.passwordRegister != $scope.user.passwordConfirmationRegister){
+                $scope.register_form.passwordConfirmationRegister.$setValidity('passwordMatch', false);
                 $scope.register_form.$setValidity('passwordMatch', false);
+
+            }else{
+                $scope.register_form.passwordConfirmationRegister.$setValidity('passwordMatch', true);
+                $scope.register_form.$setValidity('passwordMatch', true);
+
             }
         }
     }
