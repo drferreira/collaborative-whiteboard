@@ -2,23 +2,23 @@
 <html ng-app="cw-app">
     <head>
         <title>CW</title>
+        <base href="/cw-rest/">
 
-        <script type="text/javascript" src="../resources/js/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="../resources/js/bootstrap/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../resources/js/bootstrap/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="../resources/js/angular/angular.min.js"></script>
-        <script type="text/javascript" src="../resources/js/angular/ui-bootstrap-tpls-0.14.2.min.js"></script>
-        <script type="text/javascript" src="../resources/js/cw/app.js"></script>
-        <script type="text/javascript" src="../resources/js/cw/login/messages-ctrl.js"></script>
-        <script type="text/javascript" src="../resources/js/cw/login/login-ctrl.js"></script>
-        <script type="text/javascript" src="../resources/js/cw/login/register-ctrl.js"></script>
+        <link rel="import" href="app/resources/lib/jquery/include.html"/>
+        <link rel="import" href="app/resources/lib/angular/include.html"/>
 
-        <link rel="stylesheet" type="text/css" href="../resources/stylesheets/bootstrap/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/stylesheets/bootstrap/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/stylesheets/bootstrap/bootstrap-datepicker.min.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/stylesheets/bootstrap/callout.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/stylesheets/cw/login-page.css"/>
-        <link rel="stylesheet" type="text/css" href="../resources/stylesheets/cw/styles.css"/>
+        <script type="text/javascript" src="app/resources/js/cw/app.js"></script>
+        <script type="text/javascript" src="app/resources/js/cw/login/messages-ctrl.js"></script>
+        <script type="text/javascript" src="app/resources/js/cw/login/login-ctrl.js"></script>
+        <script type="text/javascript" src="app/resources/js/cw/login/register-ctrl.js"></script>
+
+        <link rel="import" href="app/resources/lib/bootstrap/include.html"/>
+
+        <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/login-page.css"/>
+        <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
+
+        <script type="text/javascript" src="app/resources/js/cw/navbar/navbar-module.js"></script>
+        <script type="text/javascript" src="app/resources/js/cw/whiteboard/whiteboard-module.js"></script>
     </head>
     <body class="container-fluid" >
         <div class="bs-callout bs-callout-info">
@@ -125,7 +125,7 @@
 
                                 <div class="form-group" ng-class="{'has-error': register_form.passwordRegister.$invalid && register_form.passwordRegister.$dirty}">
                                     <input class="form-control" ng-blur="matchPassword()" name="passwordRegister" id="passwordRegister" type="password" ng-model="user.passwordRegister"
-                                                                                                                              placeholder="Senha" required>
+                                                                                                                                                        placeholder="Senha" required>
 
                                     <span class="help-block" ng-show="register_form.passwordRegister.$error.required && register_form.passwordRegister.$dirty">Campo obrigatório.</span>
                                 </div>

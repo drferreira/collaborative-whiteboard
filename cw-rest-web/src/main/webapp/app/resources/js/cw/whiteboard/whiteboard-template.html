@@ -1,0 +1,8 @@
+<div ng-controller="WhiteboardCtrl" class="container=fluid">
+<cw-whiteboard-stages ng-show="connection.available" cw-stages="whiteboard.data.stages">
+
+</cw-whiteboard-stages>
+
+<div ng-show="!connection.available">Erro ao connectar</div>
+
+</div>
