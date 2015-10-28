@@ -23,7 +23,6 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
         $scope.$apply(function() {
             $scope.connection.available = true;
             $scope.whiteboard.data = angular.fromJson(evt.data);
-            console.log($scope.whiteboard.data);
         })
     };
 

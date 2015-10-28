@@ -15,13 +15,17 @@ angular.module('whiteboard-module', ['ui.bootstrap'])
         templateUrl: 'app/resources/js/cw/whiteboard/stages-template.html',
         controller : 'WhiteboardStagesCtrl',
         scope: {
-            cwStages: '@'
+            cwStages: '='
         }
     };
 })
 .directive('cwWhiteboardTickets', function() {
     return {
         restrict: 'E',
-        templateUrl: 'app/resources/js/cw/whiteboard/tickets-template.html'
+        templateUrl: 'app/resources/js/cw/whiteboard/tickets-template.html',
+        controller : 'WhiteboardTicketCtrl',
+        scope: {
+            cwStories: '='
+        }
     };
 });

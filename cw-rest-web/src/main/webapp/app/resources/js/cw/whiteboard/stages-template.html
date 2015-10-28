@@ -2,10 +2,9 @@
 <div ng-repeat="stage in cwStages | orderBy:'position' track by stage.position">
     <div class="col-md-6">
         <div class="panel panel-primary">
-            <div class="panel-heading">{{stage.name}}</div>
+            <div class="text-center panel-heading">{{stage.name}}</div>
 
-            <cw-whiteboard-tickets>
-            </cw-whiteboard-ticket>
+            <cw-whiteboard-tickets cw-stories="stage.stories" />
         </div>
     </div>
 </div>
