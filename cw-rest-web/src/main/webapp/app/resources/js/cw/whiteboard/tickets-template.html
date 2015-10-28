@@ -2,9 +2,10 @@
 <div ng-repeat="story in cwStories | orderBy:'priority' track by story.code">
 
     <div ng-repeat="task in story.tasks track by task.code">
-        <div class="bs-callout bs-callout-info panel-body">
-            <div class="container-fluid">
-                <div class="row">
+        <div class="ticket">
+
+            <div class="panel bs-callout bs-callout-info">
+                <div class="panel-heading bs-callout-info">
                     <div class="col-md-8">
                         <h4>{{task.subject}}</h4>
                     </div>
@@ -13,13 +14,25 @@
                     </div>
                 </div>
 
-                <br>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="container-fluid col-md-10">
+                            <div id="description">
+                                <p ng-bind-html="task.description | unsafe"></p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div id="description">
-                    <p ng-bind-html="task.description | unsafe"></p>
+                </div>
+                <div class="panel-footer">
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    <small>{{formatTime(task.estimatedTime) | date:'HH:mm'}}</small>
+                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Avançar</small></h4>
+                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Iniciar</small></h4>
+                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Abandonar</small></h4>
+                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Voltar</small></h4>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
