@@ -1,38 +1,51 @@
 <div class="container-fluid">
-<div ng-repeat="story in cwStories | orderBy:'priority' track by story.code">
+    <div ng-repeat="story in cwStories | orderBy:'priority' track by story.code">
 
-    <div ng-repeat="task in story.tasks track by task.code">
-        <div class="ticket">
+        <div ng-repeat="task in story.tasks track by task.code">
+            <div class="ticket">
 
-            <div class="panel bs-callout bs-callout-info">
-                <div class="panel-heading bs-callout-info">
-                    <div class="col-md-8">
-                        <h4>{{task.subject}}</h4>
-                    </div>
-                    <div class="col-md-4">
-                        <img width="60" height="60" class="img-thumbnail pull-right" ng-src="{{'data:image/jpeg;base64,'+ task.profilePicture}}" />
-                    </div>
-                </div>
-
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="container-fluid col-md-10">
-                            <div id="description">
-                                <p ng-bind-html="task.description | unsafe"></p>
+                <div class="panel bs-callout bs-callout-info">
+                    <div class="bs-callout-info">
+                        <div class="media">
+                            <div class="media-body">
+                                <h4 class="media-heading">{{task.subject}}</h4>
+                            </div>
+                            <div class="media-right">
+                                <a href="#">
+                                    <img ng-show="task.profilePicture" width="45em" height="45em" class="media-object img-thumbnail"
+                                         ng-src="{{'data:image/jpeg;base64,'+ task.profilePicture}}">
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                </div>
-                <div class="panel-footer">
-                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                    <small>{{formatTime(task.estimatedTime) | date:'HH:mm'}}</small>
-                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Avançar</small></h4>
-                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Iniciar</small></h4>
-                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Abandonar</small></h4>
-                    <h4 class="pull-right" style="display:inline; margin-right:10px"><small>Voltar</small></h4>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="container-fluid col-md-10">
+                                <div id="description">
+                                    <p ng-bind-html="task.description | unsafe"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        <small>{{formatTime(task.estimatedTime) | date:'HH:mm'}}</small>
+                        <h4 class="pull-right" style="display:inline; margin-right:10px">
+                            <small>Avançar</small>
+                        </h4>
+                        <h4 class="pull-right" style="display:inline; margin-right:10px">
+                            <small>Iniciar</small>
+                        </h4>
+                        <h4 class="pull-right" style="display:inline; margin-right:10px">
+                            <small>Abandonar</small>
+                        </h4>
+                        <h4 class="pull-right" style="display:inline; margin-right:10px">
+                            <small>Voltar</small>
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
