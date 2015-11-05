@@ -3,9 +3,20 @@
         <div ng-repeat="stage in cwStages | orderBy:'position' track by stage.position">
             <div class="col-md-4">
                 <div class="panel panel-primary panel-stage">
-                    <div class="text-center panel-heading">{{stage.name}}</div>
+                    <div class="text-center panel-heading">
+                        {{stage.name}}
 
-                    <cw-whiteboard-tickets cw-stories="stage.stories"/>
+                        <span class="pull-right clickable" data-toggle="collapse" data-parent="#accordion" href="{{'#stage-'+$index}}"><i class="glyphicon glyphicon-minus"></i></span>
+                    </div>
+
+                    <div id="{{'stage-'+$index}}" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
+
+                        <div class="panel-body">
+                            <cw-whiteboard-tickets cw-stories="stage.stories" last-stage="$last" first-stage="$first"/>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

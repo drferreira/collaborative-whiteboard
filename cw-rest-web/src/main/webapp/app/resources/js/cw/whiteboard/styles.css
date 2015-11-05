@@ -1,0 +1,7 @@
+.ticket-control-btn {
+    margin: 3px;
+}
+
+.ticket-control-btn:hover{
+    cursor: pointer;
+}

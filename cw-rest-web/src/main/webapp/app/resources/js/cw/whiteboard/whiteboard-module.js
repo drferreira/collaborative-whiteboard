@@ -25,7 +25,9 @@ angular.module('whiteboard-module', ['ui.bootstrap'])
         templateUrl: 'app/resources/js/cw/whiteboard/tickets-template.html',
         controller : 'WhiteboardTicketCtrl',
         scope: {
-            cwStories: '='
+            cwStories: '=',
+            lastStage: '=',
+            firstStage: '='
         }
     };
 });

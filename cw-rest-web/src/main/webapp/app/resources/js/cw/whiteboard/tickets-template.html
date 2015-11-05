@@ -12,7 +12,8 @@
                             </div>
                             <div class="media-right">
                                 <a href="#">
-                                    <img ng-show="task.profilePicture" width="45em" height="45em" class="media-object img-thumbnail"
+                                    <img ng-show="task.profilePicture" width="45em" height="45em"
+                                         class="media-object img-thumbnail"
                                          ng-src="{{'data:image/jpeg;base64,'+ task.profilePicture}}">
                                 </a>
                             </div>
@@ -27,25 +28,23 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="panel-footer">
+                    <div>
                         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                         <small>{{formatTime(task.estimatedTime) | date:'HH:mm'}}</small>
-                        <h4 class="pull-right" style="display:inline; margin-right:10px">
-                            <small>Avançar</small>
-                        </h4>
-                        <h4 class="pull-right" style="display:inline; margin-right:10px">
-                            <small>Iniciar</small>
-                        </h4>
-                        <h4 class="pull-right" style="display:inline; margin-right:10px">
-                            <small>Abandonar</small>
-                        </h4>
-                        <h4 class="pull-right" style="display:inline; margin-right:10px">
-                            <small>Voltar</small>
-                        </h4>
+
+                        <span ng-show="availableToFinalize(task)" ng-click="finalize(task)" class="ticket-control-btn pull-right label label-success">Finalizar</span>
+
+                        <span ng-show="isDontLastStage()" ng-click="goForward(task)" class="ticket-control-btn pull-right label label-success">Avançar</span>
+
+                        <span ng-show="available(task)" ng-click="play(task)" class="ticket-control-btn pull-right label label-info">Iniciar</span>
+
+                        <span ng-show="inUse(task)" ng-click="stop(task)" class="ticket-control-btn pull-right label label-default">Abandonar</span>
+
+                        <span ng-show="isNotFirstStage()" ng-click="goBack(task)" class="ticket-control-btn pull-right label label-danger">Voltar</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
