@@ -4,7 +4,7 @@
         <div ng-repeat="task in story.tasks track by task.code">
             <div class="ticket">
 
-                <div class="panel bs-callout bs-callout-info">
+                <div class="panel bs-callout bs-callout-info" ng-class="statusClass(task)">
                     <div class="bs-callout-info">
                         <div class="media">
                             <div class="media-body">

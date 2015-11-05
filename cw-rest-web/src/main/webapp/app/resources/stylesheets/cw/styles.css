@@ -1,42 +1,34 @@
 
 .color_WAITING {
-	background-color: #fbae34;
-	border: solid 1px rgb(155, 155, 155);
+	border-left-color: rgb(155, 155, 155) !important;
 }
 
 .color_REMOVED {
-	background-color: #e0eee0;
-	border: solid 1px rgb(200, 200, 200);
+	border-left-color: rgb(200, 200, 200) !important;
 }
 
 .color_AVAILABLE {
-	background-color: #97ffff;
-	border: solid 1px rgb(173, 198, 237);
+	border-left-color: rgb(173, 198, 237) !important;
 }
 
 .color_ANALYZED {
-	background-color: #6cdc97;
-	border: solid 1px rgb(0, 166, 0);
+	border-left-color: rgb(0, 166, 0) !important;
 }
 
 .color_IN_ANALYSIS {
-	background-color: #98e6b6;
-	border: solid 1px rgb(0, 166, 0);
+	border-left-color: rgb(0, 166, 0) !important;
 }
 
 .color_FINALIZED {
-	background-color: #D0D0D0;
-	border: solid 1px #ADADAD;
+  	border-left-color: #ADADAD !important;
 }
 
 .color_BUSY{
-	background-color: #fbae34;
-	border: solid 1px rgb(203, 151, 68);
+	border-left-color: rgb(203, 151, 68) !important;
 }
 
 .color_FROZEN{
-	background-color: #3399ff;
-	border: solid 1px rgb(80, 115, 253);
+	border-left-color: rgb(80, 115, 253) !important;
 }
 
 .project_name{

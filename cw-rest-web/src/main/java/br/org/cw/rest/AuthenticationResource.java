@@ -46,13 +46,23 @@ public class AuthenticationResource {
         }
     }
 
+    @POST
+    @Path("/logout")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String logout() {
+        securityService.logout(httpSession);
+        httpSession.invalidate();
+
+        return new Gson().toJson(Boolean.TRUE);
+    }
+
     public Security getSecurity(String loginData) throws EncryptedException {
         Map values = new Gson().fromJson(loginData, Map.class);
 
         String email = values.get("email").toString();
         String password = values.get("password").toString();
 
-        Security security = new Security(httpSession,email,password);
+        Security security = new Security(httpSession, email, password);
 
         return security;
     }

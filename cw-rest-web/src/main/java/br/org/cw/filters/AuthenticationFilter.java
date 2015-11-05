@@ -35,7 +35,7 @@ public class AuthenticationFilter implements Filter {
 
         if (!securityService.isLogged(httpServletRequest.getSession())) {
             String contextPath = httpServletRequest.getContextPath();
-            httpServletResponse.sendRedirect(contextPath + LOGIN_URL);
+            httpServletResponse.sendRedirect(contextPath);
         }else {
             chain.doFilter(request, response);
             return;

@@ -2,10 +2,12 @@ angular.module('cw-app').controller('RegisterCtrl', ['$scope', '$http', '$window
     $HTTP_POST_URL_VALIDATE = window.location.origin + '/cw-rest/session/rest/user/validate';
     $HTTP_POST_URL_CREATE = window.location.origin + '/cw-rest/session/rest/user/create';
 
+    $scope.user = {};
+
     $scope.register = function(){
         $http.post($HTTP_POST_URL_CREATE, $scope.user).then(function (response){
             if(response.data){
-                $window.location.href = window.location.origin + '/cw-rest/app/pages/session/home.html'
+                $window.location.href = window.location.origin + '/cw-rest/app/pages/session/home/index.html'
             }
         });
     }

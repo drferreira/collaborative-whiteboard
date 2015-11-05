@@ -8,7 +8,7 @@ angular.module('cw-app').controller('LoginCtrl', ['$scope', '$http', '$window', 
 
         }).then(function (response){
             if(response.data.status == 'SUCCESS'){
-                $window.location.href = window.location.origin + '/cw-rest/app/pages/session/home.html'
+                $window.location.href = window.location.origin + '/cw-rest/app/pages/session/home/index.html'
 
             }else{
                 $rootScope.$broadcast("loginErrorEvent");

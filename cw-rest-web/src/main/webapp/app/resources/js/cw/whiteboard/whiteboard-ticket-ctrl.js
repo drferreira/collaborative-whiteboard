@@ -2,6 +2,10 @@ angular.module('whiteboard-module').controller('WhiteboardTicketCtrl', ['$scope'
 
     var $HTTP_POST_URL = window.location.origin + '/cw-rest/session/rest/whiteboard/task/';
 
+    $scope.statusClass = function (task){
+        return 'color_' + task.taskStatus.value;
+    }
+
     $scope.formatTime = function (time) {
         return new Date(time);
     }
