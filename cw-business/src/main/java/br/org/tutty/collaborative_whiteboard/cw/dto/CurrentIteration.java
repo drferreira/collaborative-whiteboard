@@ -1,6 +1,9 @@
 package br.org.tutty.collaborative_whiteboard.cw.dto;
 
+import backlog_manager.entities.Story;
+
 import java.util.Date;
+import java.util.List;
 
 public class CurrentIteration {
     private Float percentageOfFinalizedStories;
@@ -9,6 +12,7 @@ public class CurrentIteration {
     private Date endDateCurrentIteration;
     private Integer storiesIntoIteration;
     private Integer finalizedStoriesIntoIteration;
+    private Integer storyPointsIntoIteration = 0;
 
     public void setCurrentIterationName(String currentIterationName) {
         this.currentIterationName = currentIterationName;
@@ -32,5 +36,13 @@ public class CurrentIteration {
 
     public void calcPercentageOfFinalizedStories() {
         this.percentageOfFinalizedStories = new Float((finalizedStoriesIntoIteration * 100) / storiesIntoIteration);
+    }
+
+    public void setStoryPointsIntoIteration(List<Story> storyPointsIntoIteration) {
+        storyPointsIntoIteration.forEach(story -> calcStoryPoints(story.getStoryPoints()));
+    }
+
+    private void calcStoryPoints(Integer storyPoints){
+        storyPointsIntoIteration += storyPoints;
     }
 }

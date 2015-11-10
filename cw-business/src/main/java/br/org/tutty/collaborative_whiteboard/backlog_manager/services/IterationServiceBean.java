@@ -149,6 +149,7 @@ public class IterationServiceBean implements IterationService {
         currentIteration.setCurrentIterationName(iteration.getName());
         currentIteration.setInitDateCurrentIteration(iteration.getInitDate());
         currentIteration.setEndDateCurrentIteration(iteration.getEndDate());
+        currentIteration.setStoryPointsIntoIteration(storiesIntoIteration);
 
         currentIteration.calcPercentageOfFinalizedStories();
         return currentIteration;
