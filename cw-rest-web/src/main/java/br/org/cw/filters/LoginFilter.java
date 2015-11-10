@@ -9,23 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by drferreira on 17/12/14.
- */
-@WebFilter(
-        urlPatterns = "/app/pages/session/*",
-        dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE, DispatcherType.ASYNC}
-)
-public class AuthenticationFilter implements Filter {
-
-    private static final String LOGIN_URL = "/app/pages/index.html";
+@WebFilter(urlPatterns = "/app/pages/index.html", dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE, DispatcherType.ASYNC})
+public class LoginFilter implements Filter {
+    private static final String HOME_URL = "/app/pages/session/home/index.html";
 
     @Inject
     private SecurityService securityService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        // TODO Implementar LOG
+
     }
 
     @Override
@@ -33,10 +26,10 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-        if (!securityService.isLogged(httpServletRequest.getSession())) {
+        if (securityService.isLogged(httpServletRequest.getSession())) {
             String contextPath = httpServletRequest.getContextPath();
-            httpServletResponse.sendRedirect(contextPath + LOGIN_URL);
-        }else {
+            httpServletResponse.sendRedirect(contextPath + HOME_URL);
+        } else {
             chain.doFilter(request, response);
             return;
         }
@@ -44,6 +37,6 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void destroy() {
-        // TODO Implementar LOG
+
     }
 }
