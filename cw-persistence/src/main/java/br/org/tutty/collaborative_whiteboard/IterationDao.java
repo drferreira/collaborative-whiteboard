@@ -18,4 +18,6 @@ public interface IterationDao extends Dao{
     Iteration getCurrentIteration() throws DataNotFoundException;
 
     List<Iteration> fetchIterations() throws DataNotFoundException;
+
+    List<Story> fetchFinalizedStories(Iteration iteration) throws DataNotFoundException;
 }

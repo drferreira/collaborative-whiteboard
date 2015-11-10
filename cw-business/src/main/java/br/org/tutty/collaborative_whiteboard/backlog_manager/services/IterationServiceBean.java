@@ -7,6 +7,7 @@ import backlog_manager.enums.StoryStatus;
 import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.IterationDao;
+import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
 import cw.exceptions.DataNotFoundException;
 
 import javax.ejb.Local;
@@ -124,6 +125,7 @@ public class IterationServiceBean implements IterationService {
         }
     }
 
+
     @Override
     public Long fetchIterationPoints(Iteration iteration) {
         try {
@@ -132,5 +134,23 @@ public class IterationServiceBean implements IterationService {
         } catch (DataNotFoundException e) {
             return 0l;
         }
+    }
+
+    @Override
+    public CurrentIteration fetchCurrentIterationData() throws DataNotFoundException {
+        CurrentIteration currentIteration = new CurrentIteration();
+
+        Iteration iteration = getCurrentIteration();
+        List<Story> storiesIntoIteration = iterationDao.fetchStories(iteration);
+        List<Story> stories = iterationDao.fetchFinalizedStories(iteration);
+
+        currentIteration.setStoriesIntoIteration(storiesIntoIteration.size());
+        currentIteration.setFinalizedStoriesIntoIteration(stories.size());
+        currentIteration.setCurrentIterationName(iteration.getName());
+        currentIteration.setInitDateCurrentIteration(iteration.getInitDate());
+        currentIteration.setEndDateCurrentIteration(iteration.getEndDate());
+
+        currentIteration.calcPercentageOfFinalizedStories();
+        return currentIteration;
     }
 }

@@ -1,11 +1,12 @@
-angular.module('cw-app').controller('IterationDataProgressCtrl', ['$scope', function ($scope) {
+angular.module('cw-app').controller('IterationDataProgressCtrl', ['$scope', '$http', function ($scope, $http) {
+    var HTTP_POST_URL = window.location.origin + '/cw-rest/session/rest/iteration/current/progress';
     $scope.iteration = {};
 
-    $scope.iteration.daysRemaining = 10;
+    $http.get(HTTP_POST_URL).then(function (response) {
+        if (response.data) {
+            $scope.iteration = response.data;
+            console.log(response.data);
+        }
+    });
 
-    $scope.iteration.finalizedTasks = 40;
-    $scope.iteration.finalizedStories = 10;
-    $scope.iteration.name = 'Iteracao 80';
-    $scope.iteration.initDate = '10/10/19856';
-    $scope.iteration.endDate = '30/10/19856';
 }]);
