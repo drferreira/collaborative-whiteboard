@@ -3,29 +3,35 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
 
     $scope.connection = {};
     $scope.whiteboard = {};
+    $scope.whiteboard.error = {};
 
     websocket = new WebSocket($scope.cwUrlSource);
 
     websocket.onclose = function (evt) {
         $scope.$apply(function () {
-            $scope.connection.available = false;
+            $scope.whiteboard.error.connection = true;
         })
     };
 
     websocket.onerror = function (evt) {
         $scope.$apply(function () {
-            $scope.connection.available = false;
+            $scope.whiteboard.error.connection = true;
         })
     };
 
     websocket.onmessage = function (evt) {
         $scope.$apply(function () {
-            $scope.connection.available = true;
             $scope.whiteboard.data = angular.fromJson(evt.data);
+            checkEmptyWhiteboardFlag($scope.whiteboard.data.stages);
         })
     };
 
-    $scope.connectionIsAvailable = function(){
-       return $scope.connection.available;
+
+    function checkEmptyWhiteboardFlag(stages){
+        if(!stages.length){
+            $scope.whiteboard.error.initialized = true;
+        }else{
+            $scope.whiteboard.error.initialized = false;
+        }
     }
 }]);
