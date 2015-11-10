@@ -3,10 +3,8 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
 
     $scope.connection = {};
     $scope.whiteboard = {};
-    $scope.connection.available = false;
 
     websocket = new WebSocket($scope.cwUrlSource);
-
 
     websocket.onclose = function (evt) {
         $scope.$apply(function () {
@@ -27,4 +25,7 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
         })
     };
 
+    $scope.connectionIsAvailable = function(){
+       return $scope.connection.available;
+    }
 }]);

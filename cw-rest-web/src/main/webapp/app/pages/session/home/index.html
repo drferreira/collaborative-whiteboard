@@ -25,7 +25,8 @@
 <cw-navbar></cw-navbar>
 
 <div ng-show="iteration" ng-controller="IterationDataProgressCtrl">
-    <h3>{{iteration.currentIterationName}}
+    <h3>
+        {{iteration.currentIterationName}}
         <small>{{formatTime(iteration.initDateCurrentIteration) | date:'dd/MM/yyyy'}}</small>
         <small>-</small>
         <small>{{formatTime(iteration.endDateCurrentIteration) | date:'dd/MM/yyyy'}}</small>

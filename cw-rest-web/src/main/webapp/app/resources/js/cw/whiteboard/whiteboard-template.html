@@ -1,13 +1,17 @@
 <div ng-controller="WhiteboardCtrl" class="container=fluid">
 
+    <div ng-show="connectionIsAvailable()">
+        <cw-whiteboard-stages cw-stages="whiteboard.data.stages"/>
+    </div>
 
+    <div ng-show="!connectionIsAvailable()">
+        <div class="jumbotron text-c">
+            <div class="container">
+                <h1>Erro ao connectar</h1>
 
-    <cw-whiteboard-stages ng-show="connection.available" cw-stages="whiteboard.data.stages"/>
-
-    <div ng-show="!connection.available" class="jumbotron">
-        <div class="container">
-            <h1 >Erro ao connectar</h1>
-            <p>Acesso ao quadro temporariamente indisponivel.</p>
+                <p>Acesso ao quadro temporariamente indisponivel.</p>
+                <p>Houve uma falha ao conectar com o quadro. Verifique a disponibilidade do serviço</p>
+            </div>
         </div>
     </div>
 

@@ -23,12 +23,6 @@ public class WhiteboardWS{
     @Inject
     private WhiteboardHandler whiteboardHandler;
 
-    @OnMessage
-    public void send(String dataMessage, Session senderSession){
-        // TODO Aguardando implementação para modificações no quadro.
-        System.out.println("ENVIADA MENSAGEM");
-    }
-
     @OnOpen
     public void open(Session websocketSession, EndpointConfig endpointConfig) throws DataNotFoundException {
         whiteboardHandler.addSession(websocketSession);
@@ -38,5 +32,6 @@ public class WhiteboardWS{
     @OnClose
     public void close(Session websocketSession) throws IOException {
         whiteboardHandler.removeSession(websocketSession);
+        whiteboardService.refreshWhiteboard(websocketSession);
     }
 }
