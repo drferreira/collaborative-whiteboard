@@ -40,10 +40,15 @@ public class ProfileController extends GenericController implements Serializable
 	private UserService userService;
 
 	@PostConstruct
-	public void setUp() throws DataNotFoundException {
-		LoggedUser loggedUser = sessionContext.getLoggedUser();
-		userEdition.init(loggedUser.getUser());
-	}
+	public void setUp(){
+        try {
+            LoggedUser loggedUser = sessionContext.getLoggedUser();
+            userEdition.init(loggedUser.getUser());
+
+        } catch (DataNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public void save(){
 		User changedUser = userEdition.toEntity();
