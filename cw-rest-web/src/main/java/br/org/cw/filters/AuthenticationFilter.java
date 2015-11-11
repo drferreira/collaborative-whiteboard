@@ -18,7 +18,7 @@ import java.io.IOException;
 )
 public class AuthenticationFilter implements Filter {
 
-    private static final String LOGIN_URL = "/app/pages/index.html";
+    private static final String LOGIN_URL = "/app/pages/login/index.html";
 
     @Inject
     private SecurityService securityService;

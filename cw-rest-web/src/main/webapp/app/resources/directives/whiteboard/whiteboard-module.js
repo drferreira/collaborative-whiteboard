@@ -1,8 +1,8 @@
-angular.module('whiteboard-module', ['ui.bootstrap'])
+angular.module('whiteboard-module', [])
 .directive('cwWhiteboard', function() {
     return {
         restrict: 'E',
-        templateUrl: 'app/resources/js/cw/whiteboard/whiteboard-template.html',
+        templateUrl: 'app/resources/directives/whiteboard/whiteboard-template.html',
         controller : 'WhiteboardCtrl',
         scope: {
             cwUrlSource: '@'
@@ -12,7 +12,7 @@ angular.module('whiteboard-module', ['ui.bootstrap'])
 .directive('cwWhiteboardStages', function() {
     return {
         restrict: 'E',
-        templateUrl: 'app/resources/js/cw/whiteboard/stages-template.html',
+        templateUrl: 'app/resources/directives/whiteboard/stages-template.html',
         controller : 'WhiteboardStagesCtrl',
         scope: {
             cwStages: '='
@@ -22,7 +22,7 @@ angular.module('whiteboard-module', ['ui.bootstrap'])
 .directive('cwWhiteboardTickets', function() {
     return {
         restrict: 'E',
-        templateUrl: 'app/resources/js/cw/whiteboard/tickets-template.html',
+        templateUrl: 'app/resources/directives/whiteboard/tickets-template.html',
         controller : 'WhiteboardTicketCtrl',
         scope: {
             cwStories: '=',

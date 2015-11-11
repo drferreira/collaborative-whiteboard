@@ -1,25 +1,21 @@
 <!DOCTYPE html>
-<html ng-app="cw-app">
+<html ng-app="cw-home">
 <head>
     <title>CW</title>
+    <meta charset="UTF-8"/>
     <base href="/cw-rest/">
 
     <link rel="import" href="app/resources/lib/jquery/include.html"/>
     <link rel="import" href="app/resources/lib/angular/include.html"/>
     <link rel="import" href="app/resources/lib/bootstrap/include.html"/>
+
+    <link rel="import" href="app/resources/directives/navbar/include.html"/>
+    <link rel="import" href="app/resources/directives/whiteboard/include.html"/>
+
     <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
-    <link rel="stylesheet" type="text/css" href="app/resources/js/cw/whiteboard/styles.css"/>
 
-    <script type="text/javascript" src="app/resources/js/cw/app.js"></script>
+    <script type="text/javascript" src="app/pages/session/home/home-module.js"></script>
     <script type="text/javascript" src="app/pages/session/home/iteration-data-ctrl.js"></script>
-
-    <script type="text/javascript" src="app/resources/js/cw/navbar/navbar-module.js"></script>
-    <script type="text/javascript" src="app/resources/js/cw/navbar/navbar-ctrl.js"></script>
-
-    <script type="text/javascript" src="app/resources/js/cw/whiteboard/whiteboard-module.js"></script>
-    <script type="text/javascript" src="app/resources/js/cw/whiteboard/whiteboard-ctrl.js"></script>
-    <script type="text/javascript" src="app/resources/js/cw/whiteboard/whiteboard-stages-ctrl.js"></script>
-    <script type="text/javascript" src="app/resources/js/cw/whiteboard/whiteboard-ticket-ctrl.js"></script>
 </head>
 <body class="container-fluid">
 <cw-navbar></cw-navbar>
@@ -27,11 +23,13 @@
 <div ng-show="iteration" ng-controller="IterationDataProgressCtrl">
     <h3>
         {{iteration.currentIterationName}}
+    </h3>
+
+    <h4>
         <small>{{formatTime(iteration.initDateCurrentIteration) | date:'dd/MM/yyyy'}}</small>
         <small>-</small>
         <small>{{formatTime(iteration.endDateCurrentIteration) | date:'dd/MM/yyyy'}}</small>
-    </h3>
-
+    </h4>
     <h4>
         <small>{{iteration.storyPointsIntoIteration}} StoryPoints</small>
     </h4>
@@ -49,7 +47,6 @@
 </div>
 
 <br>
-
 
 <cw-whiteboard cw-url-source="ws://localhost:8080/cw-rest/whiteboard"/>
 </body>
