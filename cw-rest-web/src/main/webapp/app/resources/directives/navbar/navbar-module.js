@@ -4,6 +4,8 @@ angular.module('navbar-module', ['ui.bootstrap'])
         restrict: 'E',
         templateUrl: 'app/resources/directives/navbar/navbar-template.html',
         controller: 'NavbarCtrl',
-        active:'='
+        scope: {
+            active: '@'
+        }
     };
 });

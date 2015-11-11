@@ -1,23 +1,23 @@
-<nav class="navbar navbar-inverse">
+<nav ng-controller="NavbarCtrl" class="navbar navbar-inverse">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">CW</a>
 
         <div class="navbar-left">
             <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">Quadro</a>
+                <li id="whiteboard" class="active">
+                    <a class="click-hand" ng-click="navigateToWhiteboard()" >Quadro</a>
                 </li>
-                <li>
-                    <a>Iterações</a>
+                <li id="iteration">
+                    <a class="click-hand" ng-click="navigateToIterations()">Iterações</a>
                 </li>
-                <li>
-                    <a>Projetos</a>
+                <li id="projects">
+                    <a class="click-hand">Projetos</a>
                 </li>
-                <li>
-                    <a>Statisticas</a>
+                <li id="statistics">
+                    <a class="click-hand">Statisticas</a>
                 </li>
-                <li>
-                    <a>Backlog</a>
+                <li id="backlog">
+                    <a class="click-hand">Backlog</a>
                 </li>
             </ul>
         </div>

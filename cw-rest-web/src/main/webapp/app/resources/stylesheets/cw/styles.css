@@ -43,3 +43,7 @@
 .beta_name{
     margin-left: 5px;
 }
+
+.click-hand:hover{
+    cursor: pointer;
+}
