@@ -5,7 +5,7 @@ angular.module('whiteboard-module', [])
         templateUrl: 'app/resources/directives/whiteboard/whiteboard-template.html',
         controller : 'WhiteboardCtrl',
         scope: {
-            cwUrlSource: '@'
+            cwUrlSourceBind: '='
         }
     }
 })

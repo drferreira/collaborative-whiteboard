@@ -5,7 +5,7 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
     $scope.whiteboard = {};
     $scope.whiteboard.error = {};
 
-    websocket = new WebSocket($scope.cwUrlSource);
+    websocket = new WebSocket($scope.cwUrlSourceBind);
 
     websocket.onclose = function (evt) {
         $scope.$apply(function () {

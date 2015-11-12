@@ -15,9 +15,10 @@
     <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
 
     <script type="text/javascript" src="app/pages/session/home/home-module.js"></script>
+    <script type="text/javascript" src="app/pages/session/home/home-ctrl.js"></script>
     <script type="text/javascript" src="app/pages/session/home/iteration-data-ctrl.js"></script>
 </head>
-<body class="container-fluid">
+<body ng-controller="HomeCtrl" class="container-fluid">
 <cw-navbar active="whiteboard"></cw-navbar>
 
 <div ng-show="iteration" ng-controller="IterationDataProgressCtrl">
@@ -48,6 +49,6 @@
 
 <br>
 
-<cw-whiteboard cw-url-source="ws://localhost:8080/cw-rest/whiteboard"/>
+<cw-whiteboard cw-url-source-bind="urlSourceWhiteboard"/>
 </body>
 </html>
