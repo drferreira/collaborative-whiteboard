@@ -13,16 +13,34 @@
 
     <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
     <script type="text/javascript" src="app/pages/session/iteration/iteration-module.js"></script>
+    <script type="text/javascript" src="app/pages/session/iteration/iteration-ctrl.js"></script>
 </head>
-<body class="container-fluid">
+<body ng-controller="IterationCtrl" class="container-fluid">
 <cw-navbar active="iteration"></cw-navbar>
 
 <div class="container">
+
     <div class="col-lg-offset-2 col-md-7">
         <div class="form-group">
-            <input class="form-control text-center" placeholder="Buscar Iteração">
+            <input type="text" placeholder="Buscar Iteração" ng-model="selectedIteration"
+                   typeahead-template-url="app/pages/session/iteration/iteration-search-result-template.html"
+                   uib-typeahead="iteration as iteration.name for iteration in fetchIterations | filter:{name:$viewValue}"
+                   class="form-control" typeahead-on-select="onSelectIteration($model)">
         </div>
     </div>
+</div>
+
+<div>
+    <h2>Nome da Iteração</h2>
+    <h4>25
+        <small>estorias</small>
+    </h4>
+    <h4>50
+        <small>tarefas</small>
+    </h4>
+    <h4>25
+        <small>pontos</small>
+    </h4>
 </div>
 
 </body>

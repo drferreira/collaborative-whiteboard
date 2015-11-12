@@ -9,7 +9,6 @@ angular.module('cw-home').controller('IterationDataProgressCtrl', ['$scope', '$h
     $http.get(HTTP_POST_URL).then(function (response) {
         if (response.data) {
             $scope.iteration = response.data;
-            console.log(response.data);
         }
     });
 

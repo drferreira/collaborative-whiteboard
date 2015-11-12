@@ -8,6 +8,8 @@ import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.IterationDao;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
+import br.org.tutty.collaborative_whiteboard.cw.dto.IterationBasicData;
+import br.org.tutty.collaborative_whiteboard.cw.factories.IterationFactory;
 import cw.exceptions.DataNotFoundException;
 
 import javax.ejb.Local;
@@ -33,12 +35,15 @@ public class IterationServiceBean implements IterationService {
     @Inject
     private BacklogManagerService backlogManagerService;
 
+    @Inject
+    private IterationFactory iterationFactory;
+
     @Override
     public void addStory(Story story, Iteration iteration) throws IterationNotFoundException {
         if (iteration != null) {
             story.setIteration(iteration);
             iterationDao.update(story);
-        }else {
+        } else {
             throw new IterationNotFoundException();
         }
     }
@@ -57,6 +62,7 @@ public class IterationServiceBean implements IterationService {
             return new ArrayList<>();
         }
     }
+
 
     @Override
     public Iteration getCurrentIteration() throws DataNotFoundException {
@@ -153,5 +159,14 @@ public class IterationServiceBean implements IterationService {
 
         currentIteration.calcPercentageOfFinalizedStories();
         return currentIteration;
+    }
+
+    @Override
+    public List<IterationBasicData> fetchBasicDataIterations() throws DataNotFoundException {
+        List<Iteration> iterations = iterationDao.fetchIterations();
+        iterations.stream().forEach(iteration -> iterationFactory.addIteration(iteration));
+
+        return iterationFactory.createIterationsBasicData();
+
     }
 }

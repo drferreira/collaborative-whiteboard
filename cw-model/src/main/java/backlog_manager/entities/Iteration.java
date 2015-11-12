@@ -1,9 +1,13 @@
 package backlog_manager.entities;
 
+import br.org.tutty.Equalization;
 import br.org.tutty.util.PropertyMonitor;
+import cw.util.DateUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +23,7 @@ public class Iteration implements Serializable {
     @GeneratedValue(generator = "IterationSequence", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Equalization(name = "name")
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -81,5 +86,9 @@ public class Iteration implements Serializable {
         this.id = id;
 
         propertyMonitor.getPropertyChangeSupport().firePropertyChange("id", oldValue, id);
+    }
+
+    public Boolean isFinished(){
+        return !DateUtil.inRange(LocalDate.now(), DateUtil.toLocalDate(initDate), DateUtil.toLocalDate(endDate));
     }
 }

@@ -15,7 +15,6 @@ angular.module('cw-app').controller('LoginCtrl', ['$scope', '$http', '$window', 
             }
 
         }, function (response){
-            console.log(response);
         });
     }
 }]);

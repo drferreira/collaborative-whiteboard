@@ -2,15 +2,14 @@ package br.org.cw.rest;
 
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
+import br.org.tutty.collaborative_whiteboard.cw.dto.IterationBasicData;
 import com.google.gson.Gson;
 import cw.exceptions.DataNotFoundException;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/iteration")
 public class IterationsResource {
@@ -33,5 +32,31 @@ public class IterationsResource {
         } catch (DataNotFoundException e) {
             return new Gson().toJson(Boolean.FALSE);
         }
+    }
+
+
+    @GET
+    @Path("/fetch/basicList")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String fetchBasicList(){
+        List<IterationBasicData> currentIteration;
+
+        try {
+            currentIteration = iterationService.fetchBasicDataIterations();
+            return new Gson().toJson(currentIteration);
+
+        } catch (DataNotFoundException e) {
+            return new Gson().toJson(Boolean.FALSE);
+        }
+    }
+
+    @GET
+    @Path("/fetch")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String fetchIterationData(@QueryParam("iterationName") String iterationName){
+        // TODO Implementar busca por dados da iteração.
+            return new Gson().toJson("TEU CU");
     }
 }

@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<a>
+    <span ng-class="{'glyphicon-ok':match.model.status, 'glyphicon glyphicon-star':!match.model.status}" class="glyphicon text-center" aria-hidden="true" style="margin-right: 15px"></span>
+    <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+</a>

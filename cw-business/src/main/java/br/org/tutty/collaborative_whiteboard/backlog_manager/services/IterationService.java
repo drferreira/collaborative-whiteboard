@@ -5,6 +5,7 @@ import backlog_manager.entities.Story;
 import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
+import br.org.tutty.collaborative_whiteboard.cw.dto.IterationBasicData;
 import cw.exceptions.DataNotFoundException;
 
 import java.util.Date;
@@ -34,4 +35,6 @@ public interface IterationService {
     Long fetchIterationPoints(Iteration iteration);
 
     CurrentIteration fetchCurrentIterationData() throws DataNotFoundException;
+
+    List<IterationBasicData> fetchBasicDataIterations() throws DataNotFoundException;
 }
