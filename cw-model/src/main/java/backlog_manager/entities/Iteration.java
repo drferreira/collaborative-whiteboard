@@ -27,9 +27,11 @@ public class Iteration implements Serializable {
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Equalization(name = "init_date")
     private Date initDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Equalization(name = "end_date")
     private Date endDate;
 
     @Transient
@@ -88,7 +90,11 @@ public class Iteration implements Serializable {
         propertyMonitor.getPropertyChangeSupport().firePropertyChange("id", oldValue, id);
     }
 
+    public Boolean inProgress(){
+        return DateUtil.inRange(LocalDate.now(), DateUtil.toLocalDate(initDate), DateUtil.toLocalDate(endDate));
+    }
+
     public Boolean isFinished(){
-        return !DateUtil.inRange(LocalDate.now(), DateUtil.toLocalDate(initDate), DateUtil.toLocalDate(endDate));
+        return DateUtil.toLocalDate(endDate).isBefore(LocalDate.now());
     }
 }

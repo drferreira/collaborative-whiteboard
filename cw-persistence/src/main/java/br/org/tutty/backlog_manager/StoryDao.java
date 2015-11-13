@@ -1,9 +1,6 @@
 package br.org.tutty.backlog_manager;
 
-import backlog_manager.entities.Analysis;
-import backlog_manager.entities.Story;
-import backlog_manager.entities.StoryStatusLog;
-import backlog_manager.entities.UploadedFile;
+import backlog_manager.entities.*;
 import backlog_manager.enums.StoryStatus;
 import br.org.tutty.collaborative_whiteboard.Dao;
 import cw.entities.Project;

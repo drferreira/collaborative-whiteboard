@@ -22,7 +22,7 @@ public class IterationsResource {
     @Path("/current/progress")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String currentProgressData(){
+    public String currentProgressData() {
         CurrentIteration currentIteration;
 
         try {
@@ -34,29 +34,19 @@ public class IterationsResource {
         }
     }
 
-
     @GET
-    @Path("/fetch/basicList")
+    @Path("/list")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String fetchBasicList(){
+    public String fetchBasicList() {
         List<IterationBasicData> currentIteration;
 
         try {
-            currentIteration = iterationService.fetchBasicDataIterations();
+            currentIteration = iterationService.listIterations();
             return new Gson().toJson(currentIteration);
 
         } catch (DataNotFoundException e) {
             return new Gson().toJson(Boolean.FALSE);
         }
-    }
-
-    @GET
-    @Path("/fetch")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String fetchIterationData(@QueryParam("iterationName") String iterationName){
-        // TODO Implementar busca por dados da iteração.
-            return new Gson().toJson("TEU CU");
     }
 }

@@ -30,18 +30,23 @@
     </div>
 </div>
 
-<div>
-    <h2>Nome da Iteração</h2>
-    <h4>25
-        <small>estorias</small>
+<div ng-show="selectedIteration.available">
+    <h2>Em progresso {{selectedIteration.inProgress}}</h2>
+
+    <h4>Finalizada {{selectedIteration.finished}}</h4>
+
+    <h4>{{formatDate(selectedIteration.init) | date:'dd/MM/yyyy'}}
+        <small>  inicio  </small>
     </h4>
-    <h4>50
-        <small>tarefas</small>
+    <h4>{{formatDate(selectedIteration.end) | date:'dd/MM/yyyy'}}
+        <small>  fim  </small>
     </h4>
-    <h4>25
-        <small>pontos</small>
-    </h4>
+
+    <div ng-repeat="selectedIteration.stories">
+
+    </div>
 </div>
+
 
 </body>
 </html>

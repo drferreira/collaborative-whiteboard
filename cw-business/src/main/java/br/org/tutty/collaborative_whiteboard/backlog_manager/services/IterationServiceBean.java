@@ -9,6 +9,7 @@ import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.IterationDao;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
 import br.org.tutty.collaborative_whiteboard.cw.dto.IterationBasicData;
+import br.org.tutty.collaborative_whiteboard.cw.dto.IterationData;
 import br.org.tutty.collaborative_whiteboard.cw.factories.IterationFactory;
 import cw.exceptions.DataNotFoundException;
 
@@ -162,11 +163,12 @@ public class IterationServiceBean implements IterationService {
     }
 
     @Override
-    public List<IterationBasicData> fetchBasicDataIterations() throws DataNotFoundException {
+    public List<IterationBasicData> listIterations() throws DataNotFoundException {
+        List<IterationBasicData> iterationBasicData = new ArrayList<>();
+
         List<Iteration> iterations = iterationDao.fetchIterations();
-        iterations.stream().forEach(iteration -> iterationFactory.addIteration(iteration));
+        iterations.stream().forEach(iteration -> iterationBasicData.add(iterationFactory.createBasicData(iteration)));
 
-        return iterationFactory.createIterationsBasicData();
-
+        return iterationBasicData;
     }
 }

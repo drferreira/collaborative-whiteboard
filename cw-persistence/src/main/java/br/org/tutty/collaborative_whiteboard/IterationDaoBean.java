@@ -97,4 +97,11 @@ public class IterationDaoBean extends GenericDao implements IterationDao {
 
         return finalizedStoriesIntoIteration;
     }
+
+    @Override
+    public Iteration fetchIterationByName(String iterationName) throws DataNotFoundException {
+        Criteria criteria = createCriteria(Iteration.class);
+        criteria.add(Restrictions.eq("name", iterationName));
+        return (Iteration) uniqueResultNotWaitingEmpty(criteria);
+    }
 }
