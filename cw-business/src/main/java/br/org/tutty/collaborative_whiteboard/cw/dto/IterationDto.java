@@ -4,7 +4,7 @@ import br.org.tutty.Equalization;
 
 import java.util.Date;
 
-public class IterationBasicData {
+public class IterationDto {
     @Equalization(name = "name")
     private String name;
 

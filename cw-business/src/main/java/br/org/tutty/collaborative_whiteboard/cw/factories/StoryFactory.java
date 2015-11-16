@@ -2,19 +2,19 @@ package br.org.tutty.collaborative_whiteboard.cw.factories;
 
 import backlog_manager.entities.Story;
 import br.org.tutty.Equalizer;
-import br.org.tutty.collaborative_whiteboard.cw.dto.StoryBasicData;
+import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
 
 public class StoryFactory {
 
-    public static StoryBasicData createBasicData(Story story){
-        StoryBasicData storyBasicData = new StoryBasicData();
+    public static StoryDto create(Story story){
+        StoryDto storyDto = new StoryDto();
         try {
-            Equalizer.equalize(story,storyBasicData);
-            return storyBasicData;
+            Equalizer.equalize(story,storyDto);
+            return storyDto;
 
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
-            return new StoryBasicData();
+            return new StoryDto();
         }
     }
 }

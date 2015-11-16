@@ -31,19 +31,48 @@
 </div>
 
 <div ng-show="selectedIteration.available">
-    <h2>Em progresso {{selectedIteration.inProgress}}</h2>
+    <div class="well">
+        <h1>{{selectedIteration.name}}
+            <span class="small" ng-show="selectedIteration.finished">  finalizada  </span>
+        </h1>
 
-    <h4>Finalizada {{selectedIteration.finished}}</h4>
+        <h4>
+            {{formatDate(selectedIteration.init) | date:'dd/MM/yyyy'}}
+            <small> até</small>
+            {{formatDate(selectedIteration.end) | date:'dd/MM/yyyy'}}
+        </h4>
+    </div>
 
-    <h4>{{formatDate(selectedIteration.init) | date:'dd/MM/yyyy'}}
-        <small>  inicio  </small>
-    </h4>
-    <h4>{{formatDate(selectedIteration.end) | date:'dd/MM/yyyy'}}
-        <small>  fim  </small>
-    </h4>
+    <br>
+    <br>
 
-    <div ng-repeat="selectedIteration.stories">
+    <div class="col-md-6">
+        <div>
+            <h4 class="text-uppercase text-center">Estorias</h4>
+        </div>
+        <div class="list-group" ng-repeat="story in selectedIteration.available">
+            <a class="list-group-item">
+                <h4 class="list-group-item-heading">{{story.subject}}
+                    <span class="small pull-right" aria-hidden="true">Disponivel</span>
+                </h4>
 
+                <p class="container" ng-bind-html="story.description | unsafe"></p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h4 class="text-uppercase text-center">Iteração</h4>
+
+        <div class="list-group" ng-repeat="story in selectedIteration.intoIteration">
+            <a class="list-group-item">
+                <h4 class="list-group-item-heading">{{story.subject}}
+                    <span class="small pull-right" aria-hidden="true">Disponivel</span>
+                </h4>
+
+                <p class="container" ng-bind-html="story.description | unsafe"></p>
+            </a>
+        </div>
     </div>
 </div>
 

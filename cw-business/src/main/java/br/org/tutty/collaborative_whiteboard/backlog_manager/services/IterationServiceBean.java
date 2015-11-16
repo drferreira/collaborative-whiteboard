@@ -8,8 +8,7 @@ import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.IterationDao;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationBasicData;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationData;
+import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
 import br.org.tutty.collaborative_whiteboard.cw.factories.IterationFactory;
 import cw.exceptions.DataNotFoundException;
 
@@ -163,12 +162,17 @@ public class IterationServiceBean implements IterationService {
     }
 
     @Override
-    public List<IterationBasicData> listIterations() throws DataNotFoundException {
-        List<IterationBasicData> iterationBasicData = new ArrayList<>();
+    public List<IterationDto> listIterations() throws DataNotFoundException {
+        List<IterationDto> iterationDto = new ArrayList<>();
 
         List<Iteration> iterations = iterationDao.fetchIterations();
-        iterations.stream().forEach(iteration -> iterationBasicData.add(iterationFactory.createBasicData(iteration)));
+        iterations.stream().forEach(iteration -> iterationDto.add(iterationFactory.create(iteration)));
 
-        return iterationBasicData;
+        return iterationDto;
+    }
+
+    @Override
+    public Iteration fetchByName(String iterationName) throws DataNotFoundException {
+        return iterationDao.fetchIterationByName(iterationName);
     }
 }

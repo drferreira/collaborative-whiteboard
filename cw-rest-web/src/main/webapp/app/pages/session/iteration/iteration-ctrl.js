@@ -1,7 +1,7 @@
 angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope) {
     var HTTP_GET_ITERATIONS_URL = window.location.origin + '/cw-rest/session/rest/iteration/list';
-    var HTTP_GET_OPEN_STORIES_URL = window.location.origin + '/cw-rest/session/rest/backlog/fetch/open';
-    var HTTP_GET_STORIES_BY_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/backlog/fetch';
+    var HTTP_GET_OPEN_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/fetch/open';
+    var HTTP_GET_STORIES_BY_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/story/fetch';
 
     loadIterationList();
 
@@ -14,30 +14,33 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
     $scope.onSelectIteration = function (iteration) {
         $scope.selectedIteration.available = true
 
-        loadStoriesToSelectedIteration(iteration);
+        loadStoriesIntoIteration(iteration);
         loadOpenStories();
 
     };
 
-    function loadStoriesToSelectedIteration(iteration) {
+    function loadStoriesIntoIteration(iteration) {
         $http.get(HTTP_GET_STORIES_BY_ITERATION_URL, {
             params: {
                 iterationName: iteration.name
             }
         }).then(function (response) {
-            $scope.selectedIteration.stories = response.data;
+            $scope.selectedIteration.intoInteration = response.data;
+            console.log(response.data);
         });
 
     }
 
     function loadOpenStories() {
         $http.get(HTTP_GET_OPEN_STORIES_URL).then(function (response) {
-            $scope.selectedIteration.stories.available = response.data;
+            $scope.selectedIteration.available = response.data;
+            console.log(response.data);
         });
     }
 
     $scope.formatDate = function (date) {
         return new Date(date);
     }
-}]);
-
+}]).filter('unsafe', function ($sce) {
+    return $sce.trustAsHtml;
+});

@@ -2,7 +2,7 @@ package br.org.cw.rest;
 
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationBasicData;
+import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
 import com.google.gson.Gson;
 import cw.exceptions.DataNotFoundException;
 
@@ -39,7 +39,7 @@ public class IterationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String fetchBasicList() {
-        List<IterationBasicData> currentIteration;
+        List<IterationDto> currentIteration;
 
         try {
             currentIteration = iterationService.listIterations();
