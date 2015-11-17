@@ -47,3 +47,11 @@
 .click-hand:hover{
     cursor: pointer;
 }
+
+.font-info{
+    color: #5bc0de !important;
+}
+
+.font-attention{
+    color : rgb(203, 151, 68) !important;
+}

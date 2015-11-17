@@ -25,7 +25,7 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
                 iterationName: iteration.name
             }
         }).then(function (response) {
-            $scope.selectedIteration.intoInteration = response.data;
+            $scope.selectedIteration.intoIteration = response.data;
             console.log(response.data);
         });
 

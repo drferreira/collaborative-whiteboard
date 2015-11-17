@@ -29,4 +29,10 @@ public class StoryDto {
 
     @Equalization(name = "story_wiki")
     private String wikiPage;
+
+    private IterationDto iteration;
+
+    public void setIteration(IterationDto iteration) {
+        this.iteration = iteration;
+    }
 }
