@@ -30,9 +30,15 @@ public class StoryDto {
     @Equalization(name = "story_wiki")
     private String wikiPage;
 
+    private StoryStatusLogDto currentStatusLog;
+
     private IterationDto iteration;
 
     public void setIteration(IterationDto iteration) {
         this.iteration = iteration;
+    }
+
+    public void setCurrentStatusLog(StoryStatusLogDto currentStatusLog) {
+        this.currentStatusLog = currentStatusLog;
     }
 }

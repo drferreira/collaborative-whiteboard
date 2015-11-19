@@ -2,6 +2,7 @@ package br.org.cw.rest;
 
 import backlog_manager.entities.Iteration;
 import backlog_manager.entities.Story;
+import backlog_manager.entities.StoryStatusLog;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.BacklogManagerService;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
 import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
@@ -14,6 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Path("/story")
 public class StoryResource {
@@ -32,7 +34,16 @@ public class StoryResource {
 
         try {
             stories = backlogManagerService.fetchAnalyzedStories();
-            stories.stream().forEach(story -> storyDtos.add(StoryFactory.create(story)));
+            stories.stream().forEach(new Consumer<Story>() {
+                @Override
+                public void accept(Story story) {
+                    try {
+                        StoryStatusLog currentStoryStatusLog = backlogManagerService.getCurrentStoryStatusLog(story);
+                        storyDtos.add(StoryFactory.create(story, currentStoryStatusLog));
+                    } catch (DataNotFoundException e) {
+                    }
+                }
+            });
 
             return new Gson().toJson(storyDtos);
         } catch (DataNotFoundException e) {
@@ -51,7 +62,17 @@ public class StoryResource {
             Iteration iteration = iterationService.fetchByName(iterationName);
             List<Story> stories = iterationService.fetchStories(iteration);
 
-            stories.stream().forEach(story -> storiesDtos.add(StoryFactory.create(story)));
+            stories.stream().forEach(new Consumer<Story>() {
+                @Override
+                public void accept(Story story) {
+                    try {
+                        StoryStatusLog currentStoryStatusLog = backlogManagerService.getCurrentStoryStatusLog(story);
+                        StoryFactory.create(story, currentStoryStatusLog);
+                        storiesDtos.add(StoryFactory.create(story, currentStoryStatusLog));
+                    } catch (DataNotFoundException e) {
+                    }
+                }
+            });
             return new Gson().toJson(storiesDtos);
 
         } catch (DataNotFoundException e) {

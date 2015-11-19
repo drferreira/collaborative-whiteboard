@@ -55,3 +55,10 @@
 .font-attention{
     color : rgb(203, 151, 68) !important;
 }
+
+.disabled{
+    z-index: 1000;
+    background-color: lightgrey;
+    opacity: 0.4;
+    pointer-events: none;
+}

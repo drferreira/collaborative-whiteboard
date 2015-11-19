@@ -1,6 +1,7 @@
 package backlog_manager.entities;
 
 import backlog_manager.enums.StoryStatus;
+import br.org.tutty.Equalization;
 import cw.entities.User;
 
 import javax.persistence.*;
@@ -19,9 +20,11 @@ public class StoryStatusLog implements Serializable{
     @GeneratedValue(generator = "StoryStatusSequence", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Equalization(name = "status")
     @Enumerated(EnumType.STRING)
     private StoryStatus storyStatus;
 
+    @Equalization(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 

@@ -26,21 +26,34 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
             }
         }).then(function (response) {
             $scope.selectedIteration.intoIteration = response.data;
-            console.log(response.data);
         });
 
-    }
+    };
 
     function loadOpenStories() {
         $http.get(HTTP_GET_OPEN_STORIES_URL).then(function (response) {
             $scope.selectedIteration.available = response.data;
-            console.log(response.data);
         });
-    }
+    };
+
+    $scope.calcStoryPoints = function (stories) {
+        var storyPoints = 0;
+
+        angular.forEach(stories, function (value, key) {
+            storyPoints = storyPoints + value.storyPoints;
+        }, storyPoints);
+
+        return storyPoints;
+    };
 
     $scope.formatDate = function (date) {
         return new Date(date);
-    }
+    };
+
+    $scope.isFinalized = function (story) {
+        return angular.equals(story.currentStatusLog.storyStatus, 'FINALIZED');
+    };
+
 }]).filter('unsafe', function ($sce) {
     return $sce.trustAsHtml;
 });

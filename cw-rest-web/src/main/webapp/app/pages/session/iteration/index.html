@@ -36,11 +36,23 @@
             <span class="small" ng-show="selectedIteration.finished">  finalizada  </span>
         </h1>
 
-        <h4>
+        <p>
+            <strong>
             {{formatDate(selectedIteration.init) | date:'dd/MM/yyyy'}}
-            <small> até</small>
+            </strong>
+            <small> até </small>
+            <strong>
             {{formatDate(selectedIteration.end) | date:'dd/MM/yyyy'}}
-        </h4>
+            </strong>
+        </p>
+        <p>
+             <strong>
+                 {{calcStoryPoints(selectedIteration.intoIteration)}}
+             </strong>
+             <span>
+                 Pontos
+             </span>
+        </p>
     </div>
 
     <br>
@@ -58,7 +70,9 @@
                     <span class="small pull-right font-attention" ng-show="story.iteration" aria-hidden="true">{{story.iteration.name}}</span>
                 </h4>
 
-                <p class="container" ng-bind-html="story.description | unsafe"></p>
+                <br>
+
+                <p ng-bind-html="story.description | unsafe"></p>
             </a>
         </div>
     </div>
@@ -66,13 +80,15 @@
     <div class="col-md-6">
         <h4 class="text-uppercase text-center">Estorias da Iteração</h4>
 
-        <div class="list-group" ng-repeat="story in selectedIteration.intoIteration">
-            <a class="list-group-item">
+        <div class="list-group" ng-class="{disabled: isFinalized(story)}" ng-repeat="story in selectedIteration.intoIteration">
+            <a class="list-group-item click-hand">
                 <h4 class="list-group-item-heading">{{story.subject}}
                     <span class="small pull-right font-attention" aria-hidden="true">{{story.iteration.name}}</span>
                 </h4>
 
-                <p class="container" ng-bind-html="story.description | unsafe"></p>
+                <br>
+
+                <p ng-bind-html="story.description | unsafe"></p>
             </a>
         </div>
     </div>
