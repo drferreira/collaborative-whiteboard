@@ -1,7 +1,10 @@
-angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope) {
+angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http', function ($scope, $http) {
     var HTTP_GET_ITERATIONS_URL = window.location.origin + '/cw-rest/session/rest/iteration/list';
     var HTTP_GET_OPEN_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/fetch/open';
     var HTTP_GET_STORIES_BY_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/story/fetch';
+
+    $scope.isReadOnly = true;
+    $scope.maxPriority = 10;
 
     loadIterationList();
 
@@ -52,6 +55,23 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
 
     $scope.isFinalized = function (story) {
         return angular.equals(story.currentStatusLog.storyStatus, 'FINALIZED');
+    };
+
+    $scope.outOfSelectedIteration = function(iteration, story){
+        if(story.iteration){
+            return !angular.equals(iteration.name, story.iteration.name);
+        }else{
+            return true;
+        }
+
+    };
+
+    $scope.addToIteration = function(story){
+
+    };
+
+    $scope.removeToIteration = function(story){
+
     };
 
 }]).filter('unsafe', function ($sce) {
