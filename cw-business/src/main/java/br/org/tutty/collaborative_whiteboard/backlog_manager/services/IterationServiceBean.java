@@ -9,6 +9,7 @@ import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.IterationDao;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
 import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
+import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
 import br.org.tutty.collaborative_whiteboard.cw.factories.IterationFactory;
 import cw.exceptions.DataNotFoundException;
 
@@ -48,8 +49,42 @@ public class IterationServiceBean implements IterationService {
         }
     }
 
+    /**
+     * Metodo refatorado para Rest
+     *
+     * @param storyCode
+     * @param iterationName
+     * @throws IterationNotFoundException
+     */
+    @Override
+    public void addStory(String storyCode, String iterationName) throws IterationNotFoundException {
+        try {
+            Iteration iteration = fetchByName(iterationName);
+            Story story = backlogManagerService.fetchByCode(storyCode);
+
+            story.setIteration(iteration);
+            iterationDao.update(story);
+
+        } catch (DataNotFoundException e) {
+            throw new IterationNotFoundException();
+        }
+    }
+
     @Override
     public void removeStory(Story story) {
+        story.setIteration(null);
+        iterationDao.update(story);
+    }
+
+    /**
+     * Metodo Refatorado para REst
+     *
+     * @param storyCode
+     * @throws DataNotFoundException
+     */
+    @Override
+    public void removeStory(String storyCode) throws DataNotFoundException {
+        Story story = backlogManagerService.fetchByCode(storyCode);
         story.setIteration(null);
         iterationDao.update(story);
     }
@@ -62,7 +97,6 @@ public class IterationServiceBean implements IterationService {
             return new ArrayList<>();
         }
     }
-
 
     @Override
     public Iteration getCurrentIteration() throws DataNotFoundException {
@@ -142,6 +176,12 @@ public class IterationServiceBean implements IterationService {
         }
     }
 
+    /**
+     * Metodo refatorado para REst
+     *
+     * @return
+     * @throws DataNotFoundException
+     */
     @Override
     public CurrentIteration fetchCurrentIterationData() throws DataNotFoundException {
         CurrentIteration currentIteration = new CurrentIteration();
@@ -161,6 +201,11 @@ public class IterationServiceBean implements IterationService {
         return currentIteration;
     }
 
+    /**
+     * Metodo Refatorado para REst
+     * @return
+     * @throws DataNotFoundException
+     */
     @Override
     public List<IterationDto> listIterations() throws DataNotFoundException {
         List<IterationDto> iterationDto = new ArrayList<>();
@@ -171,6 +216,14 @@ public class IterationServiceBean implements IterationService {
         return iterationDto;
     }
 
+
+    /**
+     * Metodo Refatorado para REst
+     *
+     * @param iterationName
+     * @return
+     * @throws DataNotFoundException
+     */
     @Override
     public Iteration fetchByName(String iterationName) throws DataNotFoundException {
         return iterationDao.fetchIterationByName(iterationName);

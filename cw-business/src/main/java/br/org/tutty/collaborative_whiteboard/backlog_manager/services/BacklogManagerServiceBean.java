@@ -56,6 +56,11 @@ public class BacklogManagerServiceBean implements BacklogManagerService {
     }
 
     @Override
+    public Story fetchByCode(String code) throws DataNotFoundException {
+        return storyDao.fetchByCode(code);
+    }
+
+    @Override
     public void updateBacklog(List<Story> stories) {
         updateStories(stories);
     }

@@ -32,6 +32,15 @@ public class StoryDaoBean extends GenericDao implements StoryDao {
     }
 
     @Override
+    public Story fetchByCode(String code) throws DataNotFoundException {
+        Criteria criteria = createCriteria(Story.class);
+        criteria.add(Restrictions.eq("code", code));
+
+        return (Story) uniqueResultNotWaitingEmpty(criteria);
+    }
+
+
+    @Override
     public Long getNextSequenceStory(Project project){
         Criteria criteria = createCriteria(Story.class);
         criteria.add(Restrictions.eq("project", project));

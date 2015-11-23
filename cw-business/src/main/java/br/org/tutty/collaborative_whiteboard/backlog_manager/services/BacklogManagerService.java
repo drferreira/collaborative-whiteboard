@@ -22,6 +22,8 @@ public interface BacklogManagerService {
 
     List<Story> fetch(ProjectArea projectArea) throws DataNotFoundException;
 
+    Story fetchByCode(String code) throws DataNotFoundException;
+
     void updateBacklog(List<Story> stories);
 
     Boolean projectAreaIsAssignedToStory(ProjectArea projectArea);

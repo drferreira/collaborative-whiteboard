@@ -6,6 +6,7 @@ import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
 import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
+import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
 import cw.exceptions.DataNotFoundException;
 
 import java.util.Date;
@@ -17,8 +18,10 @@ import java.util.List;
 public interface IterationService {
 
     void addStory(Story story, Iteration iteration) throws IterationNotFoundException;
+    void addStory(String storyCode, String iterationName) throws IterationNotFoundException;
 
     void removeStory(Story story);
+    void removeStory(String storyCode) throws DataNotFoundException;
 
     List<Iteration> fetchIterations();
 

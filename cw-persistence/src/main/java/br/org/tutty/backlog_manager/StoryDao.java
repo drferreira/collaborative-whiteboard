@@ -15,6 +15,8 @@ import java.util.List;
 public interface StoryDao extends Dao {
     List<Story> fetchAllStories() throws DataNotFoundException;
 
+    Story fetchByCode(String code) throws DataNotFoundException;
+
     Long getNextSequenceStory(Project project);
 
     List<Story> fetchStories(ProjectArea projectArea) throws DataNotFoundException;

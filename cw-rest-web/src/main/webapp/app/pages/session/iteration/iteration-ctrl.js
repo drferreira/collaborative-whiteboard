@@ -1,5 +1,7 @@
 angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http', function ($scope, $http) {
     var HTTP_GET_ITERATIONS_URL = window.location.origin + '/cw-rest/session/rest/iteration/list';
+    var HTTP_POST_ADD_STORY_TO_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/iteration/add/story';
+    var HTTP_POST_REMOTE_STORY_TO_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/iteration/remove/story';
     var HTTP_GET_OPEN_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/fetch/open';
     var HTTP_GET_STORIES_BY_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/story/fetch';
 
@@ -15,7 +17,7 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
     }
 
     $scope.onSelectIteration = function (iteration) {
-        $scope.selectedIteration.available = true
+        $scope.selectedIteration.available = true;
 
         loadStoriesIntoIteration(iteration);
         loadOpenStories();
@@ -66,12 +68,24 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
 
     };
 
-    $scope.addToIteration = function(story){
+    $scope.addToIteration = function(story, iteration){
+        var changeAction = {};
+        changeAction.story = story;
+        changeAction.iteration = iteration;
 
+        $http.post(HTTP_POST_ADD_STORY_TO_ITERATION_URL, changeAction).then(function (response) {
+            $scope.onSelectIteration(iteration);
+        });
     };
 
-    $scope.removeToIteration = function(story){
+    $scope.removeToIteration = function(story, iteration){
+        var changeAction = {};
+        changeAction.story = story;
+        changeAction.iteration = iteration;
 
+        $http.post(HTTP_POST_REMOTE_STORY_TO_ITERATION_URL, changeAction).then(function (response) {
+            $scope.onSelectIteration(iteration);
+        });
     };
 
 }]).filter('unsafe', function ($sce) {
