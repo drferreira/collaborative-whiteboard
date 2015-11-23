@@ -21,19 +21,20 @@
 <body ng-controller="HomeCtrl" class="container-fluid">
 <cw-navbar active="whiteboard"></cw-navbar>
 
-<div ng-show="iteration" ng-controller="IterationDataProgressCtrl">
-    <h3>
+<div ng-show="iteration" ng-controller="IterationDataProgressCtrl" class="well">
+    <h1>
         {{iteration.currentIterationName}}
-    </h3>
+    </h1>
 
-    <h4>
-        <small>{{formatTime(iteration.initDateCurrentIteration) | date:'dd/MM/yyyy'}}</small>
-        <small>-</small>
-        <small>{{formatTime(iteration.endDateCurrentIteration) | date:'dd/MM/yyyy'}}</small>
-    </h4>
-    <h4>
-        <small>{{iteration.storyPointsIntoIteration}} Pontos</small>
-    </h4>
+    <p>
+        <strong>{{formatTime(iteration.initDateCurrentIteration) | date:'dd/MM/yyyy'}}</strong>
+        <small> - </small>
+        <strong>{{formatTime(iteration.endDateCurrentIteration) | date:'dd/MM/yyyy'}}</strong>
+    </p>
+    <p>
+        <strong>{{iteration.storyPointsIntoIteration}} </strong>
+        <small>Pontos</small>
+    </p>
 
     <div>
         <div class="progress">
