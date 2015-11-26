@@ -1,10 +1,10 @@
-package br.org.tutty.collaborative_whiteboard.cw.dto;
+package cw.rest.model.iteration;
 
 import br.org.tutty.Equalization;
 
 import java.util.Date;
 
-public class IterationDto {
+public class Iteration {
     @Equalization(name = "name")
     private String name;
 
@@ -22,7 +22,6 @@ public class IterationDto {
     public void setFinished(Boolean finished) {
         this.finished = finished;
     }
-
     public void setInProgress(Boolean inProgress) {
         this.inProgress = inProgress;
     }

@@ -1,15 +1,13 @@
 package br.org.tutty.collaborative_whiteboard.backlog_manager.services;
 
-import backlog_manager.entities.Iteration;
 import backlog_manager.entities.Story;
 import backlog_manager.entities.StoryStatusLog;
 import backlog_manager.enums.StoryStatus;
 import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.collaborative_whiteboard.IterationDao;
-import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
-import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
+import cw.rest.model.iteration.CurrentIteration;
+import cw.rest.model.iteration.Iteration;
 import br.org.tutty.collaborative_whiteboard.cw.factories.IterationFactory;
 import cw.exceptions.DataNotFoundException;
 
@@ -40,7 +38,7 @@ public class IterationServiceBean implements IterationService {
     private IterationFactory iterationFactory;
 
     @Override
-    public void addStory(Story story, Iteration iteration) throws IterationNotFoundException {
+    public void addStory(Story story, backlog_manager.entities.Iteration iteration) throws IterationNotFoundException {
         if (iteration != null) {
             story.setIteration(iteration);
             iterationDao.update(story);
@@ -59,7 +57,7 @@ public class IterationServiceBean implements IterationService {
     @Override
     public void addStory(String storyCode, String iterationName) throws IterationNotFoundException {
         try {
-            Iteration iteration = fetchByName(iterationName);
+            backlog_manager.entities.Iteration iteration = fetchByName(iterationName);
             Story story = backlogManagerService.fetchByCode(storyCode);
 
             story.setIteration(iteration);
@@ -90,7 +88,7 @@ public class IterationServiceBean implements IterationService {
     }
 
     @Override
-    public List<Iteration> fetchIterations() {
+    public List<backlog_manager.entities.Iteration> fetchIterations() {
         try {
             return iterationDao.fetchIterations();
         } catch (DataNotFoundException e) {
@@ -99,7 +97,7 @@ public class IterationServiceBean implements IterationService {
     }
 
     @Override
-    public Iteration getCurrentIteration() throws DataNotFoundException {
+    public backlog_manager.entities.Iteration getCurrentIteration() throws DataNotFoundException {
         return iterationDao.getCurrentIteration();
     }
 
@@ -115,14 +113,14 @@ public class IterationServiceBean implements IterationService {
     }
 
     @Override
-    public List<Story> fetchStories(Iteration iteration) throws DataNotFoundException {
+    public List<Story> fetchStories(backlog_manager.entities.Iteration iteration) throws DataNotFoundException {
         return iterationDao.fetchStories(iteration);
     }
 
     @Override
     public void create(List<Story> stories, String name, Date init, Date end) throws IterationAlreadySetException {
         if (!iterationDao.existIterationInRange(init, end)) {
-            Iteration iteration = new Iteration(name, init, end);
+            backlog_manager.entities.Iteration iteration = new backlog_manager.entities.Iteration(name, init, end);
 
             iterationDao.persist(iteration);
             iterationDao.merge(iteration);
@@ -140,7 +138,7 @@ public class IterationServiceBean implements IterationService {
     }
 
     @Override
-    public Float getProgressIteration(Iteration iteration) {
+    public Float getProgressIteration(backlog_manager.entities.Iteration iteration) {
         try {
             List<Story> stories = iterationDao.fetchStories(iteration);
 
@@ -167,7 +165,7 @@ public class IterationServiceBean implements IterationService {
 
 
     @Override
-    public Long fetchIterationPoints(Iteration iteration) {
+    public Long fetchIterationPoints(backlog_manager.entities.Iteration iteration) {
         try {
             return fetchStories(iteration).stream().mapToLong(Story::getStoryPoints).sum();
 
@@ -186,7 +184,7 @@ public class IterationServiceBean implements IterationService {
     public CurrentIteration fetchCurrentIterationData() throws DataNotFoundException {
         CurrentIteration currentIteration = new CurrentIteration();
 
-        Iteration iteration = getCurrentIteration();
+        backlog_manager.entities.Iteration iteration = getCurrentIteration();
         List<Story> storiesIntoIteration = iterationDao.fetchStories(iteration);
         List<Story> stories = iterationDao.fetchFinalizedStories(iteration);
 
@@ -207,10 +205,10 @@ public class IterationServiceBean implements IterationService {
      * @throws DataNotFoundException
      */
     @Override
-    public List<IterationDto> listIterations() throws DataNotFoundException {
-        List<IterationDto> iterationDto = new ArrayList<>();
+    public List<Iteration> listIterations() throws DataNotFoundException {
+        List<Iteration> iterationDto = new ArrayList<>();
 
-        List<Iteration> iterations = iterationDao.fetchIterations();
+        List<backlog_manager.entities.Iteration> iterations = iterationDao.fetchIterations();
         iterations.stream().forEach(iteration -> iterationDto.add(iterationFactory.create(iteration)));
 
         return iterationDto;
@@ -225,7 +223,7 @@ public class IterationServiceBean implements IterationService {
      * @throws DataNotFoundException
      */
     @Override
-    public Iteration fetchByName(String iterationName) throws DataNotFoundException {
+    public backlog_manager.entities.Iteration fetchByName(String iterationName) throws DataNotFoundException {
         return iterationDao.fetchIterationByName(iterationName);
     }
 }

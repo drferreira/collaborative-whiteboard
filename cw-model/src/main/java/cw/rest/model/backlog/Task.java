@@ -1,4 +1,4 @@
-package br.org.cw.dtos.whiteboard;
+package cw.rest.model.backlog;
 
 import java.util.Date;
 

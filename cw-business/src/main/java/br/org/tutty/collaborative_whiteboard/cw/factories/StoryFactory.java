@@ -1,35 +1,32 @@
 package br.org.tutty.collaborative_whiteboard.cw.factories;
 
-import backlog_manager.entities.Iteration;
-import backlog_manager.entities.Story;
-import backlog_manager.entities.StoryStatusLog;
 import br.org.tutty.Equalizer;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
-import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
-import br.org.tutty.collaborative_whiteboard.cw.dto.StoryStatusLogDto;
+import cw.rest.model.iteration.Iteration;
+import cw.rest.model.backlog.Story;
+import cw.rest.model.backlog.StoryStatusLog;
 
 public class StoryFactory {
 
-    public static StoryDto create(Story story, StoryStatusLog currentStoryStatusLog){
-        StoryDto storyDto = new StoryDto();
+    public static Story create(backlog_manager.entities.Story story, backlog_manager.entities.StoryStatusLog currentStoryStatusLog){
+        Story storyDto = new Story();
         try {
-            StoryStatusLogDto storyStatusLogDto = new StoryStatusLogDto();
-            Equalizer.equalize(currentStoryStatusLog, storyStatusLogDto);
+            StoryStatusLog storyStatusLog = new StoryStatusLog();
+            Equalizer.equalize(currentStoryStatusLog, storyStatusLog);
             Equalizer.equalize(story,storyDto);
 
             storyDto.setIteration(buildIteration(story));
-            storyDto.setCurrentStatusLog(storyStatusLogDto);
+            storyDto.setCurrentStatusLog(storyStatusLog);
             return storyDto;
 
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
-            return new StoryDto();
+            return new Story();
         }
     }
 
-    private static IterationDto buildIteration(Story story){
-        Iteration iteration = story.getIteration();
-        IterationDto iterationDto = new IterationDto();
+    private static Iteration buildIteration(backlog_manager.entities.Story story){
+        backlog_manager.entities.Iteration iteration = story.getIteration();
+        Iteration iterationDto = new Iteration();
 
         if (iteration != null){
             try {

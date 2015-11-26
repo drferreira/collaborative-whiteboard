@@ -8,12 +8,14 @@
     <link rel="import" href="app/resources/lib/jquery/include.html"/>
     <link rel="import" href="app/resources/lib/angular/include.html"/>
     <link rel="import" href="app/resources/lib/bootstrap/include.html"/>
-
+    <link rel="import" href="app/resources/lib/chart/include.html"/>
     <link rel="import" href="app/resources/directives/navbar/include.html"/>
 
+    <script type="text/javascript" src="app/resources/lib/moment/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
-    <script type="text/javascript" src="app/pages/session/iteration/iteration-module.js"></script>
+    <script type="text/javascript" src="app/pages/session/iteration/iteration-app.js"></script>
     <script type="text/javascript" src="app/pages/session/iteration/iteration-ctrl.js"></script>
+    <script type="text/javascript" src="app/pages/session/iteration/chart-ctrl.js"></script>
 </head>
 <body ng-controller="IterationCtrl" class="container-fluid">
 <cw-navbar active="iteration"></cw-navbar>
@@ -28,6 +30,17 @@
                    class="form-control" typeahead-on-select="onSelectIteration($model)">
         </div>
     </div>
+</div>
+
+
+<div ng-controller="ChartCtrl" class="chartArea container" ng-show="!selectedIteration.available">
+    <br>
+    <br>
+    <br>
+
+    <canvas class="chart chart-bar" chart-series="series" autoResize="true"
+            chart-data="data" chart-labels="labels">
+    </canvas>
 </div>
 
 <div ng-show="selectedIteration.available">
@@ -71,6 +84,9 @@
                 </h4>
 
                 <p>
+                    <span class="small" aria-hidden="true">{{story.code}}</span>
+                </p>
+                <p>
                     <uib-rating ng-model="story.priority" max="10" readonly="isReadOnly"></uib-rating>
                 </p>
 
@@ -90,6 +106,9 @@
                     <span class="small pull-right font-attention" aria-hidden="true">{{story.iteration.name}}</span>
                 </h4>
 
+                <p>
+                    <span class="small" aria-hidden="true">{{story.code}}</span>
+                </p>
                 <p>
                     <uib-rating ng-model="story.priority" max="maxPriority" readonly="isReadOnly"></uib-rating>
                 </p>

@@ -1,6 +1,6 @@
 package br.org.cw.rest;
 
-import br.org.cw.dtos.messages.AuthenticationMessage;
+import cw.rest.model.messages.AuthenticationMessage;
 import br.org.tutty.collaborative_whiteboard.cw.service.SecurityService;
 import com.google.gson.Gson;
 import cw.dtos.Security;

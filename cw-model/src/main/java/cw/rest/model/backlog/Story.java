@@ -1,10 +1,11 @@
-package br.org.tutty.collaborative_whiteboard.cw.dto;
+package cw.rest.model.backlog;
 
 import br.org.tutty.Equalization;
+import cw.rest.model.iteration.Iteration;
 
 import java.util.Date;
 
-public class StoryDto {
+public class Story {
 
     @Equalization(name = "story_code")
     private String code;
@@ -30,15 +31,15 @@ public class StoryDto {
     @Equalization(name = "story_wiki")
     private String wikiPage;
 
-    private StoryStatusLogDto currentStatusLog;
+    private StoryStatusLog currentStatusLog;
 
-    private IterationDto iteration;
+    private Iteration iteration;
 
-    public void setIteration(IterationDto iteration) {
+    public void setIteration(Iteration iteration) {
         this.iteration = iteration;
     }
 
-    public void setCurrentStatusLog(StoryStatusLogDto currentStatusLog) {
+    public void setCurrentStatusLog(StoryStatusLog currentStatusLog) {
         this.currentStatusLog = currentStatusLog;
     }
 }

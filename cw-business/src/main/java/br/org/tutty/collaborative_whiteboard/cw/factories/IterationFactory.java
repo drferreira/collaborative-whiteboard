@@ -1,14 +1,13 @@
 package br.org.tutty.collaborative_whiteboard.cw.factories;
 
-import backlog_manager.entities.Iteration;
 import br.org.tutty.Equalizer;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
+import cw.rest.model.iteration.Iteration;
 
 public class IterationFactory {
 
-    public IterationDto create(Iteration iteration) {
+    public Iteration create(backlog_manager.entities.Iteration iteration) {
         try {
-            IterationDto iterationDto = new IterationDto();
+            Iteration iterationDto = new Iteration();
             Equalizer.equalize(iteration, iterationDto);
             iterationDto.setFinished(iteration.isFinished());
             iterationDto.setInProgress(iteration.inProgress());
@@ -17,7 +16,7 @@ public class IterationFactory {
 
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
-            return new IterationDto();
+            return new Iteration();
         }
     }
 }

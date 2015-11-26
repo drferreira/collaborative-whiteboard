@@ -1,14 +1,12 @@
 package br.org.cw.rest;
 
-import backlog_manager.entities.Iteration;
-import backlog_manager.entities.Story;
 import backlog_manager.exceptions.IterationNotFoundException;
 import br.org.tutty.Equalizer;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
-import br.org.tutty.collaborative_whiteboard.cw.dto.AddStoryToIterationDto;
-import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
-import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
+import cw.rest.model.iteration.AddStoryToIteration;
+import cw.rest.model.iteration.CurrentIteration;
+import cw.rest.model.iteration.Iteration;
+import cw.rest.model.backlog.Story;
 import com.google.gson.Gson;
 import cw.exceptions.DataNotFoundException;
 
@@ -45,7 +43,7 @@ public class IterationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String fetchBasicList() {
-        List<IterationDto> currentIteration;
+        List<Iteration> currentIteration;
 
         try {
             currentIteration = iterationService.listIterations();
@@ -61,13 +59,13 @@ public class IterationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public void addStory(String changedAction){
-        AddStoryToIterationDto addStoryToIterationDto = new Gson().fromJson(changedAction, AddStoryToIterationDto.class);
-        StoryDto storyDto = addStoryToIterationDto.getStory();
-        IterationDto iterationDto = addStoryToIterationDto.getIteration();
+        AddStoryToIteration addStoryToIteration = new Gson().fromJson(changedAction, AddStoryToIteration.class);
+        Story storyDto = addStoryToIteration.getStory();
+        Iteration iterationDto = addStoryToIteration.getIteration();
 
         try {
-            Story story = new Story();
-            Iteration iteration = new Iteration();
+            backlog_manager.entities.Story story = new backlog_manager.entities.Story();
+            backlog_manager.entities.Iteration iteration = new backlog_manager.entities.Iteration();
 
             Equalizer.equalize(storyDto, story);
             Equalizer.equalize(iterationDto, iteration);
@@ -83,11 +81,11 @@ public class IterationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public void removeStory(String changedAction){
-        AddStoryToIterationDto addStoryToIterationDto = new Gson().fromJson(changedAction, AddStoryToIterationDto.class);
-        StoryDto storyDto = addStoryToIterationDto.getStory();
+        AddStoryToIteration addStoryToIteration = new Gson().fromJson(changedAction, AddStoryToIteration.class);
+        Story storyDto = addStoryToIteration.getStory();
 
         try {
-            Story story = new Story();
+            backlog_manager.entities.Story story = new backlog_manager.entities.Story();
             Equalizer.equalize(storyDto, story);
 
             iterationService.removeStory(story.getCode());

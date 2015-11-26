@@ -1,4 +1,4 @@
-angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http', function ($scope, $http) {
+angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     var HTTP_GET_ITERATIONS_URL = window.location.origin + '/cw-rest/session/rest/iteration/list';
     var HTTP_POST_ADD_STORY_TO_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/iteration/add/story';
     var HTTP_POST_REMOTE_STORY_TO_ITERATION_URL = window.location.origin + '/cw-rest/session/rest/iteration/remove/story';
@@ -31,6 +31,7 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
             }
         }).then(function (response) {
             $scope.selectedIteration.intoIteration = response.data;
+
         });
 
     };
@@ -59,35 +60,37 @@ angular.module('iteration-module').controller('IterationCtrl', ['$scope', '$http
         return angular.equals(story.currentStatusLog.storyStatus, 'FINALIZED');
     };
 
-    $scope.outOfSelectedIteration = function(iteration, story){
-        if(story.iteration){
+    $scope.outOfSelectedIteration = function (iteration, story) {
+        if (story.iteration) {
             return !angular.equals(iteration.name, story.iteration.name);
-        }else{
+        } else {
             return true;
         }
 
     };
 
-    $scope.addToIteration = function(story, iteration){
+    $scope.addToIteration = function (story, iteration) {
         var changeAction = {};
         changeAction.story = story;
         changeAction.iteration = iteration;
 
         $http.post(HTTP_POST_ADD_STORY_TO_ITERATION_URL, changeAction).then(function (response) {
             $scope.onSelectIteration(iteration);
+            $rootScope.$broadcast("updateIterationChartData");
         });
+
     };
 
-    $scope.removeToIteration = function(story, iteration){
+    $scope.removeToIteration = function (story, iteration) {
         var changeAction = {};
         changeAction.story = story;
         changeAction.iteration = iteration;
 
         $http.post(HTTP_POST_REMOTE_STORY_TO_ITERATION_URL, changeAction).then(function (response) {
             $scope.onSelectIteration(iteration);
+            $rootScope.$broadcast("updateIterationChartData");
         });
     };
-
 }]).filter('unsafe', function ($sce) {
     return $sce.trustAsHtml;
 });

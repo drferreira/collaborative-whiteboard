@@ -9,6 +9,9 @@
                         <div class="media">
                             <div class="media-body">
                                 <h4 class="media-heading">{{task.subject}}</h4>
+                                <p>
+                                    <span class="small" aria-hidden="true">{{task.code}}</span>
+                                </p>
                             </div>
                             <div class="media-right">
                                 <a href="#">
@@ -29,6 +32,9 @@
                             </div>
                         </div>
                     </div>
+
+                    <br>
+
                     <div>
                         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                         <small>{{formatTime(task.estimatedTime) | date:'HH:mm'}}</small>

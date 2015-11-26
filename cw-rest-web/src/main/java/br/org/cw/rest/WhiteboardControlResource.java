@@ -1,6 +1,6 @@
 package br.org.cw.rest;
 
-import br.org.cw.dtos.whiteboard.Task;
+import cw.rest.model.backlog.Task;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.TaskActionService;
 import com.google.gson.Gson;
 

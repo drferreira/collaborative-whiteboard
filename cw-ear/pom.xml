@@ -136,8 +136,8 @@
 			<groupId>br.org.tutty</groupId>
 			<artifactId>equalizer</artifactId>
 			<version>1.0</version>
+            <scope>compile</scope>
 			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>

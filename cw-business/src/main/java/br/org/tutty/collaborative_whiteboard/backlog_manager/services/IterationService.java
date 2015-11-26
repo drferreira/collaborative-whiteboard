@@ -1,12 +1,10 @@
 package br.org.tutty.collaborative_whiteboard.backlog_manager.services;
 
-import backlog_manager.entities.Iteration;
 import backlog_manager.entities.Story;
 import backlog_manager.exceptions.IterationAlreadySetException;
 import backlog_manager.exceptions.IterationNotFoundException;
-import br.org.tutty.collaborative_whiteboard.cw.dto.CurrentIteration;
-import br.org.tutty.collaborative_whiteboard.cw.dto.IterationDto;
-import br.org.tutty.collaborative_whiteboard.cw.dto.StoryDto;
+import cw.rest.model.iteration.CurrentIteration;
+import cw.rest.model.iteration.Iteration;
 import cw.exceptions.DataNotFoundException;
 
 import java.util.Date;
@@ -17,29 +15,29 @@ import java.util.List;
  */
 public interface IterationService {
 
-    void addStory(Story story, Iteration iteration) throws IterationNotFoundException;
+    void addStory(Story story, backlog_manager.entities.Iteration iteration) throws IterationNotFoundException;
     void addStory(String storyCode, String iterationName) throws IterationNotFoundException;
 
     void removeStory(Story story);
     void removeStory(String storyCode) throws DataNotFoundException;
 
-    List<Iteration> fetchIterations();
+    List<backlog_manager.entities.Iteration> fetchIterations();
 
-    Iteration getCurrentIteration() throws DataNotFoundException;
+    backlog_manager.entities.Iteration getCurrentIteration() throws DataNotFoundException;
 
     List<Story> fetchStoriesAvailableForIteration();
 
-    List<Story> fetchStories(Iteration iteration) throws DataNotFoundException;
+    List<Story> fetchStories(backlog_manager.entities.Iteration iteration) throws DataNotFoundException;
 
     void create(List<Story> stories, String name, Date init, Date end) throws IterationAlreadySetException;
 
-    Float getProgressIteration(Iteration iteration);
+    Float getProgressIteration(backlog_manager.entities.Iteration iteration);
 
-    Long fetchIterationPoints(Iteration iteration);
+    Long fetchIterationPoints(backlog_manager.entities.Iteration iteration);
 
     CurrentIteration fetchCurrentIterationData() throws DataNotFoundException;
 
-    List<IterationDto> listIterations() throws DataNotFoundException;
+    List<Iteration> listIterations() throws DataNotFoundException;
 
-    Iteration fetchByName(String iterationName) throws DataNotFoundException;
+    backlog_manager.entities.Iteration fetchByName(String iterationName) throws DataNotFoundException;
 }

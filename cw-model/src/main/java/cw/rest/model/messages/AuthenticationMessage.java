@@ -1,4 +1,4 @@
-package br.org.cw.dtos.messages;
+package cw.rest.model.messages;
 
 /**
  * Created by diogoferreira on 19/10/15.

@@ -1,9 +1,0 @@
-** BUG **
-Chat não mostra mensagens em outras areas a não ser na whiteboard. Só acontece no CHROME.
-Isso ocorre no branch refatoração user-profile
-
-** BUG **
-Tela de Login com CSS errado. Isso ocorre no branch refatoração user-profile.
-
-** BUG **
-Tela de Iteração com CSS errado. Isso ocorre no branch refatoração user-profile.

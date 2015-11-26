@@ -1,4 +1,4 @@
-package br.org.tutty.collaborative_whiteboard.cw.dto;
+package cw.rest.model.iteration;
 
 import backlog_manager.entities.Story;
 
