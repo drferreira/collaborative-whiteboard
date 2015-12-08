@@ -22,4 +22,8 @@ angular.module('navbar-module').controller('NavbarCtrl', ['$scope', '$http', '$w
     $scope.navigateToIterations = function (){
         $window.location.href = window.location.origin + '/cw-rest/app/pages/session/iteration/index.html'
     }
+
+    $scope.navigateToBacklog = function (){
+        $window.location.href = window.location.origin + '/cw-rest/app/pages/session/backlog/index.html'
+    }
 }]);

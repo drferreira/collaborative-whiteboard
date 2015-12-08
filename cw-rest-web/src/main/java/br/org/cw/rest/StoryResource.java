@@ -78,4 +78,30 @@ public class StoryResource {
             return new Gson().toJson(storiesDtos);
         }
     }
+
+    @GET
+    @Path("/fetch/all")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String fetchAll() {
+        List<Story> storiesDtos = new ArrayList<>();
+        try {
+            backlogManagerService.fetchAllStories().stream().forEach(new Consumer<backlog_manager.entities.Story>() {
+                @Override
+                public void accept(backlog_manager.entities.Story story) {
+                    try {
+                        StoryStatusLog currentStoryStatusLog = backlogManagerService.getCurrentStoryStatusLog(story);
+                        StoryFactory.create(story, currentStoryStatusLog);
+                        storiesDtos.add(StoryFactory.create(story, currentStoryStatusLog));
+
+                    } catch (DataNotFoundException e) {
+                    }
+                }
+            });
+            return new Gson().toJson(storiesDtos);
+
+        } catch (DataNotFoundException e) {
+            return new Gson().toJson(storiesDtos);
+        }
+    }
 }

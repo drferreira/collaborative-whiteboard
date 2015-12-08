@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="backlog-module">
+<head>
+    <title>CW</title>
+    <meta charset="UTF-8"/>
+    <base href="/cw-rest/">
+
+    <link rel="import" href="app/resources/lib/jquery/include.html"/>
+    <link rel="import" href="app/resources/lib/angular/include.html"/>
+    <link rel="import" href="app/resources/lib/bootstrap/include.html"/>
+
+    <link rel="import" href="app/resources/directives/navbar/include.html"/>
+
+    <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
+    <script type="text/javascript" src="app/pages/session/backlog/backlog-module.js"></script>
+    <script type="text/javascript" src="app/pages/session/backlog/backlog-ctrl.js"></script>
+
+
+</head>
+<body class="container-fluid" ng-controller="BacklogCtrl">
+
+<cw-navbar active="backlog"></cw-navbar>
+
+<div class="fluid-container">
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="filter.status.remove" uib-btn-checkbox>Removido</label>
+        <label class="btn btn-primary" ng-model="filter.status.waiting" uib-btn-checkbox>Aguardanto</label>
+        <label class="btn btn-primary" ng-model="filter.status.available" uib-btn-checkbox>Disponivel</label>
+        <label class="btn btn-primary" ng-model="filter.status.analyzing" uib-btn-checkbox>Em Analise</label>
+        <label class="btn btn-primary" ng-model="filter.status.analyzed" uib-btn-checkbox>Analisado</label>
+        <label class="btn btn-primary" ng-model="filter.status.finalized" uib-btn-checkbox>Finalizado</label>
+        <br>
+        <br>
+        <input type="text" placeholder="Buscar por uma valor, branch, código etc ..." class="form-control"
+               ng-model="filter.value">
+    </div>
+</div>
+
+<br>
+<br>
+
+<div>
+    <div class="list-group">
+        <div ng-repeat="story in stories">
+            <div class="list-group-item click-hand" ng-dblclick="showToolbarElements($event)">
+                <div class="hide">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a data-toggle="tab"
+                                                                  href="{{'#' + story.code + '_resume'}}"
+                                                                  ng-click="showResume(story)">Estoria</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_details'}}"
+                                                   ng-click="showDetails(story)">Detalhes</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_tasks'}}"
+                                                   ng-click="showTasks(story)">Tarefas</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_files'}}"
+                                                   ng-click="showFiles(story)">Arquivos</a></li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div id="{{story.code + '_resume'}}" class="tab-pane fade in active">
+                        <p>
+                            <uib-rating class="md-col-3" ng-model="story.priority" max="10"
+                                        readonly="isReadOnly"></uib-rating>
+                        </p>
+                        <h4>{{story.subject}}</h4>
+                        <h6 class="md-col-3">{{story.code}}</h6>
+
+                    </div>
+
+                    <div id="{{story.code + '_details'}}" class="tab-pane fade in">
+                        <p ng-bind-html="story.description | unsafe"></p>
+                    </div>
+
+                    <div id="{{story.code + '_tasks'}}" class="tab-pane fade in">
+                        <p>
+                        Tarefas
+                        </p>
+                    </div>
+
+                    <div id="{{story.code + '_files'}}" class="tab-pane fade in">
+                        <p>
+                            Arquivos
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
