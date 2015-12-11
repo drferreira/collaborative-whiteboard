@@ -4,6 +4,7 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
     $scope.connection = {};
     $scope.whiteboard = {};
     $scope.whiteboard.error = {};
+    $scope.isLoading = true;
 
     websocket = new WebSocket($scope.cwUrlSourceBind);
 
@@ -23,6 +24,7 @@ angular.module('whiteboard-module').controller('WhiteboardCtrl', ['$scope', '$ht
         $scope.$apply(function () {
             $scope.whiteboard.data = angular.fromJson(evt.data);
             checkEmptyWhiteboardFlag($scope.whiteboard.data.stages);
+            $scope.isLoading = false;
         })
     };
 

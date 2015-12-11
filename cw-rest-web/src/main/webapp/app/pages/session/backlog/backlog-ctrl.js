@@ -3,9 +3,11 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
 
     $scope.isReadOnly = true;
     $scope.showToolbar = false;
+    $scope.isLoading = true;
 
     $http.get(HTTP_GET_OPEN_STORIES_URL).then(function (response) {
         $scope.stories = response.data;
+        $scope.isLoading = false;
     });
 
     $scope.showToolbarElements = function ($event) {

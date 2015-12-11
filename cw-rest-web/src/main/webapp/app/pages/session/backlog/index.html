@@ -21,7 +21,7 @@
 
 <cw-navbar active="backlog"></cw-navbar>
 
-<div class="fluid-container">
+<div class="fluid-container text-center center-block">
     <div class="btn-group">
         <label class="btn btn-primary" ng-model="filter.status.remove" uib-btn-checkbox>Removido</label>
         <label class="btn btn-primary" ng-model="filter.status.waiting" uib-btn-checkbox>Aguardanto</label>
@@ -38,6 +38,8 @@
 
 <br>
 <br>
+
+<img src="app/resources/img/loading.gif" ng-show="isLoading" class="img-responsive center-block" />
 
 <div>
     <div class="list-group">
@@ -59,27 +61,25 @@
 
                 <div class="tab-content">
                     <div id="{{story.code + '_resume'}}" class="tab-pane fade in active">
+                        <h4> <span>{{story.subject}}</span> <small class="pull-right"> {{story.code}} </small></h4>
                         <p>
                             <uib-rating class="md-col-3" ng-model="story.priority" max="10"
                                         readonly="isReadOnly"></uib-rating>
                         </p>
-                        <h4>{{story.subject}}</h4>
-                        <h6 class="md-col-3">{{story.code}}</h6>
-
                     </div>
 
                     <div id="{{story.code + '_details'}}" class="tab-pane fade in">
-                        <p ng-bind-html="story.description | unsafe"></p>
+                        <p style="margin-top: 20px;" ng-bind-html="story.description | unsafe"></p>
                     </div>
 
                     <div id="{{story.code + '_tasks'}}" class="tab-pane fade in">
-                        <p>
+                        <p style="margin-top: 20px;">
                         Tarefas
                         </p>
                     </div>
 
                     <div id="{{story.code + '_files'}}" class="tab-pane fade in">
-                        <p>
+                        <p style="margin-top: 20px;">
                             Arquivos
                         </p>
                     </div>
