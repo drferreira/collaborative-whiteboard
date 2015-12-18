@@ -10,3 +10,7 @@ CREATE OR REPLACE VIEW extraction_task AS SELECT story.code AS story_code, to_ch
 -- DROP VIEW extraction_user;
 CREATE OR REPLACE VIEW extraction_user AS SELECT "user".firstname AS nome, "user".email, ( SELECT count(*) AS count FROM task_status status WHERE status.user_id = "user".id AND status.taskstatus::text = 'BUSY'::text) AS tarefas, ( SELECT round(avg(result.count), 2) AS round FROM ( SELECT count(*) AS count FROM task_status status WHERE status.taskstatus::text = 'BUSY'::text GROUP BY status.user_id) result) AS media FROM "user"; ALTER TABLE extraction_user OWNER TO postgres;
 
+-- View: extraction_user
+-- DROP VIEW extraction_user;
+CREATE OR REPLACE VIEW extraction_user AS SELECT "user".firstname AS nome, "user".email, ( SELECT count(*) AS count FROM task_status status WHERE status.user_id = "user".id AND status.taskstatus::text = 'BUSY'::text) AS tarefas, ( SELECT round(avg(result.count), 2) AS round FROM ( SELECT count(*) AS count FROM task_status status WHERE status.taskstatus::text = 'BUSY'::text GROUP BY status.user_id) result) AS media FROM "user"; ALTER TABLE extraction_user OWNER TO postgres;
+

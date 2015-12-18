@@ -2,12 +2,16 @@ package br.org.cw.rest;
 
 import backlog_manager.entities.Iteration;
 import backlog_manager.entities.StoryStatusLog;
+import backlog_manager.entities.UploadedFile;
+import br.org.tutty.Equalization;
+import br.org.tutty.Equalizer;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.BacklogManagerService;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
 import cw.rest.model.backlog.Story;
 import br.org.tutty.collaborative_whiteboard.cw.factories.StoryFactory;
 import com.google.gson.Gson;
 import cw.exceptions.DataNotFoundException;
+import cw.rest.model.backlog.Task;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -49,6 +53,66 @@ public class StoryResource {
             return new Gson().toJson(storyDtos);
         }
 
+    }
+
+    @GET
+    @Path("/files")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String fetchFiles(@QueryParam(value = "storyCode") String code) {
+        List<cw.rest.model.backlog.UploadedFile> uploadedDtos = new ArrayList<>();
+
+        try {
+            backlog_manager.entities.Story story = backlogManagerService.fetchByCode(code);
+            List<UploadedFile > uploadedFiles = backlogManagerService.fetchFiles(story);
+
+            uploadedFiles.forEach(new Consumer<UploadedFile>() {
+                @Override
+                public void accept(UploadedFile uploadedFile) {
+                    cw.rest.model.backlog.UploadedFile uploadedFileDto = new cw.rest.model.backlog.UploadedFile();
+                    try {
+                        Equalizer.equalize(uploadedFile, uploadedFileDto);
+                        uploadedDtos.add(uploadedFileDto);
+
+                    } catch (IllegalAccessException | NoSuchFieldException e) {}
+
+                }
+            });
+
+        } catch (DataNotFoundException e) {}
+
+        return new Gson().toJson(uploadedDtos);
+    }
+
+    @GET
+    @Path("/tasks")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String fetchTasks(@QueryParam(value = "storyCode") String code) {
+        List<Task> tasksDtos = new ArrayList<>();
+
+        try {
+            backlog_manager.entities.Story story = backlogManagerService.fetchByCode(code);
+            List<backlog_manager.entities.Task> tasks = backlogManagerService.fetchTasks(story);
+
+            tasks.forEach(new Consumer<backlog_manager.entities.Task>() {
+                @Override
+                public void accept(backlog_manager.entities.Task task) {
+                    Task taskDto = new Task();
+
+                    try {
+                        Equalizer.equalize(task, taskDto);
+                        tasksDtos.add(taskDto);
+                    } catch (IllegalAccessException | NoSuchFieldException e) {
+                    }
+                }
+            });
+
+
+        } catch (DataNotFoundException e) {
+        }
+
+        return new Gson().toJson(tasksDtos);
     }
 
     @GET

@@ -23,12 +23,12 @@
 
 <div class="fluid-container text-center center-block">
     <div class="btn-group">
-        <label class="btn btn-primary" ng-model="filter.status.remove" uib-btn-checkbox>Removido</label>
-        <label class="btn btn-primary" ng-model="filter.status.waiting" uib-btn-checkbox>Aguardanto</label>
-        <label class="btn btn-primary" ng-model="filter.status.available" uib-btn-checkbox>Disponivel</label>
-        <label class="btn btn-primary" ng-model="filter.status.analyzing" uib-btn-checkbox>Em Analise</label>
-        <label class="btn btn-primary" ng-model="filter.status.analyzed" uib-btn-checkbox>Analisado</label>
-        <label class="btn btn-primary" ng-model="filter.status.finalized" uib-btn-checkbox>Finalizado</label>
+        <label class="btn btn-primary" ng-model="storyFilter.remove" uib-btn-checkbox>Removido</label>
+        <label class="btn btn-primary" ng-model="storyFilter.waiting" uib-btn-checkbox>Aguardanto</label>
+        <label class="btn btn-primary" ng-model="storyFilter.available" uib-btn-checkbox>Disponivel</label>
+        <label class="btn btn-primary" ng-model="storyFilter.analyzing" uib-btn-checkbox>Em Analise</label>
+        <label class="btn btn-primary" ng-model="storyFilter.analyzed" uib-btn-checkbox>Analisado</label>
+        <label class="btn btn-primary" ng-model="storyFilter.finalized" uib-btn-checkbox>Finalizado</label>
         <br>
         <br>
         <input type="text" placeholder="Buscar por uma valor, branch, código etc ..." class="form-control"
@@ -39,11 +39,11 @@
 <br>
 <br>
 
-<img src="app/resources/img/loading.gif" ng-show="isLoading" class="img-responsive center-block" />
+<img src="app/resources/img/loading.gif" ng-show="isLoading" class="img-responsive center-block"/>
 
 <div>
     <div class="list-group">
-        <div ng-repeat="story in stories">
+        <div ng-repeat="story in stories | filter:filterStories">
             <div class="list-group-item click-hand" ng-dblclick="showToolbarElements($event)">
                 <div class="hide">
                     <ul class="nav nav-tabs">
@@ -53,15 +53,17 @@
                         <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_details'}}"
                                                    ng-click="showDetails(story)">Detalhes</a></li>
                         <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_tasks'}}"
-                                                   ng-click="showTasks(story)">Tarefas</a></li>
+                                                   ng-click="loadTasks(story)">Tarefas</a></li>
                         <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_files'}}"
-                                                   ng-click="showFiles(story)">Arquivos</a></li>
+                                                   ng-click="loadFiles(story);">Arquivos</a></li>
                     </ul>
                 </div>
 
                 <div class="tab-content">
                     <div id="{{story.code + '_resume'}}" class="tab-pane fade in active">
-                        <h4> <span>{{story.subject}}</span> <small class="pull-right"> {{story.code}} </small></h4>
+                        <h4><span>{{story.subject}}</span>
+                            <small class="pull-right"> {{story.code}}</small>
+                        </h4>
                         <p>
                             <uib-rating class="md-col-3" ng-model="story.priority" max="10"
                                         readonly="isReadOnly"></uib-rating>
@@ -73,15 +75,19 @@
                     </div>
 
                     <div id="{{story.code + '_tasks'}}" class="tab-pane fade in">
-                        <p style="margin-top: 20px;">
-                        Tarefas
-                        </p>
+                        <ul class="list-group" style="margin-top: 20px;">
+                            <div ng-repeat="task in story.tasks">
+                                <li class="list-group-item" ng-class="colorRepeat($index)">{{task.subject}}</li>
+                            </div>
+                        </ul>
                     </div>
 
                     <div id="{{story.code + '_files'}}" class="tab-pane fade in">
-                        <p style="margin-top: 20px;">
-                            Arquivos
-                        </p>
+                        <ul class="list-group" style="margin-top: 20px;">
+                            <div ng-repeat="file in story.files ">
+                                <li class="list-group-item" ng-class="colorRepeat($index)">{{file.fileName}}</li>
+                            </div>
+                        </ul>
                     </div>
                 </div>
             </div>
