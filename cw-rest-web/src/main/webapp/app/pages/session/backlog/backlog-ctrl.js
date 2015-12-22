@@ -7,6 +7,22 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
     $scope.showToolbar = false;
     $scope.isLoading = true;
 
+    $scope.storyFilter = {
+        status : {
+            removed: false,
+            waiting: false,
+            available: false,
+            in_analysis: false,
+            analyzed: false,
+            finalized: false,
+        },
+
+        text : {
+            value : ''
+        }
+    };
+
+
     $http.get(HTTP_GET_OPEN_STORIES_URL).then(function (response) {
         $scope.stories = response.data;
         $scope.isLoading = false;
@@ -19,7 +35,7 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
         } else {
             $($event.currentTarget.children[0]).addClass('hide')
         }
-    }
+    };
 
     $scope.loadFiles = function (story) {
         if (!story.files) {
@@ -30,7 +46,7 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
                 story.files = response.data;
             });
         }
-    }
+    };
 
     $scope.loadTasks = function (story) {
         if (!story.tasks) {
@@ -41,37 +57,53 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
                 story.tasks = response.data;
             });
         }
-    }
+    };
 
     $scope.colorRepeat = function (index) {
         if (!(index % 2)) {
             return 'list-group-item-info';
         }
-    }
+    };
 
-    $scope.showResume = function (story) {
-    }
+   /* $scope.showResume = function (story) {
+    };
 
     $scope.showDetails = function (story) {
-    }
+    };
 
     $scope.toolbarShow = function () {
 
-    }
+    };*/
 
-    $scope.filterStories = function (story){
-        var filter = $scope.storyFilter;
-        var filterResult = true;
+    $scope.filterStories = function (story) {
+        if( filterStatus(story) && filterOpenTextArea(story)){
+            return true;
+        }
+    };
 
-        angular.forEach(filter, function (value, key) {
-            if(story.currentStatusLog.storyStatus.toLowerCase() == key.toLowerCase()){
-                 filterResult = value;
+    function filterStatus(story) {
+        for (property in $scope.storyFilter.status){
+            if($scope.storyFilter.status[property]){
+                return $scope.storyFilter.status[story.currentStatusLog.storyStatus.toLowerCase()];
+            }else{
+                continue;
             }
-        });
+        }
 
-        // TODO BUG AQUI
-        return filterResult;
-    }
+        return true;
+    };
+
+    function filterOpenTextArea(story) {
+        var value = $scope.storyFilter.text.value;
+
+        if(value){
+            return story.code.includes(value) || story.branch.includes(value) || story.subject.includes(value);
+
+        }else{
+            return true;
+        }
+    };
+
 }]).filter('unsafe', function ($sce) {
     return $sce.trustAsHtml;
 });

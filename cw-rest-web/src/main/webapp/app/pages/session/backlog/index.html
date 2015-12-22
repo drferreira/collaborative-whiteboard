@@ -23,16 +23,16 @@
 
 <div class="fluid-container text-center center-block">
     <div class="btn-group">
-        <label class="btn btn-primary" ng-model="storyFilter.remove" uib-btn-checkbox>Removido</label>
-        <label class="btn btn-primary" ng-model="storyFilter.waiting" uib-btn-checkbox>Aguardanto</label>
-        <label class="btn btn-primary" ng-model="storyFilter.available" uib-btn-checkbox>Disponivel</label>
-        <label class="btn btn-primary" ng-model="storyFilter.analyzing" uib-btn-checkbox>Em Analise</label>
-        <label class="btn btn-primary" ng-model="storyFilter.analyzed" uib-btn-checkbox>Analisado</label>
-        <label class="btn btn-primary" ng-model="storyFilter.finalized" uib-btn-checkbox>Finalizado</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.removed" uib-btn-checkbox btn-checkbox-false>Removido</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.waiting" uib-btn-checkbox btn-checkbox-false>Aguardanto</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.available" uib-btn-checkbox btn-checkbox-false>Disponivel</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.in_analysis" uib-btn-checkbox btn-checkbox-false>Em Analise</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.analyzed" uib-btn-checkbox btn-checkbox-false>Analisado</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.finalized" uib-btn-checkbox btn-checkbox-false>Finalizado</label>
         <br>
         <br>
         <input type="text" placeholder="Buscar por uma valor, branch, código etc ..." class="form-control"
-               ng-model="filter.value">
+               ng-model="storyFilter.text.value">
     </div>
 </div>
 
