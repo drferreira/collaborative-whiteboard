@@ -8,7 +8,7 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
     $scope.isLoading = true;
 
     $scope.storyFilter = {
-        status : {
+        status: {
             removed: false,
             waiting: false,
             available: false,
@@ -17,11 +17,14 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
             finalized: false,
         },
 
-        text : {
-            value : ''
+        text: {
+            value: ''
         }
     };
 
+    $scope.statusClass = function (story) {
+        return 'color_' + story.currentStatusLog.storyStatus;
+    };
 
     $http.get(HTTP_GET_OPEN_STORIES_URL).then(function (response) {
         $scope.stories = response.data;
@@ -65,27 +68,21 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
         }
     };
 
-   /* $scope.showResume = function (story) {
-    };
-
-    $scope.showDetails = function (story) {
-    };
-
-    $scope.toolbarShow = function () {
-
-    };*/
-
     $scope.filterStories = function (story) {
-        if( filterStatus(story) && filterOpenTextArea(story)){
+        if (filterStatus(story) && filterOpenTextArea(story)) {
             return true;
         }
     };
 
+    $scope.formatTime = function (time) {
+        return new Date(time);
+    }
+
     function filterStatus(story) {
-        for (property in $scope.storyFilter.status){
-            if($scope.storyFilter.status[property]){
+        for (property in $scope.storyFilter.status) {
+            if ($scope.storyFilter.status[property]) {
                 return $scope.storyFilter.status[story.currentStatusLog.storyStatus.toLowerCase()];
-            }else{
+            } else {
                 continue;
             }
         }
@@ -96,10 +93,10 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
     function filterOpenTextArea(story) {
         var value = $scope.storyFilter.text.value;
 
-        if(value){
+        if (value) {
             return story.code.includes(value) || story.branch.includes(value) || story.subject.includes(value);
 
-        }else{
+        } else {
             return true;
         }
     };

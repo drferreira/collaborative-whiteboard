@@ -26,7 +26,8 @@
         <label class="btn btn-primary" ng-model="storyFilter.status.removed" uib-btn-checkbox btn-checkbox-false>Removido</label>
         <label class="btn btn-primary" ng-model="storyFilter.status.waiting" uib-btn-checkbox btn-checkbox-false>Aguardanto</label>
         <label class="btn btn-primary" ng-model="storyFilter.status.available" uib-btn-checkbox btn-checkbox-false>Disponivel</label>
-        <label class="btn btn-primary" ng-model="storyFilter.status.in_analysis" uib-btn-checkbox btn-checkbox-false>Em Analise</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.in_analysis" uib-btn-checkbox btn-checkbox-false>Em
+            Analise</label>
         <label class="btn btn-primary" ng-model="storyFilter.status.analyzed" uib-btn-checkbox btn-checkbox-false>Analisado</label>
         <label class="btn btn-primary" ng-model="storyFilter.status.finalized" uib-btn-checkbox btn-checkbox-false>Finalizado</label>
         <br>
@@ -44,7 +45,8 @@
 <div>
     <div class="list-group">
         <div ng-repeat="story in stories | filter:filterStories">
-            <div class="list-group-item click-hand" ng-dblclick="showToolbarElements($event)">
+            <div class="list-group-item click-hand highlighted-in-white border-status" ng-class="statusClass(story)"
+                 ng-dblclick="showToolbarElements($event)">
                 <div class="hide">
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active"><a data-toggle="tab"
@@ -77,7 +79,9 @@
                     <div id="{{story.code + '_tasks'}}" class="tab-pane fade in">
                         <ul class="list-group" style="margin-top: 20px;">
                             <div ng-repeat="task in story.tasks">
-                                <li class="list-group-item" ng-class="colorRepeat($index)">{{task.subject}}</li>
+                                <li class="list-group-item" ng-class="colorRepeat($index)">
+                                    {{formatTime(task.estimatedTime) | date:'HH:mm'}} : {{task.subject}}
+                                </li>
                             </div>
                         </ul>
                     </div>

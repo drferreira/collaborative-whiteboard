@@ -1,6 +1,6 @@
 
 .color_WAITING {
-	border-left-color: rgb(155, 155, 155) !important;
+	border-left-color: rgb(251, 174, 52) !important;
 }
 
 .color_REMOVED {
@@ -61,4 +61,13 @@
     background-color: lightgrey;
     opacity: 0.4;
     pointer-events: none;
+}
+
+.highlighted-in-white{
+    background-color: #f5f5f5;
+
+}
+
+.border-status{
+    border-left-width: 4px;
 }

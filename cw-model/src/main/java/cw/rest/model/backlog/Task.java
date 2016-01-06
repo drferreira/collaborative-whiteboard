@@ -8,10 +8,8 @@ public class Task {
     @Equalization(name = "taks_code")
     private String code;
 
-    private String branch;
-    private Integer storyPoints;
-    private Integer priority;
-    private Date creationDate;
+    @Equalization(name = "taks_estimated_time")
+    private Date estimatedTime;
 
     @Equalization(name = "taks_subject")
     private String subject;
