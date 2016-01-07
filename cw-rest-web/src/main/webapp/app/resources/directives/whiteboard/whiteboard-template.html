@@ -1,5 +1,7 @@
 <div ng-controller="WhiteboardCtrl" class="container=fluid">
 
+    <img src="app/resources/img/loading.gif" ng-show="isLoading" class="img-responsive center-block" />
+
     <div ng-show="!whiteboard.error.initialized && !whiteboard.error.connection">
         <cw-whiteboard-stages cw-stages="whiteboard.data.stages"/>
     </div>

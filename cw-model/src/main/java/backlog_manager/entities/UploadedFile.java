@@ -1,5 +1,6 @@
 package backlog_manager.entities;
 
+import br.org.tutty.Equalization;
 import br.org.tutty.util.PropertyMonitor;
 import cw.entities.User;
 import org.apache.commons.io.IOUtils;
@@ -23,9 +24,11 @@ public class UploadedFile implements Serializable {
     @GeneratedValue(generator = "UploadedFileSequence", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Equalization(name = "updaloadDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @Equalization(name = "fileName")
     @Column(name = "file_name")
     private String fileName;
 

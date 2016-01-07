@@ -16,7 +16,7 @@
 	<build>
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>src/main/webapp/app/pages/login</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
@@ -37,7 +37,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<webResources>
 						<webResource>
-							<directory>src/main/resources/properties</directory>
+							<directory>src/main/webapp/app/pages/login</directory>
 							<filtering>true</filtering>
 						</webResource>
 					</webResources>

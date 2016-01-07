@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="backlog-module">
+<head>
+    <title>CW</title>
+    <meta charset="UTF-8"/>
+    <base href="/cw-rest/">
+
+    <link rel="import" href="app/resources/lib/jquery/include.html"/>
+    <link rel="import" href="app/resources/lib/angular/include.html"/>
+    <link rel="import" href="app/resources/lib/bootstrap/include.html"/>
+
+    <link rel="import" href="app/resources/directives/navbar/include.html"/>
+
+    <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
+    <script type="text/javascript" src="app/pages/session/backlog/backlog-module.js"></script>
+    <script type="text/javascript" src="app/pages/session/backlog/backlog-ctrl.js"></script>
+
+
+</head>
+<body class="container-fluid" ng-controller="BacklogCtrl">
+
+<cw-navbar active="backlog"></cw-navbar>
+
+<div class="fluid-container text-center center-block">
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="storyFilter.status.removed" uib-btn-checkbox btn-checkbox-false>Removido</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.waiting" uib-btn-checkbox btn-checkbox-false>Aguardanto</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.available" uib-btn-checkbox btn-checkbox-false>Disponivel</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.in_analysis" uib-btn-checkbox btn-checkbox-false>Em
+            Analise</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.analyzed" uib-btn-checkbox btn-checkbox-false>Analisado</label>
+        <label class="btn btn-primary" ng-model="storyFilter.status.finalized" uib-btn-checkbox btn-checkbox-false>Finalizado</label>
+        <br>
+        <br>
+        <input type="text" placeholder="Buscar por uma valor, branch, código etc ..." class="form-control"
+               ng-model="storyFilter.text.value">
+    </div>
+</div>
+
+<br>
+<br>
+
+<img src="app/resources/img/loading.gif" ng-show="isLoading" class="img-responsive center-block"/>
+
+<div>
+    <div class="list-group">
+        <div ng-repeat="story in stories | filter:filterStories">
+            <div class="list-group-item click-hand highlighted-in-white border-status" ng-class="statusClass(story)">
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a data-toggle="tab"
+                                                                  href="{{'#' + story.code + '_resume'}}"
+                                                                  ng-click="showResume(story)">Estoria</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_details'}}"
+                                                   ng-click="showDetails(story)">Detalhes</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_tasks'}}"
+                                                   ng-click="loadTasks(story)">Tarefas</a></li>
+                        <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_files'}}"
+                                                   ng-click="loadFiles(story);">Arquivos</a></li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div id="{{story.code + '_resume'}}" class="tab-pane fade in active">
+                        <div style="margin-top: 20px">
+                            <h4><span>{{story.subject}}</span>
+                                <small class="pull-right"> {{story.code}}</small>
+                            </h4>
+                            <p>
+                                <uib-rating class="md-col-3" ng-model="story.priority" max="10"
+                                            readonly="isReadOnly"></uib-rating>
+                                <small class="pull-right">{{story.storyPoints}} Pontos</small>
+                            </p>
+                            <p>
+                                <small>{{iterationName(story)}}</small>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="{{story.code + '_details'}}" class="tab-pane fade in">
+                        <p style="margin-top: 20px;" ng-bind-html="story.description | unsafe"></p>
+                    </div>
+
+                    <div id="{{story.code + '_tasks'}}" class="tab-pane fade in">
+                        <ul class="list-group" style="margin-top: 20px;">
+                            <div ng-repeat="task in story.tasks">
+                                <li class="list-group-item" ng-class="colorRepeat($index)">
+                                    {{formatTime(task.estimatedTime) | date:'HH:mm'}} : {{task.subject}}
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div id="{{story.code + '_files'}}" class="tab-pane fade in">
+                        <ul class="list-group" style="margin-top: 20px;">
+                            <div ng-repeat="file in story.files ">
+                                <li class="list-group-item" ng-class="colorRepeat($index)">
+                                    <div class="list-group">
+                                        <span class="pull-left">
+                                           {{file.fileName}}
+                                        </span>
+                                        <span class="pull-right">
+                                            <button class="btn btn-xs btn-danger" ng-click="removeFile(story, file)">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                            <button class="btn btn-xs btn-info" ng-click="downloadFile(story, file)">
+                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

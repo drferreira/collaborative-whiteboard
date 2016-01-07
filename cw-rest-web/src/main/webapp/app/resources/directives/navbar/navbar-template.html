@@ -1,6 +1,6 @@
 <nav ng-controller="NavbarCtrl" class="navbar navbar-inverse">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">CW</a>
+        <a class="navbar-brand">CW</a>
 
         <div class="navbar-left">
             <ul class="nav navbar-nav">
@@ -17,7 +17,7 @@
                     <a class="click-hand">Statisticas</a>
                 </li>
                 <li id="backlog">
-                    <a class="click-hand">Backlog</a>
+                    <a class="click-hand" ng-click="navigateToBacklog()">Backlog</a>
                 </li>
             </ul>
         </div>
