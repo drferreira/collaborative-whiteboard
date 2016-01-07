@@ -2,6 +2,8 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
     const HTTP_GET_OPEN_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/fetch/all';
     const HTTP_GET_FILES_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/files';
     const HTTP_GET_TASKS_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/tasks';
+    const REMOVE_FILE_URL = window.location.origin + '';
+    const DOWNLOAD_FILE_URL = window.location.origin + '';
 
     $scope.isReadOnly = true;
     $scope.showToolbar = false;
@@ -31,14 +33,14 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
         $scope.isLoading = false;
     });
 
-    $scope.showToolbarElements = function ($event) {
+/*    $scope.showToolbarElements = function ($event) {
         if ($($event.currentTarget.children[0]).hasClass('hide')) {
             $($event.currentTarget.children[0]).removeClass('hide')
 
         } else {
             $($event.currentTarget.children[0]).addClass('hide')
         }
-    };
+    };*/
 
     $scope.loadFiles = function (story) {
         if (!story.files) {
@@ -76,7 +78,33 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
 
     $scope.formatTime = function (time) {
         return new Date(time);
-    }
+    };
+
+    $scope.iterationName = function (story){
+        var iteration = story.iteration;
+
+        if(iteration){
+            return 'Iteração : ' + iteration.name;
+        }
+    };
+
+    $scope.removeFile = function removeFile(story, file){
+        $http.post(REMOVE_FILE_URL, {
+            params: {'story': story, 'file' : file}
+
+        }).then(function (response) {
+            // REMOVER ARQUIVO DO JSON
+        });
+    };
+
+    $scope.downloadFile = function downloadFile(story, file){
+        $http.get(DOWNLOAD_FILE_URL, {
+            params: {'story': story, 'file' : file}
+
+        }).then(function (response) {
+            // BAIXAR ARQUIVO ENCONTRADO
+        });
+    };
 
     function filterStatus(story) {
         for (property in $scope.storyFilter.status) {

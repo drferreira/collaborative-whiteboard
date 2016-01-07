@@ -45,9 +45,8 @@
 <div>
     <div class="list-group">
         <div ng-repeat="story in stories | filter:filterStories">
-            <div class="list-group-item click-hand highlighted-in-white border-status" ng-class="statusClass(story)"
-                 ng-dblclick="showToolbarElements($event)">
-                <div class="hide">
+            <div class="list-group-item click-hand highlighted-in-white border-status" ng-class="statusClass(story)">
+                <div>
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active"><a data-toggle="tab"
                                                                   href="{{'#' + story.code + '_resume'}}"
@@ -63,13 +62,19 @@
 
                 <div class="tab-content">
                     <div id="{{story.code + '_resume'}}" class="tab-pane fade in active">
-                        <h4><span>{{story.subject}}</span>
-                            <small class="pull-right"> {{story.code}}</small>
-                        </h4>
-                        <p>
-                            <uib-rating class="md-col-3" ng-model="story.priority" max="10"
-                                        readonly="isReadOnly"></uib-rating>
-                        </p>
+                        <div style="margin-top: 20px">
+                            <h4><span>{{story.subject}}</span>
+                                <small class="pull-right"> {{story.code}}</small>
+                            </h4>
+                            <p>
+                                <uib-rating class="md-col-3" ng-model="story.priority" max="10"
+                                            readonly="isReadOnly"></uib-rating>
+                                <small class="pull-right">{{story.storyPoints}} Pontos</small>
+                            </p>
+                            <p>
+                                <small>{{iterationName(story)}}</small>
+                            </p>
+                        </div>
                     </div>
 
                     <div id="{{story.code + '_details'}}" class="tab-pane fade in">
@@ -89,7 +94,21 @@
                     <div id="{{story.code + '_files'}}" class="tab-pane fade in">
                         <ul class="list-group" style="margin-top: 20px;">
                             <div ng-repeat="file in story.files ">
-                                <li class="list-group-item" ng-class="colorRepeat($index)">{{file.fileName}}</li>
+                                <li class="list-group-item" ng-class="colorRepeat($index)">
+                                    <div class="list-group">
+                                        <span class="pull-left">
+                                           {{file.fileName}}
+                                        </span>
+                                        <span class="pull-right">
+                                            <button class="btn btn-xs btn-danger" ng-click="removeFile(story, file)">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                            <button class="btn btn-xs btn-info" ng-click="downloadFile(story, file)">
+                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
                             </div>
                         </ul>
                     </div>
