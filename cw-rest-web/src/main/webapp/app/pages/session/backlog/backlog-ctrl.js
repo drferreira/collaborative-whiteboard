@@ -33,15 +33,6 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
         $scope.isLoading = false;
     });
 
-/*    $scope.showToolbarElements = function ($event) {
-        if ($($event.currentTarget.children[0]).hasClass('hide')) {
-            $($event.currentTarget.children[0]).removeClass('hide')
-
-        } else {
-            $($event.currentTarget.children[0]).addClass('hide')
-        }
-    };*/
-
     $scope.loadFiles = function (story) {
         if (!story.files) {
             $http.get(HTTP_GET_FILES_STORIES_URL, {
