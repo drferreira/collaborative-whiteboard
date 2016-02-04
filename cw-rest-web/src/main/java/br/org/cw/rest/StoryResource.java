@@ -6,6 +6,7 @@ import backlog_manager.entities.UploadedFile;
 import br.org.tutty.Equalizer;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.BacklogManagerService;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
+import com.google.gson.JsonObject;
 import cw.rest.model.backlog.Story;
 import br.org.tutty.collaborative_whiteboard.cw.factories.StoryFactory;
 import com.google.gson.Gson;
@@ -193,5 +194,18 @@ public class StoryResource {
         } catch (DataNotFoundException e) {
             return new Gson().toJson(e);
         }
+    }
+
+    @POST
+    @Path("/file/remove")
+    public void fileRemove(String fileData) {
+        try {
+            JsonObject jsonData = new Gson().fromJson(fileData, JsonObject.class);
+
+            backlogManagerService.removeFile(jsonData.get("storyCode").getAsString(), jsonData.get("fileName").getAsString());
+        } catch (DataNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

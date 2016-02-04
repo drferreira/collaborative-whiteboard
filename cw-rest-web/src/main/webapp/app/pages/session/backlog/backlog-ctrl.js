@@ -2,7 +2,7 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
     const HTTP_GET_OPEN_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/fetch/all';
     const HTTP_GET_FILES_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/files';
     const HTTP_GET_TASKS_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/tasks';
-    const REMOVE_FILE_URL = window.location.origin + '';
+    const REMOVE_FILE_URL = window.location.origin + '/cw-rest/session/rest/story/file/remove';
     const DOWNLOAD_FILE_URL = window.location.origin + '/cw-rest/session/rest/story/file/download';
 
     $scope.isReadOnly = true;
@@ -71,35 +71,42 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
         return new Date(time);
     };
 
-    $scope.iterationName = function (story){
+    $scope.iterationName = function (story) {
         var iteration = story.iteration;
 
-        if(iteration){
+        if (iteration) {
             return 'Iteração : ' + iteration.name;
         }
     };
 
-    $scope.removeFile = function removeFile(story, file){
-        $http.post(REMOVE_FILE_URL, {
-            params: {'story': story, 'file' : file}
-
-        }).then(function (response) {
-            // REMOVER ARQUIVO DO JSON
+    $scope.removeFile = function removeFile(story, file) {
+        $http({
+            method: 'POST',
+            url: REMOVE_FILE_URL,
+            data: {
+                storyCode: story.code,
+                fileName: file.fileName
+            }
+        }).then(function (){
+            story.files.forEach(function (object, index){
+                if(object.fileName == file.fileName){
+                    story.files.splice(index, 1);
+                    return;
+                }
+            });
         });
     };
 
-    $scope.downloadFile = function downloadFile(storyCode, fileName){
-
-
+    $scope.downloadFile = function downloadFile(story, file) {
         $http.get(DOWNLOAD_FILE_URL, {
-            params: {'storyCode' : storyCode, 'fileName': fileName},
+            params: {'storyCode': story.code, 'fileName': file.fileName},
 
         }).then(function (response) {
             var bytes = response.data.file;
             var downloadElement = document.createElement('a');
 
             downloadElement.setAttribute('href', 'data:text/html;base64,' + bytes);
-            downloadElement.setAttribute('download', fileName);
+            downloadElement.setAttribute('download', file.fileName);
             downloadElement.setAttribute('target', '_blank');
             downloadElement.click();
         });

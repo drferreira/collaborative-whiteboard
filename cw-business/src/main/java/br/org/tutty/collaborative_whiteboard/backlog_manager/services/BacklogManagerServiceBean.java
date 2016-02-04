@@ -257,4 +257,10 @@ public class BacklogManagerServiceBean implements BacklogManagerService {
 
         return uploadedFile;
     }
+
+    @Override
+    public void removeFile(String storyCode, String fileName) throws DataNotFoundException {
+        UploadedFile uploadedFile = fetchFile(storyCode, fileName);
+        storyDao.remove(uploadedFile);
+    }
 }
