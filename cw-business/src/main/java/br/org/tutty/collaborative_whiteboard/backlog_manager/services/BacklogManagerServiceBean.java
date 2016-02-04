@@ -249,4 +249,12 @@ public class BacklogManagerServiceBean implements BacklogManagerService {
     public List<UploadedFile> fetchFiles(Story selectedStory) throws DataNotFoundException {
         return storyDao.fetchFiles(selectedStory);
     }
+
+    @Override
+    public UploadedFile fetchFile(String storyCode, String fileName) throws DataNotFoundException {
+        Story story = fetchByCode(storyCode);
+        UploadedFile uploadedFile = storyDao.fetchFile(story, fileName);
+
+        return uploadedFile;
+    }
 }

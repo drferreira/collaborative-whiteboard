@@ -3,7 +3,7 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
     const HTTP_GET_FILES_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/files';
     const HTTP_GET_TASKS_STORIES_URL = window.location.origin + '/cw-rest/session/rest/story/tasks';
     const REMOVE_FILE_URL = window.location.origin + '';
-    const DOWNLOAD_FILE_URL = window.location.origin + '';
+    const DOWNLOAD_FILE_URL = window.location.origin + '/cw-rest/session/rest/story/file/download';
 
     $scope.isReadOnly = true;
     $scope.showToolbar = false;
@@ -88,12 +88,20 @@ angular.module('backlog-module').controller('BacklogCtrl', ['$scope', '$http', '
         });
     };
 
-    $scope.downloadFile = function downloadFile(story, file){
+    $scope.downloadFile = function downloadFile(storyCode, fileName){
+
+
         $http.get(DOWNLOAD_FILE_URL, {
-            params: {'story': story, 'file' : file}
+            params: {'storyCode' : storyCode, 'fileName': fileName},
 
         }).then(function (response) {
-            // BAIXAR ARQUIVO ENCONTRADO
+            var bytes = response.data.file;
+            var downloadElement = document.createElement('a');
+
+            downloadElement.setAttribute('href', 'data:text/html;base64,' + bytes);
+            downloadElement.setAttribute('download', fileName);
+            downloadElement.setAttribute('target', '_blank');
+            downloadElement.click();
         });
     };
 

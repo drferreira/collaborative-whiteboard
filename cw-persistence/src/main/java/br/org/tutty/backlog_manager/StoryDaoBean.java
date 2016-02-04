@@ -106,4 +106,13 @@ public class StoryDaoBean extends GenericDao implements StoryDao {
 
         return listNotWaitingEmpty(criteria);
     }
+
+    @Override
+    public UploadedFile fetchFile(Story story, String fileName) throws DataNotFoundException {
+        Criteria criteria = createCriteria(UploadedFile.class);
+        criteria.add(Restrictions.eq("story", story));
+        criteria.add(Restrictions.eq("fileName", fileName));
+
+        return (UploadedFile) uniqueResultNotWaitingEmpty(criteria);
+    }
 }
