@@ -11,7 +11,7 @@
                                 <h4 class="media-heading" style="color: #3072AC !important;">{{task.subject}}</h4>
 
                                 <p>
-                                    <span class="small" aria-hidden="true">{{task.code}}</span>
+                                    <span class="small text-muted" aria-hidden="true">{{task.code}}</span>
                                 </p>
                             </div>
                             <div class="media-right">
@@ -23,6 +23,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <br>
 
                     <div class="panel-body">
                         <div>
@@ -36,34 +38,36 @@
 
                     <br>
 
-                    <div class="btn-group-xs">
-                        <button type="button" class="btn btn-danger" ng-show="isNotFirstStage()"
-                                ng-click="goBack(task)">
-                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-                            Voltar
-                        </button>
+                    <div>
+                        <div class="btn-group-xs">
+                            <button type="button" class="btn btn-danger" ng-show="isNotFirstStage()"
+                                    ng-click="goBack(task)">
+                                <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                                Voltar
+                            </button>
 
-                        <button type="button" class="btn btn-info" ng-show="available(task)" ng-click="play(task)">
-                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                            Iniciar
-                        </button>
+                            <button type="button" class="btn btn-info" ng-show="available(task)" ng-click="play(task)">
+                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                                Iniciar
+                            </button>
 
-                        <button type="button" class="btn" ng-show="inUse(task)" ng-click="stop(task)">
-                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-                            Abandonar
-                        </button>
+                            <button type="button" class="btn" ng-show="inUse(task)" ng-click="stop(task)">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                                Abandonar
+                            </button>
 
-                        <button type="button" class="btn btn-success" ng-show="isDontLastStage()"
-                                ng-click="goForward(task)">
-                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                            Avançar
-                        </button>
+                            <button type="button" class="btn btn-success" ng-show="isDontLastStage()"
+                                    ng-click="goForward(task)">
+                                <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                                Avançar
+                            </button>
 
-                        <button type="button" class="btn btn-success" ng-show="availableToFinalize(task)"
-                                ng-click="finalize(task)">
-                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                            Finalizar
-                        </button>
+                            <button type="button" class="btn btn-success" ng-show="availableToFinalize(task)"
+                                    ng-click="finalize(task)">
+                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                                Finalizar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
