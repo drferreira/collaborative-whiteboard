@@ -12,6 +12,7 @@
     <link rel="import" href="app/resources/directives/navbar/include.html"/>
 
     <link rel="stylesheet" type="text/css" href="app/resources/stylesheets/cw/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="app/pages/session/backlog/backlog-styles.css"/>
     <script type="text/javascript" src="app/pages/session/backlog/backlog-module.js"></script>
     <script type="text/javascript" src="app/pages/session/backlog/backlog-ctrl.js"></script>
 
@@ -58,6 +59,8 @@
                         <li role="presentation"><a data-toggle="tab" href="{{'#' + story.code + '_files'}}"
                                                    ng-click="loadFiles(story);">Arquivos</a></li>
                     </ul>
+
+
                 </div>
 
                 <div class="tab-content">
@@ -85,10 +88,24 @@
                         <ul class="list-group" style="margin-top: 20px;">
                             <div ng-repeat="task in story.tasks">
                                 <li class="list-group-item" ng-class="colorRepeat($index)">
-                                    {{formatTime(task.estimatedTime) | date:'HH:mm'}} : {{task.subject}}
+                                    <div class="list-group">
+                                        <span class="pull-left">
+                                           {{formatTime(task.estimatedTime) | date:'HH:mm'}} : {{task.subject}}
+                                        </span>
+                                        <span class="pull-right">
+                                            <button class="btn btn-xs btn-danger">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </li>
                             </div>
                         </ul>
+
+                        <button class="btn btn-xs btn-primary">
+                            <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Nova
+                        </button>
                     </div>
 
                     <div id="{{story.code + '_files'}}" class="tab-pane fade in">
@@ -104,7 +121,8 @@
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </button>
                                             <button class="btn btn-xs btn-info" ng-click="downloadFile(story, file)">
-                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-download-alt"
+                                                      aria-hidden="true"></span>
                                             </button>
                                         </span>
                                     </div>
@@ -112,12 +130,13 @@
                             </div>
                         </ul>
                     </div>
+
                 </div>
             </div>
-
             <br>
         </div>
     </div>
+</div>
 </div>
 
 </body>

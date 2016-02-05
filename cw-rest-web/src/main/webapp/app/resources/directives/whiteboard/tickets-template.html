@@ -2,11 +2,11 @@
     <div ng-repeat="story in cwStories | orderBy:'priority' track by story.code">
 
         <div ng-repeat="task in story.tasks track by task.code">
-            <div class="ticket" style="background-color: #F9F7F7;">
+            <div class="ticket">
 
                 <div class="bs-callout bs-callout-info" ng-class="statusClass(task)">
                     <div class="bs-callout-info">
-                        <div class="media" style="border-bottom: 1px #EEEEEE solid; padding-bottom: 8px;">
+                        <div class="media" style="border-bottom: 1px #EEEEEE solid;">
                             <div class="media-body">
                                 <h4 class="media-heading" style="color: #3072AC !important;">{{task.subject}}</h4>
 
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <div class="row">
+                        <div>
                             <div class="container-fluid col-md-10">
                                 <div id="description">
                                     <p ng-bind-html="task.description | unsafe"></p>
@@ -36,32 +36,31 @@
 
                     <br>
 
-<!--                        <span class="glyphicon glyphicon-time" aria-hidden="true">
-                            <small>{{formatTime(task.estimatedTime) | date:'HH:mm'}}</small>
-                        </span>-->
-
-                    <div>
-                        <button class="btn btn-xs btn-danger" ng-show="isNotFirstStage()" ng-click="goBack(task)">
+                    <div class="btn-group-xs">
+                        <button type="button" class="btn btn-danger" ng-show="isNotFirstStage()"
+                                ng-click="goBack(task)">
                             <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
                             Voltar
                         </button>
 
-                        <button class="btn btn-xs btn-info" ng-show="available(task)" ng-click="play(task)">
+                        <button type="button" class="btn btn-info" ng-show="available(task)" ng-click="play(task)">
                             <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
                             Iniciar
                         </button>
 
-                        <button class="btn btn-xs" ng-show="inUse(task)" ng-click="stop(task)">
+                        <button type="button" class="btn" ng-show="inUse(task)" ng-click="stop(task)">
                             <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                             Abandonar
                         </button>
 
-                        <button class="btn btn-xs btn-success" ng-show="isDontLastStage()" ng-click="goForward(task)">
+                        <button type="button" class="btn btn-success" ng-show="isDontLastStage()"
+                                ng-click="goForward(task)">
                             <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                             Avançar
                         </button>
 
-                        <button class="btn btn-xs btn-success" ng-show="availableToFinalize(task)" ng-click="finalize(task)">
+                        <button type="button" class="btn btn-success" ng-show="availableToFinalize(task)"
+                                ng-click="finalize(task)">
                             <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
                             Finalizar
                         </button>
