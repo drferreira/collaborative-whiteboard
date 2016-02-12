@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.org.tutty.collaborative-whiteboard</groupId>
 	<artifactId>cw-root</artifactId>
-	<version>2.3.2-SNAPSHOT</version>
+	<version>2.3.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>cw-root</name>
 
