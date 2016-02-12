@@ -28,4 +28,6 @@ public interface StoryDao extends Dao {
     Analysis getLastStoryAnalysis(Story story) throws DataNotFoundException;
 
     List<UploadedFile> fetchFiles(Story selectedStory) throws DataNotFoundException;
+
+    UploadedFile fetchFile(Story story, String fileName) throws DataNotFoundException;
 }

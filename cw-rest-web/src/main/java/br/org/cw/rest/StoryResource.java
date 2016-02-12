@@ -3,20 +3,22 @@ package br.org.cw.rest;
 import backlog_manager.entities.Iteration;
 import backlog_manager.entities.StoryStatusLog;
 import backlog_manager.entities.UploadedFile;
-import br.org.tutty.Equalization;
 import br.org.tutty.Equalizer;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.BacklogManagerService;
 import br.org.tutty.collaborative_whiteboard.backlog_manager.services.IterationService;
+import com.google.gson.JsonObject;
 import cw.rest.model.backlog.Story;
 import br.org.tutty.collaborative_whiteboard.cw.factories.StoryFactory;
 import com.google.gson.Gson;
 import cw.exceptions.DataNotFoundException;
 import cw.rest.model.backlog.Task;
+import cw.rest.model.backlog.UploadedFileDto;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -60,26 +62,28 @@ public class StoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String fetchFiles(@QueryParam(value = "storyCode") String code) {
-        List<cw.rest.model.backlog.UploadedFile> uploadedDtos = new ArrayList<>();
+        List<UploadedFileDto> uploadedDtos = new ArrayList<>();
 
         try {
             backlog_manager.entities.Story story = backlogManagerService.fetchByCode(code);
-            List<UploadedFile > uploadedFiles = backlogManagerService.fetchFiles(story);
+            List<UploadedFile> uploadedFiles = backlogManagerService.fetchFiles(story);
 
             uploadedFiles.forEach(new Consumer<UploadedFile>() {
                 @Override
                 public void accept(UploadedFile uploadedFile) {
-                    cw.rest.model.backlog.UploadedFile uploadedFileDto = new cw.rest.model.backlog.UploadedFile();
+                    UploadedFileDto uploadedFileDtoDto = new UploadedFileDto();
                     try {
-                        Equalizer.equalize(uploadedFile, uploadedFileDto);
-                        uploadedDtos.add(uploadedFileDto);
+                        Equalizer.equalize(uploadedFile, uploadedFileDtoDto);
+                        uploadedDtos.add(uploadedFileDtoDto);
 
-                    } catch (IllegalAccessException | NoSuchFieldException e) {}
+                    } catch (IllegalAccessException | NoSuchFieldException e) {
+                    }
 
                 }
             });
 
-        } catch (DataNotFoundException e) {}
+        } catch (DataNotFoundException e) {
+        }
 
         return new Gson().toJson(uploadedDtos);
     }
@@ -167,5 +171,41 @@ public class StoryResource {
         } catch (DataNotFoundException e) {
             return new Gson().toJson(storiesDtos);
         }
+    }
+
+    @GET
+    @Path("/file/download")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String fileDownload(@QueryParam("storyCode") String storyCode, @QueryParam("fileName") String fileName) {
+        try {
+            UploadedFile uploadedFile = backlogManagerService.fetchFile(storyCode, fileName);
+            UploadedFileDto uploadedFileDto = new UploadedFileDto();
+
+            try {
+                Equalizer.equalize(uploadedFile, uploadedFileDto);
+                uploadedFileDto.setFile(Base64.getEncoder().encodeToString(uploadedFile.getFile()));
+                return new Gson().toJson(uploadedFileDto);
+
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                return new Gson().toJson(e);
+            }
+
+        } catch (DataNotFoundException e) {
+            return new Gson().toJson(e);
+        }
+    }
+
+    @POST
+    @Path("/file/remove")
+    public void fileRemove(String fileData) {
+        try {
+            JsonObject jsonData = new Gson().fromJson(fileData, JsonObject.class);
+
+            backlogManagerService.removeFile(jsonData.get("storyCode").getAsString(), jsonData.get("fileName").getAsString());
+        } catch (DataNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

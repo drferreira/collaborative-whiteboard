@@ -63,4 +63,8 @@ public interface BacklogManagerService {
     List<UploadedFile> fetchFiles(Story selectedStory) throws DataNotFoundException;
 
     void removeFile(UploadedFile uploadedFile);
+
+    UploadedFile fetchFile(String storyCode, String fileName) throws DataNotFoundException;
+
+    void removeFile(String storyCode, String fileName) throws DataNotFoundException;
 }
